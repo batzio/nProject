@@ -1,0 +1,92 @@
+<!-- index.html -->
+<!doctype html>
+<html>
+
+<head>
+    <title>add project</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <!-- load bootstrap via CDN -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
+    "></script> <!-- load jquery via CDN -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="/js/add_project.js"></script> <!-- load our javascript file -->
+    <!-- <script src="/js/conference_update.js"></script> -->
+</head>
+
+<body>
+    <!-- <h1>Welcome</h1> -->
+    <!-- <img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.jce.ac.il%2Fwp-content%2Fuploads%2F2021%2F10%2FAzrieli-Logo.jpg&imgrefurl=https%3A%2F%2Fwww.jce.ac.il%2Fnotice_cat%2Fnews%2F&tbnid=8d1-XpdQQ01anM&vet=12ahUKEwiR9LOkxpn8AhWSVKQEHY-KCEMQMygBegUIARCzAQ..i&docid=j0JkATis1IwGYM&w=1299&h=827&q=%D7%9C%D7%95%D7%92%D7%95%20%D7%A9%D7%9C%20%D7%9E%D7%9B%D7%9C%D7%9C%D7%AA%20%D7%A2%D7%96%D7%A8%D7%99%D7%90%D7%9C%D7%99JPG&hl=iw&ved=2ahUKEwiR9LOkxpn8AhWSVKQEHY-KCEMQMygBegUIARCzAQ"> -->
+
+    <!-- <center> -->
+    <div class="col-sm-6 col-sm-offset-3">
+
+        <!-- <h1 id="conference_title">Welcome</h1> -->
+
+        <!-- OUR FORM -->
+        <form id="id_project" name="id_login" method="POST">
+
+            <!-- NAME -->
+            <div id="name-group" class="form-group">
+                <label for="name">Project name</label>
+                <input type="text" class="form-control" name="project_id" id="project_id" placeholder="Enter project name"
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- SUBJECT -->
+            <div id="name-group" class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" class="form-control" name="subject_id" id="subject_id" placeholder="Enter subject"
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- DETAILS -->
+            <div id="id-group" class="form-group">
+                <label for="details">Details</label>
+                <input type="text" class="form-control" name="details_id" id="details_id" placeholder="Enter details"
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- PROJECT TYPE -->
+            <div id="id-group" class="form-group">
+                <label for="project_type">Project type</label>
+                <input type="text" class="form-control" name="project_type_id" id="project_type_id" placeholder="Enter project type"
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- STATUS -->
+            <div id="id-group" class="form-group">
+                <label for="status">Status</label>
+                <input type="text" class="form-control" name="status_id" id="status_id" placeholder="Enter status"
+                    required>
+                <!-- errors will go here -->
+            </div>
+            
+            <!-- OFFER -->
+            <div id="id-group" class="form-group">
+                <label for="offer">Offer</label>
+                <input type="text" class="form-control" name="offer_id" id="offer_id" placeholder="Enter offer"
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- ADD TIME -->
+            <div id="id-group" class="form-group">
+                <label for="offer">Add time</label>
+                <input type="date" class="form-control" name="add_time_id" id="add_time_id"
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <button type="submit" onclick="add_proj()" class="btn btn-success">Submit<span class="fa fa-arrow-right"></span></button>
+    </form>
+
+    </div>
+    <!-- </center> -->
+</body>
+
+</html>

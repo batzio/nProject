@@ -1,0 +1,63 @@
+<!-- index.html -->
+<!doctype html>
+<html>
+
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <!-- load bootstrap via CDN -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
+    "></script> <!-- load jquery via CDN -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="/js/Login.js"></script> <!-- load our javascript file -->
+    <!-- <script src="/js/conference_update.js"></script> -->
+</head>
+
+<body>
+    <!-- <h1>Welcome</h1> -->
+    <!-- <img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.jce.ac.il%2Fwp-content%2Fuploads%2F2021%2F10%2FAzrieli-Logo.jpg&imgrefurl=https%3A%2F%2Fwww.jce.ac.il%2Fnotice_cat%2Fnews%2F&tbnid=8d1-XpdQQ01anM&vet=12ahUKEwiR9LOkxpn8AhWSVKQEHY-KCEMQMygBegUIARCzAQ..i&docid=j0JkATis1IwGYM&w=1299&h=827&q=%D7%9C%D7%95%D7%92%D7%95%20%D7%A9%D7%9C%20%D7%9E%D7%9B%D7%9C%D7%9C%D7%AA%20%D7%A2%D7%96%D7%A8%D7%99%D7%90%D7%9C%D7%99JPG&hl=iw&ved=2ahUKEwiR9LOkxpn8AhWSVKQEHY-KCEMQMygBegUIARCzAQ"> -->
+
+    <!-- <center> -->
+    <div class="col-sm-6 col-sm-offset-3">
+
+        <h1 id="conference_title">Welcome</h1>
+
+        <!-- OUR FORM -->
+        <form id="id_login" name="id_login" method="POST">
+
+            <!-- NAME -->
+            <div id="name-group" class="form-group">
+                <label id="username" for="name">Username</label>
+                <input type="text" class="form-control" name="id_username" id="id_username" placeholder="Enter username"
+                    required>
+                <!-- errors will go here -->
+            </div>
+            
+            <!-- PASSWORD -->
+            <div id="id-group" class="form-group">
+                <label for="password">Password</label>
+                <input type="text" class="form-control" name="id_password" id="id_password" placeholder="Enter password"
+                    required>
+                <span class="psw"><a href="#" style="color: red;"> Forgot password?</a></span>
+                <!-- לעבור לעמוד שנותן לאפס סיסמא -->
+                <!-- errors will go here -->
+            </div>
+
+            <!-- <button id="btn_ok" type="submit" onclick="clickOK()" class="btn btn-success">Submit <span
+                    class="fa fa-arrow-right"></span></button> -->
+
+            <button type="submit" class="btn btn-success">Submit <span class="fa fa-arrow-right"></span></button>
+            <br>
+            <br>
+            <!-- IF LECTURER -->
+            <input type="checkbox" id="id_lecturer_inpt" name="lecturer" value="Lecturer">
+
+            <label id="id_lecturer_lbl">Are you the lecturer?</label><br>
+    </form>
+
+    </div>
+    <!-- </center> -->
+</body>
+
+</html>

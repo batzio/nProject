@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <!-- load bootstrap via CDN -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
+    "></script> <!-- load jquery via CDN -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="/js/home_page.js"></script> <!-- load our javascript file -->
+</head>
+
+<body>
+    <!-- <center> -->
+        <div class="col-sm-6 col-sm-offset-3">
+
+            <!-- <h1 id="conference_title">Welcome</h1> -->
+
+            <!-- OUR FORM -->
+            <form id="id_project" name="id_login">
+
+                <h1 id="title"></h1>
+
+                <!-- PROJECTS -->
+                <div id="id-list-group" class="form-group">
+                    <label id="lbl_projects" for="project">Projects</label>
+                    <select name="projects_name" id="projects_name"></select>
+                    <!-- to take the projects from the db -->
+                    <!-- להביא את שמות הפרוייקטים כמו הכנסים בטבלה -->
+                </div>
+
+                <!-- EXPLANATION -->
+                <div id="explanation-group" class="form-group">
+                    <label id="explanation" for="name">Explanation</label>
+                    <input type="text" class="form-control" name="id_explanation" id="id_explanation"
+                        placeholder="An explanation of the desired project will appear here" disabled>
+                    <!-- errors will go here -->
+                </div>
+
+                <!-- GRADES -->
+                <!-- <div id="grades-group" class="form-group">
+                <label for="grades">Grades</label>
+                <input type="number" class="form-control" name="grades-id" id="grades-id" placeholder="Grades" > -->
+                <!-- errors will go here -->
+                <!-- </div> -->
+                <button type="submit" class="btn btn-success" onclick="goToTracking()">Monitoring the project <span
+                        class="fa fa-arrow-right"></span></button>
+            </form>
+        </div>
+
+</body>
+<!-- </center> -->
+
+</html>
