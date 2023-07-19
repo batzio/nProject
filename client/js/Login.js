@@ -22,18 +22,23 @@ $(document).ready(function () {
 function sub() {
     var username = document.getElementById("id_username")
     var password = document.getElementById("id_password")
+    // alert('sub  ')
+
 
     $.ajax({
         type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
         url: '/student/' + password.value,
         contentType: 'application/json',
         success: function (result) {
-            if (result[0].name == username.value && result[0].password == password.value) {
-                localStorage.setItem("data", "student");
-                window.location.href = "/assigAndsubDats";
 
-            }
-            else{
+            // alert('getPasswordSdt - ')
+            console.log('getPasswordSdt - '+ JSON.stringify(result[0]))
+            if (result[0].sdt_username == username.value && result[0].sdt_password == password.value) {
+                localStorage.setItem("data", "student")
+                window.location.href = "/assigAndsubDats"
+                // alert('getPasswordSdt - ' + result[0].sdt_username)
+            } // alert('getPasswordSdt - '+ username.value)
+            else {
                 add_mod();
             }
         },
@@ -59,16 +64,18 @@ function sub() {
     // });
 }
 
-function add_mod(){
-     $.ajax({
+function add_mod() {
+    $.ajax({
         type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
         url: '/moderator/' + password.value,
         contentType: 'application/json',
         success: function (result) {
-            if (result[0].name == username.value && result[0].password == password.value) {
-                localStorage.setItem("data", "moderator");
-                window.location.href = "/assigAndsubDats";
-
+            if (result[0].mod_username == username.value && result[0].mod_password == password.value) {
+                localStorage.setItem("data", "moderator")
+                window.location.href = "/assigAndsubDats"
+            }
+            else{
+                alert('שם משתמש ו/או הסיסמה שגויים')
             }
         },
         error: function (jqXhr, textStatus, errorThrown) {
@@ -76,7 +83,8 @@ function add_mod(){
         }
     });
 }
-function resetPassword(){
+
+function resetPassword() {
 
     window.location.href = '/password';
 }
