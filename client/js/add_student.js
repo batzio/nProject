@@ -8,6 +8,7 @@ $(document).ready(function () {
 
 // const translate = require('google-translate-api');
 });
+
 function add_studen() {
     $.ajax({
         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
@@ -24,7 +25,7 @@ function add_studen() {
         processData: false,
         encode: true,
         success: function (data, textStatus, jQxhr) {
-            location.href = "/home";
+            location.href = "/assigAndsubDats"
         },
         error: function (jqXhr, textStatus, errorThrown) {
             console.log('tring')
