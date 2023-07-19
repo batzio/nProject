@@ -10,8 +10,8 @@ router.post('/addstudent', projects_routes.createStudent);
 router.get('/projects', projects_routes.getProjects);
 router.get('/explanation/:id', projects_routes.getExplanation);
 router.get('/status/:id', projects_routes.getStatus);
-router.get('/moderator/:password', projects_routes.getPassword);
-router.get('/student/:password', projects_routes.getPassword);
+router.get('/moderator/:password', projects_routes.getPasswordMod);
+router.get('/student/:password', projects_routes.getPasswordSdt);
 router.get('/students', projects_routes.getStudents);
 router.get('/project/:id', projects_routes.getProject);
 
