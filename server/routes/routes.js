@@ -3,18 +3,19 @@ const express = require('express'),
 
 var router = express.Router();
 
-router.post('/addproject', projects_routes.CreateProject);
-router.get('/projects', projects_routes.getProjects);      
-router.get('/explanation/:id', projects_routes.getExplanation)        
+router.post('/addproject', projects_routes.createProject);
+router.post('/addmoderator', projects_routes.createModerator);
+router.post('/addstudent', projects_routes.createStudent);
 
-// router.put('/conferences/:id', projects_routes.updateConference);     
-// router.post('/addlecturer/:id', projects_routes.AddLecturerToConference);     
-// router.get('/conferences', projects_routes.getConferences);     
-// router.delete('/lecturer/:id/:idlec', projects_routes.deleteLecturerFromConference);     
-// router.delete('/list/:id', projects_routes.deleteConference);        
-// router.post('/lecturer/', projects_routes.CreateLecturer);   
-// router.get('/lecturers', projects_routes.getLecturers);  
-// router.get('/getlecturesconference/:id', projects_routes.getLecturesConferences);
+router.get('/projects', projects_routes.getProjects);
+router.get('/explanation/:id', projects_routes.getExplanation);
+router.get('/status/:id', projects_routes.getStatus);
+router.get('/moderator/:password', projects_routes.getPassword);
+router.get('/student/:password', projects_routes.getPassword);
+router.get('/students', projects_routes.getStudents);
+router.get('/project/:id', projects_routes.getProject);
+
+router.put('/updatProject/:id', projects_routes.updateProject);
 
 
 module.exports = router;

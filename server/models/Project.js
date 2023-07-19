@@ -28,7 +28,8 @@ var ProjectSchema = new mongoose.Schema({
     status: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        enum: ['פתוח', 'סגור'] // Replace with your desired options
     },
 
     offer: {
@@ -38,16 +39,11 @@ var ProjectSchema = new mongoose.Schema({
     },
 
     add_time: {
-        type: Date,
+        type: String,
         required: true,
         trim: true
     }
 
-
-    // lecturers_arr: [{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Lecturer'
-    // }],
 
 }, { timestamps: true });
 ProjectSchema.plugin(id_validator);

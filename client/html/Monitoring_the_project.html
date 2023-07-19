@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
@@ -8,49 +8,77 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <script src="/js/Monitoring_the_project.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script src="/js/taskbar.js"></script>
     <title>Monitoring</title>
 </head>
 
 <body>
     <div>
-
+        <h1>מעקב אחר הפרויקט</h1>
         <table id="tbl_monitoring">
             <thead>
                 <tr>
-                    <th id="dataOfSub">Date of Submission</th>
-                    <th id="title">Title</th>
-                    <th id="submission_report">Submission of the report</th>
-                    <th id="status_rep">Status</th>
-                    <th id="weighted_score">Weighted Score</th>
+                    <th id="title">כותרת</th>
+                    <th id="upload_file">העלאת קובץ</th>
+                    <th id="dateOfSub">תאריך הגשה</th>
+                    <th id="submission_report">אישור הגשת הדוח</th>
+                    <th id="status_rep">סטטוס</th>
+                    <th id="weighted_score">ציון משוקלל</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th id="פroposal">Proposal report</th>
+                    <th>דוח הצעה</th>
+                    
+
+                    <!-- <td>01/01/2021</td>-->
+                    <!-- <td id="proposal">  -->
+                        
+                        <!-- <form id="form_report">
+                            <input id="input_report">
+                        </form> -->
+                    <!-- </td> -->
                 </tr>
                 <tr>
-                    <th id="alpha">Alpha report</th>
+                    <th id="alpha">דוח אלפה</th>
+                    <!-- <td>01/01/2021</td> -->
+                    <td id="alpha" >
+                        <!-- <form id="form_report">
+                            <input id="input_report">
+                        </form> -->
+                    </td>
                 </tr>
                 <tr>
-                    <th id="submitting">Submitting a job application</th>
+                    <th id="submitting">לו"ז לסימסטר ב'</th>
                 </tr>
                 <tr>
-                    <th id="beta">Beta report</th>
+                    <th id="beta">דוח בטה</th>
+                    <!-- <td>01/01/2021</td> -->
+                    <td id="beta">
+                        <!-- <form id="form_report">
+                            <input id="input_report">
+                        </form> -->
+                    </td>
                 </tr>
                 <tr>
-                    <th id="final_rep">Final Report</th>
+                    <th id="final_rep">דוח סופי</th>
+                    <!-- <td>01/01/2021</td> -->
+                    <td id="final_rep">
+                        <!-- <form id="form_report">
+                            <input id="input_report">
+                        </form> -->
+                    </td>
                 </tr>
                 <tr>
-                    <th id="presentation">Project presentation</th>
+                    <th id="presentation">הצגת הפרויקט</th>
                 </tr>
                 <tr>
-                    <th id="final_sco">Final score</th>
+                    <th id="final_sco">ציון סופי</th>
                 </tr>
             </tbody>
         </table>
     </div>
-
+    <button type="button" id="btnHome" onclick="home()"><span class="fa fa-arrow-right">בית</span></button>
 </body>
-
 </html>

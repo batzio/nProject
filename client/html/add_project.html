@@ -1,6 +1,5 @@
-<!-- index.html -->
 <!doctype html>
-<html>
+<html lang="he" dir="rtl">
 
 <head>
     <title>add project</title>
@@ -9,9 +8,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
     "></script> <!-- load jquery via CDN -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <script src="/js/add_project.js"></script> <!-- load our javascript file -->
-    <!-- <script src="/js/conference_update.js"></script> -->
 </head>
 
 <body>
@@ -24,65 +22,69 @@
         <!-- <h1 id="conference_title">Welcome</h1> -->
 
         <!-- OUR FORM -->
-        <form id="id_project" name="id_login" method="POST">
-
+        <form id="id_project" name="id_login">
+            <h1 id="title">הוספת פרוייקט:</h1>
             <!-- NAME -->
             <div id="name-group" class="form-group">
-                <label for="name">Project name</label>
-                <input type="text" class="form-control" name="project_id" id="project_id" placeholder="Enter project name"
+                <label for="name">שם:</label>
+                <input type="text" class="form-control" name="project_id" id="project_id" placeholder="שם פרוייקט"
                     required>
                 <!-- errors will go here -->
             </div>
 
             <!-- SUBJECT -->
             <div id="name-group" class="form-group">
-                <label for="subject">Subject</label>
-                <input type="text" class="form-control" name="subject_id" id="subject_id" placeholder="Enter subject"
+                <label for="subject">תת נושא:</label>
+                <input type="text" class="form-control" name="subject_id" id="subject_id" placeholder="תת נושא"
                     required>
                 <!-- errors will go here -->
             </div>
 
             <!-- DETAILS -->
             <div id="id-group" class="form-group">
-                <label for="details">Details</label>
-                <input type="text" class="form-control" name="details_id" id="details_id" placeholder="Enter details"
+                <label for="details">פרטים:</label>
+                <input type="text" class="form-control" name="details_id" id="details_id" placeholder="פרטי פרוייקט"
                     required>
                 <!-- errors will go here -->
             </div>
 
             <!-- PROJECT TYPE -->
             <div id="id-group" class="form-group">
-                <label for="project_type">Project type</label>
-                <input type="text" class="form-control" name="project_type_id" id="project_type_id" placeholder="Enter project type"
+                <label for="project_type">נושא:</label>
+                <input type="text" class="form-control" name="project_type_id" id="project_type_id" placeholder="סוג פרוייקט"
                     required>
                 <!-- errors will go here -->
             </div>
 
             <!-- STATUS -->
             <div id="id-group" class="form-group">
-                <label for="status">Status</label>
-                <input type="text" class="form-control" name="status_id" id="status_id" placeholder="Enter status"
+                <label for="status">סטטוס:</label>
+                <!-- <select name="status_id" id="status_id">
+                    <option value="open" id="open">פתוח</option>
+                    <option value="close" id="close">סגור</option>
+                </select> -->
+                <input type="text" class="form-control" name="status_id" id="status_id" placeholder="סטטוס הפרוייקט"
                     required>
                 <!-- errors will go here -->
             </div>
             
             <!-- OFFER -->
             <div id="id-group" class="form-group">
-                <label for="offer">Offer</label>
-                <input type="text" class="form-control" name="offer_id" id="offer_id" placeholder="Enter offer"
+                <label for="offer">מציע:</label>
+                <input type="text" class="form-control" name="offer_id" id="offer_id" placeholder="מציע הפרוייקט"
                     required>
                 <!-- errors will go here -->
             </div>
 
             <!-- ADD TIME -->
             <div id="id-group" class="form-group">
-                <label for="offer">Add time</label>
-                <input type="date" class="form-control" name="add_time_id" id="add_time_id"
-                    required>
+                <label for="offer" id="offer_add_time_id">נוסף בתאריך:</label>
+                <input type="text" class="form-control" name="add_time_id" id="add_time_id"
+                    disabled>
                 <!-- errors will go here -->
             </div>
 
-            <button type="submit" onclick="add_proj()" class="btn btn-success">Submit<span class="fa fa-arrow-right"></span></button>
+            <button type="submit" onclick="add_proj()" class="btn btn-success">אישור<span class="fa fa-arrow-right"></span></button>
     </form>
 
     </div>

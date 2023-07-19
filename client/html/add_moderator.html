@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add moderator</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <!-- load bootstrap via CDN -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
+    "></script> <!-- load jquery via CDN -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/add_moderator.js"></script> <!-- load our javascript file -->
+</head>
+<body>
+    <div class="col-sm-6 col-sm-offset-3">
+
+        <!-- <h1 id="conference_title">Welcome</h1> -->
+
+        <!-- OUR FORM -->
+        <form id="id_mod" name="id_mod">
+            <h1 id="title_mod">הוספת מנחה:</h1>
+            <!-- USERNAME -->
+            <div id="name-group" class="form-group">
+                <label for="name">שם משתמש</label>
+                <input type="text" class="form-control" name="mod_username_id" id="mod_username_id" placeholder="שם משתמש"
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- PASSWORD -->
+            <div id="name-group" class="form-group">
+                <label for="subject">סיסמה</label>
+                <input type="password" class="form-control" name="mod_pswd_id" id="mod_pswd_id" placeholder="סיסמה"
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- FIRST NAME -->
+            <div id="name-group" class="form-group">
+                <label for="firstName">שם פרטי:</label>
+                <input type="text" class="form-control" name="firstName_mod_id" id="firstName_mod_id"
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- LAST NAME -->
+            <div id="name-group" class="form-group">
+                <label for="lastName">שם משפחה:</label>
+                <input type="text" class="form-control" name="lastName_mod_id" id="lastName_mod_id"
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- ID -->
+            <div id="name-group" class="form-group">
+                <label for="id_mod">ת.ז.:</label>
+                <input type="text" class="form-control" name="id_mod" id="id_mod"
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- EMAIL -->
+            <div id="id-group" class="form-group">
+                <label for="email_mod">כתובת מייל:</label>
+                <input type="email" class="form-control" name="email_mod_id" id="email_mod_id"
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- IS COORDINATOR -->
+            <div id="id-group" class="form-group">
+                <label for="is_coordinator">האם רכז?</label>
+                <input type="checkbox" class="form-control" name="is_coordinator_id" id="is_coordinator_id"
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <button type="submit" onclick="add_mod()" class="btn btn-success">אישור<span class="fa fa-arrow-right"></span></button>
+    </form>
+
+    </div>
+</body>
+</html>
