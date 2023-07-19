@@ -56,7 +56,7 @@ module.exports = {
     
         else {
             const student = new Student(req.body);
-            console.log('st' + req.body),
+            // console.log('st' + req.body),
 
             student.save().then(student =>
             // console.log('st' + student),
@@ -67,15 +67,16 @@ module.exports = {
     },
     
     createModerator: function (req, res) {
+        
         if (!req.body) res.status(400).send("There is no body")
     
         else {
+            // console.log('createModerator')
             const moderator = new Moderator(req.body);
-            // console.log('st' + req.body),
+            // console.log('createModerator'),
 
             moderator.save().then(moderator =>
-            // console.log('st' + student),
-                
+            // console.log('createModerator'),
                 res.status(200).send(moderator)
             ).catch(e => res.status(400).send(e))
         }
@@ -128,13 +129,25 @@ module.exports = {
     // },
 
 
-    getPassword:function (req, res) {
+    getPasswordSdt:function (req, res) {
         // if (!req.params["id"]) res.status(400).send("There is no id");
         //If the project doesnt exist
         // console.log('getExplanation - ' + JSON.stringify(req.body._id))
-        Student.find({ "password": req.params.password }).then(student => {
-            // console.log('getConference - conf - ' + JSON.stringify(conference) )
+        Student.find({ "sdt_password": req.params.password }).then(student => {
+            // console.log('getPasswordSdt - ' + JSON.stringify(student[0].sdt_password))
+
             res.status(200).send(student)
+        }
+        ).catch(e => res.status(500).send())
+    },
+
+    getPasswordMod:function (req, res) {
+        // if (!req.params["id"]) res.status(400).send("There is no id");
+        //If the project doesnt exist
+        // console.log('getExplanation - ' + JSON.stringify(req.body._id))
+        Student.find({ "mod_password": req.params.password }).then(moderator => {
+            // console.log('getConference - conf - ' + JSON.stringify(conference) )
+            res.status(200).send(moderator)
         }
         ).catch(e => res.status(500).send())
     },
@@ -177,7 +190,7 @@ module.exports = {
         // }
     },
 
-    /* getConference()
+    /* getProject()
     get id conference and show lecturer list of this conference
     return with status 200 in success
     */
