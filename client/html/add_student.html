@@ -11,17 +11,11 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/add_student.js"></script> <!-- load our javascript file -->
-    <!-- <script src="/js/conference_update.js"></script> -->
+    <script src="/js/showPassword.js"></script>
 </head>
 
 <body>
-    <!-- <h1>Welcome</h1> -->
-    <!-- <img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.jce.ac.il%2Fwp-content%2Fuploads%2F2021%2F10%2FAzrieli-Logo.jpg&imgrefurl=https%3A%2F%2Fwww.jce.ac.il%2Fnotice_cat%2Fnews%2F&tbnid=8d1-XpdQQ01anM&vet=12ahUKEwiR9LOkxpn8AhWSVKQEHY-KCEMQMygBegUIARCzAQ..i&docid=j0JkATis1IwGYM&w=1299&h=827&q=%D7%9C%D7%95%D7%92%D7%95%20%D7%A9%D7%9C%20%D7%9E%D7%9B%D7%9C%D7%9C%D7%AA%20%D7%A2%D7%96%D7%A8%D7%99%D7%90%D7%9C%D7%99JPG&hl=iw&ved=2ahUKEwiR9LOkxpn8AhWSVKQEHY-KCEMQMygBegUIARCzAQ"> -->
-
-    <!-- <center> -->
     <div class="col-sm-6 col-sm-offset-3">
-
-        <!-- <h1 id="conference_title">Welcome</h1> -->
 
         <!-- OUR FORM -->
         <form id="id_project" name="id_login">
@@ -29,40 +23,41 @@
             <!-- USERNAME -->
             <div id="name-group" class="form-group">
                 <label for="name">שם משתמש</label>
-                <input type="text" class="form-control" name="sdt_username_id" id="sdt_username_id" placeholder="שם משתמש"
-                    required>
+                <input type="text" class="form-control" name="sdt_username_id" id="sdt_username_id"
+                    placeholder="שם משתמש" required>
                 <!-- errors will go here -->
             </div>
 
             <!-- PASSWORD -->
             <div id="name-group" class="form-group">
                 <label for="password">סיסמה</label>
-                <input type="password" class="form-control" name="sdt_pswd_id" id="sdt_pswd_id" placeholder="סיסמה"
+                <input type="password" class="form-control" name="sdt_pswd_id" id="sdt_pswd_id" value="0000"
                     required>
+                לבדיקת סיסמה <input type="checkbox" onclick="showPassword('sdt')" id="chbx_shw_pwd_id">
                 <!-- errors will go here -->
             </div>
 
-             <!-- FIRST NAME -->
-             <div id="name-group" class="form-group">
+
+            <!-- FIRST NAME -->
+            <div id="name-group" class="form-group">
                 <label for="firstName">שם פרטי:</label>
-                <input type="text" class="form-control" name="firstName_sdt_id" id="firstName_sdt_id" placeholder="שם פרטי"
-                    required>
+                <input type="text" class="form-control" name="firstName_sdt_id" id="firstName_sdt_id"
+                    placeholder="שם פרטי" required>
                 <!-- errors will go here -->
             </div>
 
             <!-- LAST NAME -->
             <div id="name-group" class="form-group">
                 <label for="lastName">שם משפחה:</label>
-                <input type="text" class="form-control" name="lastName_sdt_id" id="lastName_sdt_id" placeholder="שם משפחה"
-                    required>
+                <input type="text" class="form-control" name="lastName_sdt_id" id="lastName_sdt_id"
+                    placeholder="שם משפחה" required>
                 <!-- errors will go here -->
             </div>
 
             <!-- ID -->
             <div id="name-group" class="form-group">
                 <label for="id_mod">ת.ז.:</label>
-                <input type="text" class="form-control" name="id_sdt" id="id_sdt" placeholder="ת.ז."
-                    required>
+                <input type="text" class="form-control" name="id_sdt" id="id_sdt" placeholder="ת.ז." required>
                 <!-- errors will go here -->
             </div>
 
@@ -74,8 +69,9 @@
                 <!-- errors will go here -->
             </div>
 
-            <button type="submit" onclick="add_studen()" class="btn btn-success">אישור<span class="fa fa-arrow-right"></span></button>
-    </form>
+            <button type="submit" onclick="add_studen()" class="btn btn-success">אישור<span
+                    class="fa fa-arrow-right"></span></button>
+        </form>
 
     </div>
     <!-- </center> -->
