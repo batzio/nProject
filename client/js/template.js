@@ -33,3 +33,52 @@
 // // app.listen(3000, () => {
 // //   console.log('Server is running on http://localhost:3000');
 // // });
+
+
+
+
+function btnshow() {
+    $.ajax({
+        type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
+        url: '/getstudents',
+        contentType: 'application/json',
+        success: function (result) {
+            console.log('in btn_show')
+            $.each(result, function (index, value) {      // Save the params and append on the table
+                var row = $('<tr><td>' + value.sdt_firstName + '</td>' +
+                    '<td><img src="' + value.alfa_rpt_exm + '"></td>' +
+                    '</tr>');
+                $('#tbl_files').append(row);
+            })
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+}
+
+
+
+
+// var btn_show = document.getElementById('show_btn');
+
+// // Now you can use btn_show
+// btn_show.addEventListener('click', function() {
+//     alert('check')
+//     $.ajax({
+//                 url: '/students',
+//                 type: 'GET',
+//                 success: function (data) {
+//                     console.log('in btn_show')
+//                     $.each(data, function (index, value) {      // Save the params and append on the table
+//                         var row = $('<tr><td>' + value.sdt_firstName + '</td>' +
+//                             // '<td><img src="' + value.alfa_rpt + '"></td>' +
+//                             '</tr>');
+//                         $('#tbl_files').append(row);
+//                     })
+//                 },
+//                 error: function (jqXHR, textStatus, errorThrown) {
+//                     console.log('Error: ' + textStatus + ' - ' + errorThrown);
+//                 }
+//             });
+// });
