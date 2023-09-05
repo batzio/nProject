@@ -12,13 +12,14 @@ app.use('/login', express.static(path.join(__dirname, 'client/html/Login.html'))
 app.use('/addproject', express.static(path.join(__dirname, 'client/html/add_project.html')));
 app.use('/home', express.static(path.join(__dirname, 'client/html/home_page.html')));
 app.use('/Monitoring', express.static(path.join(__dirname, 'client/html/Monitoring_the_project.html')));
-app.use('/password', express.static(path.join(__dirname, 'client/html/reset_password.html')));
+app.use('/changepassword', express.static(path.join(__dirname, 'client/html/reset_password.html')));
 app.use('/template', express.static(path.join(__dirname, 'client/html/template.html')));
 app.use('/addstudent', express.static(path.join(__dirname, 'client/html/add_student.html')));
-app.use('/tempLogin', express.static(path.join(__dirname, 'client/html/temp_login.html')));
+// app.use('/tempLogin', express.static(path.join(__dirname, 'client/html/temp_login.html')));
 app.use('/assigAndsubDats', express.static(path.join(__dirname, 'client/html/assignments_and_submission_dates.html')));
 app.use('/addmoderator', express.static(path.join(__dirname, 'client/html/add_moderator.html')));
-
+app.use('/uploads', express.static('uploads'));
+app.use('/addcoordinator', express.static(path.join(__dirname, 'client/html/add_coordinator.html')));
 
 app.use('/css', express.static(path.join(__dirname, 'client/css')));
 app.use('/js', express.static(path.join(__dirname, 'client/js')));
