@@ -24,21 +24,28 @@
         <!-- OUR FORM -->
         <form id="id_project" name="id_login">
             <h1 id="title">הוספת פרוייקט:</h1>
-            <!-- NAME -->
+            <!-- FIRST NAME -->
             <div id="name-group" class="form-group">
-                <label for="name">שם:</label>
-                <input type="text" class="form-control" name="project_id" id="project_id" placeholder="שם פרוייקט"
+                <label for="name">שם קוד פרוייקט באנגלית:</label>
+                <input type="text" class="form-control" name="pjt_eng_id" id="pjt_eng_id" placeholder="שם פרוייקט באנגלית"
+                    required>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- LAST NAME -->
+            <div id="name-group" class="form-group">
+                <label for="name">שם פרוייקט בעברית:</label>
+                <input type="text" class="form-control" name="pjt_hbw_id" id="pjt_hbw_id" placeholder="שם פרוייקט בעברית"
                     required>
                 <!-- errors will go here -->
             </div>
 
             <!-- SUBJECT -->
-            <div id="name-group" class="form-group">
+            <!-- <div id="name-group" class="form-group">
                 <label for="subject">תת נושא:</label>
                 <input type="text" class="form-control" name="subject_id" id="subject_id" placeholder="תת נושא"
                     required>
-                <!-- errors will go here -->
-            </div>
+            </div> -->
 
             <!-- DETAILS -->
             <div id="id-group" class="form-group">
@@ -59,20 +66,18 @@
             <!-- STATUS -->
             <div id="id-group" class="form-group">
                 <label for="status">סטטוס:</label>
-                <!-- <select name="status_id" id="status_id">
+                <select name="status_id" id="status_id">
                     <option value="open" id="open">פתוח</option>
                     <option value="close" id="close">סגור</option>
-                </select> -->
-                <input type="text" class="form-control" name="status_id" id="status_id" placeholder="סטטוס הפרוייקט"
-                    required>
+                </select>
+                <input type="hidden" class="form-control" name="input_status_id" id="input_status_id">
                 <!-- errors will go here -->
             </div>
             
             <!-- OFFER -->
             <div id="id-group" class="form-group">
                 <label for="offer">מציע:</label>
-                <input type="text" class="form-control" name="offer_id" id="offer_id" placeholder="מציע הפרוייקט"
-                    required>
+                <input type="text" class="form-control" name="offer_id" id="offer_id" disabled>
                 <!-- errors will go here -->
             </div>
 
@@ -84,6 +89,30 @@
                 <!-- errors will go here -->
             </div>
 
+            <!-- SINGLE OR COUPLE -->
+            <div id="id-group" class="form-group">
+                <label for="single_or_couple">יחיד או זוג:</label>
+                <select name="single_or_couple" id="single_or_couple_id">
+                    <option value="single" id="single">יחיד</option>
+                    <option value="couple" id="couple">זוג</option>
+                </select>
+                <input type="hidden" class="form-control" name="input_single_or_couple_id" id="input_single_or_couple_id">
+                <!-- errors will go here -->
+            </div>
+            
+             <!-- EXTERNAL FACTOR -->
+             <div id="id-group" class="form-group">
+                <label for="external_factor">גורם חיצוני:</label>
+                <input type="text" class="form-control" name="external_factor_id" id="external_factor_id" >
+                <!-- errors will go here -->
+            </div>
+
+             <!-- EXTERNAL PARTY EMAIL -->
+             <div id="id-group" class="form-group">
+                <label for="external_party_email">מייל של הגורם החיצוני:</label>
+                <input type="text" class="form-control" name="external_party_email_id" id="external_party_email_id" >
+                <!-- errors will go here -->
+            </div>
             <button type="submit" onclick="add_proj()" class="btn btn-success">אישור<span class="fa fa-arrow-right"></span></button>
     </form>
 
