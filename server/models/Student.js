@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const id_validator = require('mongoose-id-validator');
 var StudentSchema = new mongoose.Schema({
-    sdt_username: {
+    username: {
         type: String,
         required: true,
         trim: true
     },
 
-    sdt_password: {
+    password: {
         type: String,
         required: true,
         trim: true
@@ -31,17 +31,40 @@ var StudentSchema = new mongoose.Schema({
         trim: true
     },
 
-    // sdt_age:{
-    //     type: Number,
-    //     required: true,
-    //     trim: true
-    // },
-
     sdt_email: {
         type: String,
         required: true,
         trim: true,
+    },
+
+    alfa_rpt_exm: {
+        type: String
+    },
+
+    alfa_grd: {
+        type: Number,
+        required: true,
+        trim: true,
+    },
+
+    beta_grd: {
+        type: Number,
+        required: true,
+        trim: true,
+    },
+
+    finall_rpt_grd: {
+        type: Number,
+        required: true,
+        trim: true,
+    },
+
+    finall_grd: {
+        type: Number,
+        required: true,
+        trim: true,
     }
+
 
 }, { timestamps: true });
 StudentSchema.plugin(id_validator);

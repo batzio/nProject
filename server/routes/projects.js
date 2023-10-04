@@ -1,7 +1,9 @@
 const { json } = require('express');
+// const bcrypt = require('bcrypt');
 const Project = require('../models/Project.js')
 const Moderator = require('../models/Moderator.js')
 const Student = require('../models/Student.js')
+const Coordinator = require('../models/Coordinator.js')
 
 function isValidDate(date) {
     var str_date = new Date(date).toISOString().slice(0, 10)
@@ -25,26 +27,9 @@ module.exports = {
     createProject: function (req, res) {
         console.log("blablabla")
         if (!req.body) res.status(400).send("There is no body")
-        
-        // else if (!req.body.name ||
-        //     !req.body.subject ||
-        //     !req.body.details ||
-        //     !req.body.project_type ||
-        //     !req.body.status ||
-        //     !req.body.offer ||
-        //     !req.body.add_time) {
-        //         console.log(req.body);
-        //     res.status(400).send("Missing parameters")
-        // }
-        // else if (!isValidDate(req.body.date)) {
-        //     res.status(400).send("Invalid date")
-        // }
         else {
-        console.log("blablabla")
-            
+            console.log("blablabla")
             const project = new Project(req.body);
-            console.log("project -- ",project)
-
             project.save().then(project =>
                 res.status(200).send(project)
             ).catch(e => res.status(400).send(e))
@@ -53,49 +38,43 @@ module.exports = {
 
     createStudent: function (req, res) {
         if (!req.body) res.status(400).send("There is no body")
-    
         else {
             const student = new Student(req.body);
-            // console.log('st' + req.body),
-
             student.save().then(student =>
-            // console.log('st' + student),
-                
                 res.status(200).send(student)
             ).catch(e => res.status(400).send(e))
         }
     },
-    
-    createModerator: function (req, res) {
-        
-        if (!req.body) res.status(400).send("There is no body")
-    
-        else {
-            // console.log('createModerator')
-            const moderator = new Moderator(req.body);
-            // console.log('createModerator'),
 
+    createModerator: function (req, res) {
+        if (!req.body) res.status(400).send("There is no body")
+        else {
+            const moderator = new Moderator(req.body);
             moderator.save().then(moderator =>
-            // console.log('createModerator'),
                 res.status(200).send(moderator)
             ).catch(e => res.status(400).send(e))
         }
     },
-    
+
+    createCoordinator: function (req, res) {
+        if (!req.body) res.status(400).send("There is no body")
+        else {
+            const coordinator = new Coordinator(req.body);
+            coordinator.save().then(coordinator =>
+                res.status(200).send(coordinator)
+            ).catch(e => res.status(400).send(e))
+        }
+    },
+
     getProjects: async function (req, res) {
-        await Project.find().then(project => 
-            // console.log('hi you - ' + lecturers_arr)
+        await Project.find().then(project =>
             res.send(project)
-            // console.log('server - ')
         ).catch(e => res.status(500).send())
     },
 
     getExplanation: function (req, res) {
         if (!req.params["id"]) res.status(400).send("There is no id");
-        //If the project doesnt exist
-        // console.log('getExplanation - ' + JSON.stringify(req.body._id))
         Project.find({ "_id": req.params.id }).then(project => {
-            // console.log('getConference - conf - ' + JSON.stringify(conference) )
             res.status(200).send(project)
         }
         ).catch(e => res.status(500).send())
@@ -103,91 +82,119 @@ module.exports = {
 
     getStatus: function (req, res) {
         if (!req.params["id"]) res.status(400).send("There is no id");
-        //If the project doesnt exist
-        // console.log('getExplanation - ' + JSON.stringify(req.body._id))
         Project.find({ "_id": req.params.id }).then(project => {
-            // console.log('getConference - conf - ' + JSON.stringify(conference) )
             res.status(200).send(project)
         }
         ).catch(e => res.status(500).send())
     },
 
-   
-    // getUsername: function (req, res) {
-    //     console.log('getUsername - ' + JSON.stringify(req.params.name))
-
-    //     // if (!req.params["id"]) res.status(400).send("There is no id");
-    //     // //If the project doesnt exist
-    //     // console.log('getUsername - ')
-    //     // console.log('getUsername - ' + JSON.stringify(req.body.id))
-    //     Student.find({ "name": req.params.name }).then(student => {
-    //         console.log('check - ', JSON.stringify(student[0].name)),
-    //         // console.log('getConference - conf - ' + JSON.stringify(conference) )
-    //         res.status(200).send(student)
-    //     }
-    //     ).catch(e => res.status(500).send())
-    // },
-
-
-    getPasswordSdt:function (req, res) {
-        // if (!req.params["id"]) res.status(400).send("There is no id");
-        //If the project doesnt exist
-        // console.log('getExplanation - ' + JSON.stringify(req.body._id))
-        Student.find({ "sdt_password": req.params.password }).then(student => {
-            // console.log('getPasswordSdt - ' + JSON.stringify(student[0].sdt_password))
-
+    getIdSdt: function (req, res) {
+        Student.find({ "sdt_ID": req.params.id }).then(student => {
             res.status(200).send(student)
         }
         ).catch(e => res.status(500).send())
     },
 
-    getPasswordMod:function (req, res) {
-        // if (!req.params["id"]) res.status(400).send("There is no id");
-        //If the project doesnt exist
-        // console.log('getExplanation - ' + JSON.stringify(req.body._id))
-        Student.find({ "mod_password": req.params.password }).then(moderator => {
-            // console.log('getConference - conf - ' + JSON.stringify(conference) )
+    getIdMod: function (req, res) {
+        // console.log('getIdMod - ')
+        Moderator.find({ "mod_ID": req.params.id }).then(moderator => {
+            res.status(200).send(moderator)
+        }
+        ).catch(e => res.status(500).send())
+    },
+
+    getPasswordSdt: function (req, res) {
+        Student.find({ "password": req.params.password }).then(student => {
+            res.status(200).send(student)
+        }
+        ).catch(e => res.status(500).send())
+    },
+
+    getPasswordMod: function (req, res) {
+        // console.log('getPasswordMod')
+        Moderator.find({ "password": req.params.password }).then(moderator => {
+            // console.log('getPasswordMod iii - ', moderator[0]),
             res.status(200).send(moderator)
         }
         ).catch(e => res.status(500).send())
     },
 
     getStudents: function (req, res) {
-        Student.find().then(student => 
-            // console.log('try' + student)
+        Student.find().then(student =>
             res.send(student)
+        ).catch(e => res.status(500).send())
+    },
+
+    getModerators: function (req, res) {
+        console.log('getModerators')
+        Moderator.find().then(moderator =>
+            res.send(moderator)
+        ).catch(e => res.status(500).send())
+    },
+
+    getCoodinator: function (req, res) {
+        // if (!req.params["id"]) res.status(400).send("There is no id");
+        Coordinator.find().then(coordinator =>
+            res.send(coordinator)
         ).catch(e => res.status(500).send())
     },
 
     updateProject: function (req, res) {
         console.log(JSON.stringify(req.body.name))
-        // if (!req.body.name ||
-        //     !req.body.manager ||
-        //     !req.body.image ||
-        //     !req.body.date) {
-        //     res.status(400).send("Missing parameters")
-        // }
-        // else if (!isValidDate(req.body.date)) {
-        //     res.status(400).send("Invalid date")
-        // }
-        // else {          //If it's valid
-            const updates = Object.keys(req.body)
-            const allowedUpdates = ['name', 'subject', 'details', 'project_type', 'status', 'offer', 'add_time']
-            const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+        const updates = Object.keys(req.body)
+        const allowedUpdates = ['name', 'subject', 'details', 'project_type', 'status', 'offer', 'add_time']
+        const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
-            if (!isValidOperation) {
-                return res.status(400).send({ error: 'Invalid updates!' })
+        if (!isValidOperation) {
+            return res.status(400).send({ error: 'Invalid updates!' })
+        }
+        Project.findOneAndUpdate({ "_id": req.params.id }, req.body, { new: true, runValidators: true }).then(project => {
+            if (!project) {
+                return res.status(404).send('There is no project')
             }
-            Project.findOneAndUpdate({ "_id": req.params.id }, req.body, { new: true, runValidators: true }).then(project => {
-                // console.log('updateConference - ' + conference)
-                if (!project) {
+            else {
+                res.send(project)
+            }
+        }).catch(e => res.status(400).send(e))
+    },
+
+    updateStudent: function (req, res) {
+        const updates = Object.keys(req.body)
+        const allowedUpdates = ['password'];
+        const isValidOperation = updates.length === 1 && updates[0] === 'password';
+
+        if (!isValidOperation) {
+            return res.status(400).send({ error: 'Invalid updates!' })
+        }
+
+        Student.findOneAndUpdate({ "sdt_ID": req.params.id }, { "password": req.body.password }, { new: true, runValidators: true })
+            .then(student => {
+                if (!student) {
                     return res.status(404).send('There is no project')
                 }
                 else {
-                    res.send(project)
+                    res.send(student)
                 }
             }).catch(e => res.status(400).send(e))
-        // }
+    },
+
+    updateModerator: function (req, res) {
+        console.log('in updateS')
+        const updates = Object.keys(req.body)
+        const allowedUpdates = ['password'];
+        const isValidOperation = updates.length === 1 && updates[0] === 'password';
+        if (!isValidOperation) {
+            return res.status(400).send({ error: 'Invalid updates!' })
+        }
+        Moderator.findOneAndUpdate({ "mod_ID": req.params.id }, { "password": req.body.password }, { new: true, runValidators: true })
+            .then(moderator => {
+                if (!moderator) {
+                    return res.status(404).send('There is no project')
+                }
+                else {
+                    res.send(moderator)
+                }
+            }).catch(e => res.status(400).send(e))
     },
 
     /* getProject()
@@ -199,7 +206,6 @@ module.exports = {
         //If the conference doesnt exist
         console.log('getProject - ' + JSON.stringify(req.body._id))
         Project.find({ "_id": req.params.id }).then(project => {
-            // console.log('getConference - conf - ' + JSON.stringify(conference) )
             res.status(200).send(project)
         }
         ).catch(e => res.status(500).send())

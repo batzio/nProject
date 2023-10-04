@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const id_validator = require('mongoose-id-validator');
 var ProjectSchema = new mongoose.Schema({
-    name: {
+    name_english: {
         type: String,
         required: true,
         trim: true
     },
 
-    subject: {
+    name_hebrew: {
         type: String,
         required: true,
         trim: true
@@ -28,8 +28,8 @@ var ProjectSchema = new mongoose.Schema({
     status: {
         type: String,
         required: true,
-        trim: true,
-        enum: ['פתוח', 'סגור'] // Replace with your desired options
+        trim: true
+        // enum: ['פתוח', 'סגור'] // Replace with your desired options
     },
 
     offer: {
@@ -39,6 +39,24 @@ var ProjectSchema = new mongoose.Schema({
     },
 
     add_time: {
+        type: String,
+        required: true,
+        trim: true
+    },
+
+    single_or_couple: {
+        type: String,
+        required: true,
+        trim: true
+    },
+
+    external_factor: {
+        type: String,
+        required: true,
+        trim: true
+    },
+
+    external_party_email: {
         type: String,
         required: true,
         trim: true

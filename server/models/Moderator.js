@@ -1,14 +1,14 @@
 const mongoose = require('mongoose')
-const id_validator = require ('mongoose-id-validator');
+const id_validator = require('mongoose-id-validator');
 
 var ModeratorSchema = new mongoose.Schema({
-    mod_username: {
+    username: {
         type: String,
         required: true,
         trim: true
     },
 
-    mod_password: {
+    password: {
         type: String,
         required: true,
         trim: true
@@ -16,7 +16,6 @@ var ModeratorSchema = new mongoose.Schema({
 
     mod_firstName: {
         type: String,
-        required: true,
         trim: true
     },
 
@@ -31,24 +30,37 @@ var ModeratorSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    
+    mod_email: {
+        type: String,
+        required: true,
+        trim: true
+    },
 
-    // mod_age:{
-    //     type: Number,
+    // mod_isCoordinator: {
+    //     type: String,
     //     required: true,
     //     trim: true
     // },
 
-    mod_email: {
-        type: String,
+    pjt1_grd: {
+        type: Number,
         required: true,
-        trim: true,
+        trim: true
     },
 
-    mod_isCoordinator: {
-        type: Boolean,
+    pjt2_grd: {
+        type: Number,
         required: true,
-        default: false
-      }
+        trim: true
+    },
+
+    pjt3_grd: {
+        type: Number,
+        required: true,
+        trim: true
+    }
+
 }, { timestamps: true }
 );
 ModeratorSchema.plugin(id_validator);
