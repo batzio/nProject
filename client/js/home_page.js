@@ -1,4 +1,7 @@
-$(document).ready(function () {
+jQuery(function($) {
+    // Your code here
+//   });
+// $(document).ready(function () {
     var username = localStorage.getItem('username')
     document.getElementById("title").innerHTML = "שלום, " + username;
     // });
