@@ -45,14 +45,20 @@ jQuery(function($) {
 });
 
 function if_there_coor(){
+    alert('in if_there_coor')
     $.ajax({
         type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
-        url: '/getcoorrdinator',
+        url: '/getCoodinator',
         success: function (result) {
-            console.log('result[0].coo_ID - ' + result[0])
-            alert('result[0].coo_ID ')
+
+            // console.log('result[0].coo_ID - ' + result[0].coo_ID)
+            // alert('result[0].coo_ID ')
+
             if(result[0] == undefined){
                 add_coord();
+            }
+            else{
+            location.href = "/login";
             }
         },
         error: function (jqXhr, textStatus, errorThrown) {
@@ -64,6 +70,7 @@ function if_there_coor(){
 
 
 function add_coord() {
+    alert('in add_coord')
     // var id = localStorage.getItem('conference_id')
     var id_coor = localStorage.getItem('id_coor')
     $.ajax({
@@ -71,11 +78,11 @@ function add_coord() {
         url: '/addcoordinator', // the url where we want to POST
         contentType: 'application/json',
         data: JSON.stringify({
-            "coo_ID": id_coor,
-            "Proposal_rpt": "",
-            "alfa_rpt": "",
-            "beta_rpt": "",
-            "finall_rpt": ""
+            "coo_ID": id_coor//,
+            // "Proposal_rpt": "",
+            // "alfa_rpt": "",
+            // "beta_rpt": "",
+            // "finall_rpt": ""
         }),
         processData: false,
         encode: true,
