@@ -13,20 +13,14 @@
 </head>
 
 <body>
-    <!-- <h1>Welcome</h1> -->
-    <!-- <img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.jce.ac.il%2Fwp-content%2Fuploads%2F2021%2F10%2FAzrieli-Logo.jpg&imgrefurl=https%3A%2F%2Fwww.jce.ac.il%2Fnotice_cat%2Fnews%2F&tbnid=8d1-XpdQQ01anM&vet=12ahUKEwiR9LOkxpn8AhWSVKQEHY-KCEMQMygBegUIARCzAQ..i&docid=j0JkATis1IwGYM&w=1299&h=827&q=%D7%9C%D7%95%D7%92%D7%95%20%D7%A9%D7%9C%20%D7%9E%D7%9B%D7%9C%D7%9C%D7%AA%20%D7%A2%D7%96%D7%A8%D7%99%D7%90%D7%9C%D7%99JPG&hl=iw&ved=2ahUKEwiR9LOkxpn8AhWSVKQEHY-KCEMQMygBegUIARCzAQ"> -->
-
-    <!-- <center> -->
     <div class="col-sm-6 col-sm-offset-3">
-
-        <!-- <h1 id="conference_title">Welcome</h1> -->
 
         <!-- OUR FORM -->
         <form id="id_project" name="id_login">
             <h1 id="title">הוספת פרוייקט:</h1>
             <!-- FIRST NAME -->
             <div id="name-group" class="form-group">
-                <label for="name">שם קוד פרוייקט באנגלית:</label>
+                <label for="name">שם פרוייקט באנגלית:</label>
                 <input type="text" class="form-control" name="pjt_eng_id" id="pjt_eng_id" placeholder="שם פרוייקט באנגלית"
                     required>
                 <!-- errors will go here -->
@@ -39,13 +33,6 @@
                     required>
                 <!-- errors will go here -->
             </div>
-
-            <!-- SUBJECT -->
-            <!-- <div id="name-group" class="form-group">
-                <label for="subject">תת נושא:</label>
-                <input type="text" class="form-control" name="subject_id" id="subject_id" placeholder="תת נושא"
-                    required>
-            </div> -->
 
             <!-- DETAILS -->
             <div id="id-group" class="form-group">
@@ -81,10 +68,18 @@
                 <!-- errors will go here -->
             </div>
 
-            <!-- ADD TIME -->
+            <!-- Added on TIME -->
             <div id="id-group" class="form-group">
                 <label for="offer" id="offer_add_time_id">נוסף בתאריך:</label>
                 <input type="text" class="form-control" name="add_time_id" id="add_time_id"
+                    disabled>
+                <!-- errors will go here -->
+            </div>
+
+            <!-- Updated on TIME -->
+            <div id="id_group_update" class="form-group">
+                <label for="offer" id="offer_update_time_id">עודכן בתאריך:</label>
+                <input type="text" class="form-control" name="update_time_id" id="update_time_id"
                     disabled>
                 <!-- errors will go here -->
             </div>
@@ -113,7 +108,7 @@
                 <input type="text" class="form-control" name="external_party_email_id" id="external_party_email_id" >
                 <!-- errors will go here -->
             </div>
-            <button type="submit" onclick="add_proj()" class="btn btn-success">אישור<span class="fa fa-arrow-right"></span></button>
+            <button type="submit" onclick="per_add_proj()" class="btn btn-success">אישור<span class="fa fa-arrow-right"></span></button>
     </form>
 
     </div>
