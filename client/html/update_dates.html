@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+
+<head>
+    <title>עידכון תאריכי הגשה</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <!-- load bootstrap via CDN -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
+    "></script> <!-- load jquery via CDN -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/update_dates.js"></script> <!-- load our javascript file -->
+</head>
+
+<body>
+    <div class="col-sm-6 col-sm-offset-3">
+        <button id="submittingAProposalReportBtn" onclick="submittingAProposalReport()">הגשת דוח הצעה</button>
+        <button id="submittingAnAlfaReportBtn" onclick="submittingAnAlfaReport()">הגשת דוח אלפה</button>
+        <button id="submittingABetaReportBtn" onclick="submittingABetaReport()">הגשת דוח בטה</button>
+        <button id="submittingAFinalReportBtn" onclick="submittingAFinalReport()">הגשת דוח סופי</button>
+        <button id="presentationOfTheProjectBtn" onclick="presentationOfTheProject()">הצגת הפרויקט</button>
+    </div>
+
+    <div id="proposal" style="display: none;">
+        <label>הגשה בתאריך:</label>
+        <input type="date" id="proposal_id" required>
+    </div>
+
+    <div id="alfa" style="display: none;">
+        <label>הגשה בתאריך:</label>
+        <input type="date" id="alfa_id" required>
+    </div>
+
+    <div id="beta" style="display: none;">
+        <label>הגשה בתאריך:</label>
+        <input type="date" id="beta_id" required>
+    </div>
+
+    <div id="final" style="display: none;">
+        <label>הגשה בתאריך:</label>
+        <input type="date" id="final_id" required>
+    </div>
+
+    <div id="presentation" style="display: none;">
+        <label>הצגה בתאריך:</label>
+        <input type="date" id="presentation_id" required>
+    </div>
+    <br>
+    <button id="okBtn" onclick="sentDate()">אישור</button>
+
+</body>
+
+</html>
