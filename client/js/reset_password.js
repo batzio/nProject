@@ -2,7 +2,7 @@
 
 // $(document).ready(function () {
 jQuery(function ($) {
-    alert('in reset page')
+    // alert('in reset page')
     var username = localStorage.getItem('username')
     document.getElementById('username_reset_pwd').value = username
     document.getElementById('username_reset_pwd').innerHTML = username
@@ -31,7 +31,7 @@ function getUsername() {
                     if (value.sdt_ID == id) {
                         flag = true;
                         update_student_pwd(id, newPwd)
-                        return;
+                        // return;
                     }
                 });
                 if (!flag) {
@@ -42,11 +42,11 @@ function getUsername() {
                         success: function (result) {
                             $.each(result, function (index, value) {
                                 // console.log('username - ' + username)
-                                alert('j')
+                                // alert('j')
                                 if (value.mod_ID == id) {//((value.username == username) && ) {
                                     // check_id_moderator(username, id)
                                     update_moderator_pwd(id, newPwd);
-                                    return;
+                                    // return;
                                 }
                             });
                         },
@@ -154,7 +154,7 @@ function update_student_pwd(id, newPwd) {
         }),
         success: function () {
             // resolve();
-            window.location.href = '/assigAndsubDats';
+            window.location.href = '/login';
         },
         error: function (jqXhr, textStatus, errorThrown) {
             console.log(errorThrown);
@@ -203,7 +203,7 @@ function update_moderator_pwd(id, newPwd) {
         }),
         success: function () {
             // resolve();
-            window.location.href = '/assigAndsubDats';
+            window.location.href = '/login';
         },
         error: function (jqXhr, textStatus, errorThrown) {
             console.log(errorThrown);
