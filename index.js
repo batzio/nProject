@@ -15,7 +15,7 @@ app.use('/Monitoring', express.static(path.join(__dirname, 'client/html/Monitori
 app.use('/changepassword', express.static(path.join(__dirname, 'client/html/reset_password.html')));
 app.use('/template', express.static(path.join(__dirname, 'client/html/template.html')));
 app.use('/addstudent', express.static(path.join(__dirname, 'client/html/add_student.html')));
-// app.use('/tempLogin', express.static(path.join(__dirname, 'client/html/temp_login.html')));
+app.use('/updatedates', express.static(path.join(__dirname, 'client/html/update_dates.html')));
 app.use('/assigAndsubDats', express.static(path.join(__dirname, 'client/html/assignments_and_submission_dates.html')));
 app.use('/addmoderator', express.static(path.join(__dirname, 'client/html/add_moderator.html')));
 app.use('/uploads', express.static('uploads'));
