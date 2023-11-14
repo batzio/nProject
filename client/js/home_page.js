@@ -14,6 +14,8 @@ jQuery(function ($) {
 
     var data = localStorage.getItem("data");
     var btnEditProj = document.getElementById("editProjbtn");
+    var btnSendingARequest = document.getElementById("sendingARequest");
+
     // If the user id student he will see all the projects
     if (data === "student") {
         btnEditProj.style.visibility = "hidden";
@@ -23,8 +25,8 @@ jQuery(function ($) {
     else {
         // document.getElementById("status_id").style.display = "none";
         // If the user is moderator he will see onle his projects
-        //אם המשתמש הוא מנחה אז נביא את כל הפרויקטים שלו לפי האיי די שלו. ניתן יהיה לסדר את זה ברגע שהלוגין יהיה מוכן ונוכל להיכנס לאתר לפי שם משתמש וסיסמה
         if (data === "moderator" || data === "coordinator") {
+            btnSendingARequest.style.visibility = "hidden";
             var id = localStorage.getItem("modID");
             $.ajax({
                 type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
@@ -67,6 +69,9 @@ jQuery(function ($) {
                     success: function (result) {
                         // console.log(result)
                         document.getElementById('status_id').value = result[0].status;
+                        if (result[0].status == 'close') {
+                            btnSendingARequest.style.visibility = "hidden";
+                        }
 
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
@@ -141,7 +146,7 @@ function getProjectsDetails(id, index) {
             project.setAttribute("external_factor", value.external_factor)
             project.setAttribute("external_party_email", value.external_party_email)
 
-            console.log('name - ', value.name_hebrew);
+            // console.log('name - ', value.name_hebrew);
             // alert('name')
             project.innerHTML = value.name_hebrew
             projects_name.appendChild(project)
@@ -152,7 +157,7 @@ function getProjectsDetails(id, index) {
     });
 }
 
-function getAllProjectsDetails(){
+function getAllProjectsDetails() {
     $.ajax({
         type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
         url: '/projects',
@@ -188,3 +193,46 @@ function getAllProjectsDetails(){
         }
     });
 }
+
+function sendRequest() {
+
+    //פונ' זו נקראת רק כאשר סטודנט נכנס למערכת. יש להביא איכשהו את המייל של המנחה של אותו פרוייקט לכאן
+
+    var id_mod = localStorage.getItem("modID");
+    $.ajax({
+        type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
+        url: '/getemail/' + id_mod,
+        contentType: 'application/json',
+        success: function (result) {
+            // var email = 'batziona99@gmail.com'
+            // alert('before')
+            var subject = 'בקשת פרוייקט';
+            var body1 = 'שלום וברכה,';
+            var body2 = "אשמח לשמוע פרטים אודות הפרוייקט:"
+            var fullBody = body1 + "\n" +body2;
+            var mailtoUrl = 'mailto:' + result + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(fullBody);
+            // console.log('mailtoUrl - ', mailtoUrl)
+            // alert('mailtoUrl')
+            window.open(mailtoUrl, '_self');
+            // alert('after window.open')
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+}
+
+
+/*
+success: function (result) {
+            var emailAddress = result;
+            var subject = 'Your email subject';
+            var body = 'This is the pre-filled body of the email. You can add more text here.';
+
+            // Construct the mailto URL with subject and body
+            var mailtoUrl = 'mailto:' + emailAddress + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+
+            // Open the default email client
+            window.open(mailtoUrl, '_blank');
+        },
+*/
