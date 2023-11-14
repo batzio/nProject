@@ -37,12 +37,6 @@ var ModeratorSchema = new mongoose.Schema({
         trim: true
     },
 
-    // mod_isCoordinator: {
-    //     type: String,
-    //     required: true,
-    //     trim: true
-    // },
-
     pjt1_grd: {
         type: Number,
         required: true,
@@ -59,7 +53,12 @@ var ModeratorSchema = new mongoose.Schema({
         type: Number,
         required: true,
         trim: true
-    }
+    },
+
+    projects_arr: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'project'
+    }]
 
 }, { timestamps: true }
 );

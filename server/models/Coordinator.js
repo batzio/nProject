@@ -6,23 +6,23 @@ var CoordinatorSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
-    },
-
-    Proposal_rpt: {
-        type: String
-    },
-
-    alfa_rpt: {
-        type: String
-    },
-
-    beta_rpt: {
-        type: String
-    },
-
-    finall_rpt: {
-        type: String
     }
+
+    // Proposal_rpt: {
+    //     type: String
+    // },
+
+    // alfa_rpt: {
+    //     type: String
+    // },
+
+    // beta_rpt: {
+    //     type: String
+    // },
+
+    // finall_rpt: {
+    //     type: String
+    // }
 
 }, { timestamps: true }
 );

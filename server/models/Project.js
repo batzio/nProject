@@ -43,6 +43,12 @@ var ProjectSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    
+    update_time: {
+        type: String,
+        required: true,
+        trim: true
+    }, 
 
     single_or_couple: {
         type: String,
