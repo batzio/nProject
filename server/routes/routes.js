@@ -52,5 +52,6 @@ router.get('/getemail/:id', projects_routes.getEmailMod);
 router.put('/updatProject/:id', projects_routes.updateProject);
 router.put('/updateStudent/:id', projects_routes.updateStudent);
 router.put('/updateModerator/:id', projects_routes.updateModerator);
+router.put('/updateIdModToProjet/:id', projects_routes.updateIdModToProjet);
 
 module.exports = router;
