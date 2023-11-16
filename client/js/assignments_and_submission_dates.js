@@ -1,5 +1,6 @@
 jQuery(function ($) {
     var data = localStorage.getItem("data");
+    localStorage.setItem("data", data);
 
     var addProjBtn = document.getElementById("addProjectBtn")
     var addStudentBtn = document.getElementById("addStudentBtn")
