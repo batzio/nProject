@@ -6,6 +6,10 @@ console.log('modID - ', modID)
 // alert('modID')
 // $(document).ready(function () {
 jQuery(function ($) {
+    var data = localStorage.getItem("data");
+    localStorage.setItem("data", data);
+
+    
     if (isEdit == 'true') {
         $('#title').html("עידכון פרויקט:")
         receiving_the_information();
@@ -161,12 +165,13 @@ function add_project(outputStatus, outputSingleOrCouple) {
             "update_time": $('#update_time_id').val(),
             "single_or_couple": outputSingleOrCouple,
             "external_factor": $('#external_factor_id').val(),
-            "external_party_email": $('#external_party_email_id').val()
+            "external_party_email": $('#external_party_email_id').val(),
+            "mod_id": ""
         }),
         processData: false,
         encode: true,
         success: function (data, textStatus, jQxhr) {
-            // console.log('data - ', data._id)
+            // console.log('data - ', data)
             // alert('data._id')
 
             add_pro_to_mod(data._id);
@@ -179,7 +184,7 @@ function add_project(outputStatus, outputSingleOrCouple) {
 }
 
 function add_pro_to_mod(id_pjt) {
-    // alert('in add_pro_to_mod')
+    alert('in add_pro_to_mod')
     $.ajax({
         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
         url: '/addProjectToModerator/' + modID, // the url where we want to POST
@@ -190,10 +195,34 @@ function add_pro_to_mod(id_pjt) {
         processData: false,
         encode: true,
         success: function (data, textStatus, jQxhr) {
-            location.href = "/assigAndsubDats";
+            add_mod_to_pro(id_pjt);
+            // location.href = "/assigAndsubDats";
         },
         error: function (jqXhr, textStatus, errorThrown) {
             console.log(errorThrown);
         }
     })
+}
+
+function add_mod_to_pro(id_pjt) {
+    console.log('add_mod_to_pro - ', id_pjt)
+    console.log(modID)
+    alert('add_mod_to_pro')
+    $.ajax({
+        type: 'PUT', // define the type of HTTP verb we want to use (GET for our form)
+        url: '/updateIdModToProjet/' + id_pjt,
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "mod_id": modID
+        }),
+        success: function (result) {
+            alert('before result')
+            console.log('result - ', result)
+            alert('result')
+            window.location.href = '/assigAndsubDats';
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    });
 }
