@@ -1,9 +1,5 @@
-// const { use } = require("../../server/routes/routes");
-
 jQuery(function ($) {
     var name = localStorage.getItem('name')
-    // console.log('name - ', name)
-    // alert('name')
     document.getElementById("title").innerHTML = "שלום, " + name;
 
     var project = document.createElement("option")
@@ -82,9 +78,11 @@ jQuery(function ($) {
                 if (document.getElementById("id_explanation") != "") {
                     // alert("in if in for num1 - check edit btn - ",option.id)
                     document.getElementById('editProjbtn').onclick = function () {
+                        // const id_pjt = option.id;
                         editProject(option.id);
                     };
                 }
+                localStorage.setItem('id_pjt', option.id)
                 break;
             }
         }
@@ -194,11 +192,11 @@ function getAllProjectsDetails() {
     });
 }
 
-function sendRequest() {
-
+function sendRequest(id_mod, name) {
+    // getIdModFromPro();
     //פונ' זו נקראת רק כאשר סטודנט נכנס למערכת. יש להביא איכשהו את המייל של המנחה של אותו פרוייקט לכאן
 
-    var id_mod = localStorage.getItem("modID");
+    // var id_mod = localStorage.getItem("modID");
     $.ajax({
         type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
         url: '/getemail/' + id_mod,
@@ -208,8 +206,8 @@ function sendRequest() {
             // alert('before')
             var subject = 'בקשת פרוייקט';
             var body1 = 'שלום וברכה,';
-            var body2 = "אשמח לשמוע פרטים אודות הפרוייקט:"
-            var fullBody = body1 + "\n" +body2;
+            var body2 = "אשמח לשמוע פרטים אודות הפרוייקט:" + '\n' + name;
+            var fullBody = body1 + "\n" + body2;
             var mailtoUrl = 'mailto:' + result + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(fullBody);
             // console.log('mailtoUrl - ', mailtoUrl)
             // alert('mailtoUrl')
@@ -222,17 +220,19 @@ function sendRequest() {
     });
 }
 
+function getIdModFromPro() {
+    var id_pjt = localStorage.getItem('id_pjt');
 
-/*
-success: function (result) {
-            var emailAddress = result;
-            var subject = 'Your email subject';
-            var body = 'This is the pre-filled body of the email. You can add more text here.';
+    $.ajax({
+        type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
+        url: '/project/' + id_pjt,
+        success: function (result) {
+            // console.log(result[0])
 
-            // Construct the mailto URL with subject and body
-            var mailtoUrl = 'mailto:' + emailAddress + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-
-            // Open the default email client
-            window.open(mailtoUrl, '_blank');
+            sendRequest(result[0].mod_id, result[0].name_hebrew);
         },
-*/
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+}
