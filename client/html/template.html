@@ -11,14 +11,70 @@
   <link rel="stylesheet" href="/css/stl.css">
   <script src="/js/template.js"></script>
 </head>
+<center>
 
-<body>
-  <h1>File Upload</h1>
-  <form action="/upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" />
-  </br>
-    <input type="submit" value="Upload" />
-  </form>
-</body>
+  <body>
+    <div>
+      <h1>דוחות</h1>
+      <br>
+
+      <table dir="rtl">
+        <tr dir="rtl">
+          <!-- <th> </th> -->
+          <th>דוח הצעה</th>
+          <th>דוח אלפה</th>
+          <th>דוח בטה</th>
+          <th>דוח סופי</th>
+          <th>קובץ סיאסבי</th>
+        </tr>
+
+        <tr>
+          <td>
+            <form id="uploadForm" enctype="multipart/form-data">
+              <input type="file" id="propFileInput" name="proposal_rpt" accept=".pdf" />
+              <button type="button" onclick="proposal_upload()">העלאה</button>
+            </form>
+          </td>
+
+          <td>
+          <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" id="alfaFileInput" name="alfa_rpt" accept=".pdf" />
+            <button type="button" onclick="alfa_upload()">העלאה</button>
+          </form>
+          </td>
+
+          <td>
+            <form id="uploadForm" enctype="multipart/form-data">
+              <input type="file" id="betaFileInput" name="beta_rpt" accept=".pdf" />
+              <button type="button" onclick="beta_upload()">העלאה</button>
+            </form>
+          </td>
+
+          <td>
+            <form id="uploadForm" enctype="multipart/form-data">
+              <input type="file" id="finalFileInput" name="final_rpt" accept=".pdf" />
+              <button type="button" onclick="final_upload()">העלאה</button>
+            </form>
+          </td>
+                 <!-- CSB -->
+          <td>
+            <!-- <form id="uploadForm" enctype="multipart/form-data">
+              <input type="file" id="alfaFileInput" name="alfa_rpt" accept=".pdf" />
+              <button type="button" onclick="alfa_upload()">העלאה</button>
+            </form> -->
+          </td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</center>
 
 </html>

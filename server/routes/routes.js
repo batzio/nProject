@@ -1,34 +1,52 @@
 const express = require('express');
 const projects_routes = require('./projects');
-// const upload = require('./upload')
 const multer = require('multer');
+const path = require('path');
 
 var router = express.Router();
 
 
-// Configure file upload with Multer
+// // Set up Multer for file uploads
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, 'uploads/');
+//     },
+//     filename: function (req, file, cb) {
+//         const d = new Date();
+//         var date = d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear()
+//         var time = d.getHours() + '.' + d.getMinutes() + "." + d.getSeconds() + "." + d.getMilliseconds()
+//         var fullTime = date + " " + time;
+//         cb(null, file.fieldname + '-' + fullTime + path.extname(file.originalname));
+//     }
+// });
+
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads/'); // The folder where files will be stored
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/');
     },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname);
-    },
+    filename: function (req, file, cb) {
+        const d = new Date();
+        var date = d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear()
+        var time = d.getHours() + '.' + d.getMinutes() + "." + d.getSeconds() + "." + d.getMilliseconds()
+        var fullTime = date + " " + time;
+        // console.log('storage - ', path.extname(file.originalname))
+        cb(null, file.fieldname + '-' + fullTime + path.extname(file.originalname));
+    }
 });
 
-const upload = multer({ storage });
+const upload = multer({ 
+    storage: storage,
+    dest: 'uploads/' });
+
 
 // Define a route to handle file uploads
-router.post('/uploadProRep', projects_routes.createUploadProRep)
-// app.post('/upload', upload.single('file'), (req, res) => {
-//     res.status(200).json({ message: 'File uploaded successfully' });
-// });
-// app.use('/upload', express.static(path.join(__dirname, 'static/index.html')));
+// router.post('/uploadProRep', projects_routes.createUploadProRep);
 
-//  upload.single('propos_rpt'),
-//                                 upload.single('alfa_rpt'),
-//                                 upload.single('beta_rpt'),
-//                                 upload.single('finall_rpt'),
+router.post('/uploadProposalRep', upload.single('proposal_rpt'), projects_routes.createUploadPropRep);
+router.post('/uploadAlfaRep', upload.single('alfa_rpt'), projects_routes.createUploadAlfaRep);
+router.post('/uploadBetaRep', upload.single('beta_rpt'), projects_routes.createUploadBetaRep);
+router.post('/uploadFinalRep', upload.single('final_rpt'), projects_routes.createUploadFinalRep);
+
 router.post('/addproject', projects_routes.createProject);
 router.post('/addmoderator', projects_routes.createModerator);
 router.post('/addstudent', projects_routes.createStudent);
@@ -41,7 +59,7 @@ router.get('/status/:id', projects_routes.getStatus);
 router.get('/getModeratorPwd/:password', projects_routes.getPasswordMod);
 router.get('/student/:id', projects_routes.getIdSdt);
 router.get('/moderator/:id', projects_routes.getIdMod);
-router.get('/getStudentPwd/:password', projects_routes.getPasswordSdt); 
+router.get('/getStudentPwd/:password', projects_routes.getPasswordSdt);
 router.get('/getstudents', projects_routes.getStudents);
 router.get('/getmoderators', projects_routes.getModerators);
 router.get('/project/:id', projects_routes.getProject);

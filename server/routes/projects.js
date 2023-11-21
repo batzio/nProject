@@ -1,6 +1,9 @@
 const { json } = require('express');
-// const bcrypt = require('bcrypt');
-const Project = require('../models/Project.js')
+const Project = require('../models/Project.js');
+const ProposalReport = require('../models/ProposalReport.js');
+const AlfaReport = require('../models/AlfaReport.js');
+const BetaReport = require('../models/BetaReport.js');
+const FinalReport = require('../models/FinalReport.js');
 const Moderator = require('../models/Moderator.js')
 const Student = require('../models/Student.js')
 const Coordinator = require('../models/Coordinator.js')
@@ -25,23 +28,52 @@ function isValidDate(date) {
 
 module.exports = {
 
-    createUploadProRep: function (req, res) {
-        res.status(200).json({ message: 'File uploaded successfully' });
-    },
-
     createProject: function (req, res) {
-        console.log("createProject")
+        // console.log("createProject")
         if (!req.body) res.status(400).send("There is no body")
         else {
-            // console.log("blab")
-            // console.log(req.body);
             const project = new Project(req.body);
 
             project.save().then(project =>
-                // console.log(project),
                 res.status(200).send(project)
             ).catch(e => res.status(400).send(e))
         }
+    },
+
+    createUploadPropRep: async function (req, res) {
+        const newFile = new ProposalReport({
+            propos_rpt_name: req.file.filename,
+            propos_rpt_path: req.file.path
+        });
+        await newFile.save();
+        res.status(200).send(newFile);
+    },
+
+    createUploadAlfaRep: async function (req, res) {
+        const newFile = new AlfaReport({
+            alfa_rpt_name: req.file.filename,
+            alfa_rpt_path: req.file.path
+        });
+        await newFile.save();
+        res.status(200).send(newFile);
+    },
+
+    createUploadBetaRep: async function (req, res) {
+        const newFile = new BetaReport({
+            beta_rpt_name: req.file.filename,
+            beta_rpt_path: req.file.path
+        });
+        await newFile.save();
+        res.status(200).send(newFile);
+    },
+
+    createUploadFinalRep: async function (req, res) {
+        const newFile = new FinalReport({
+            final_rpt_name: req.file.filename,
+            final_rpt_path: req.file.path
+        });
+        await newFile.save();
+        res.status(200).send(newFile);
     },
 
     createStudent: function (req, res) {
@@ -191,7 +223,7 @@ module.exports = {
         // console.log(req.body)
         // console.log(req.params)
         const updates = Object.keys(req.body)
-        const allowedUpdates = ['name_english', 'name_hebrew', 'details', 'project_type', 'status', 'single_or_couple', 'external_factor', 'external_party_email']
+        const allowedUpdates = ['name_english', 'name_hebrew', 'details', 'project_type', 'status', 'single_or_couple', 'update_time', 'external_factor', 'external_party_email']
         const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
         if (!isValidOperation) {

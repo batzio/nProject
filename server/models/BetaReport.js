@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 const id_validator = require('mongoose-id-validator');
 var BetaReportSchema = new mongoose.Schema({
 
-    beta_rpt: {
+    beta_rpt_name: {
+        type: String
+    },
+
+    beta_rpt_path:{
         type: String
     }
 
