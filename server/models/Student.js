@@ -37,9 +37,10 @@ var StudentSchema = new mongoose.Schema({
         trim: true,
     },
 
-    // alfa_rpt_exm: {
-    //     type: String
-    // },
+    id_pjt: {
+        type: String,
+        trim: true
+    },
 
     alfa_grd: {
         type: Number,
