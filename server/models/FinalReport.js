@@ -8,6 +8,10 @@ var FinalReportSchema = new mongoose.Schema({
 
     final_rpt_path: {
         type: String
+    },
+
+    final_rpt_id:{
+        type: String
     }
 
 }, { timestamps: true });

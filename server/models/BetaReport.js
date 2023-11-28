@@ -8,6 +8,10 @@ var BetaReportSchema = new mongoose.Schema({
 
     beta_rpt_path:{
         type: String
+    },
+
+    beta_rpt_id:{
+        type: String
     }
 
 }, { timestamps: true });
