@@ -8,6 +8,10 @@ var ProposalReportSchema = new mongoose.Schema({
 
     propos_rpt_path: {
         type: String
+    },
+
+    propos_rpt_id:{
+        type: String
     }
 
 }, { timestamps: true });

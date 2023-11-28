@@ -29,7 +29,6 @@ var ProjectSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
-        // enum: ['פתוח', 'סגור'] // Replace with your desired options
     },
 
     offer: {
@@ -43,12 +42,18 @@ var ProjectSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    
+
+    // add_time: {
+    //     type: Date,
+    //     required: true,
+    //     trim: true
+    // },
+
     update_time: {
         type: String,
-        required: true,
+        // required: true,
         trim: true
-    }, 
+    },
 
     single_or_couple: {
         type: String,
@@ -66,6 +71,12 @@ var ProjectSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
+    },
+
+    mod_id: {
+        type: String
+        // required: true,
+        // trim: true
     }
 
 
