@@ -93,6 +93,8 @@ function addProject() {
 }
 
 function monitoringTbl() {
+    var sdt = localStorage.getItem("stdID")
+    localStorage.setItem('stdID', sdt)
     window.location.href = "/Monitoring";
 }
 
