@@ -6,7 +6,8 @@ const BetaReport = require('../models/BetaReport.js');
 const FinalReport = require('../models/FinalReport.js');
 const Moderator = require('../models/Moderator.js')
 const Student = require('../models/Student.js')
-const Coordinator = require('../models/Coordinator.js')
+const Coordinator = require('../models/Coordinator.js');
+const path = require('path');
 
 function isValidDate(date) {
     var str_date = new Date(date).toISOString().slice(0, 10)
@@ -40,10 +41,27 @@ module.exports = {
         }
     },
 
+    // createUploadRep: async function (req, res) {
+    //     console.log('createUploadRep')
+    //     consolr.log(req.params)
+    //     const newFile = new ProposalReport({
+    //         propos_rpt_name: req.file.filename,
+    //         propos_rpt_path: req.file.path,
+    //         propos_rpt_id: '0000'
+    //     });
+    //     await newFile.save();
+    //     res.status(200).send(newFile);
+    // },
+
+
+
     createUploadPropRep: async function (req, res) {
+        console.log('createUploadPropRep')
+        console.log(req.params)
         const newFile = new ProposalReport({
             propos_rpt_name: req.file.filename,
-            propos_rpt_path: req.file.path
+            propos_rpt_path: req.file.path,
+            propos_rpt_id: req.params.fileId
         });
         await newFile.save();
         res.status(200).send(newFile);
@@ -52,7 +70,8 @@ module.exports = {
     createUploadAlfaRep: async function (req, res) {
         const newFile = new AlfaReport({
             alfa_rpt_name: req.file.filename,
-            alfa_rpt_path: req.file.path
+            alfa_rpt_path: req.file.path,
+            alfa_rpt_id: req.params.fileId
         });
         await newFile.save();
         res.status(200).send(newFile);
@@ -61,7 +80,8 @@ module.exports = {
     createUploadBetaRep: async function (req, res) {
         const newFile = new BetaReport({
             beta_rpt_name: req.file.filename,
-            beta_rpt_path: req.file.path
+            beta_rpt_path: req.file.path,
+            beta_rpt_id: req.params.fileId
         });
         await newFile.save();
         res.status(200).send(newFile);
@@ -70,14 +90,16 @@ module.exports = {
     createUploadFinalRep: async function (req, res) {
         const newFile = new FinalReport({
             final_rpt_name: req.file.filename,
-            final_rpt_path: req.file.path
+            final_rpt_path: req.file.path,
+            final_rpt_id: req.params.fileId
         });
         await newFile.save();
         res.status(200).send(newFile);
     },
 
     createStudent: function (req, res) {
-        // console.log('in add student - server')
+        console.log('in add student - server')
+        console.log(req.body)
         if (!req.body) res.status(400).send("There is no body")
         else {
             const student = new Student(req.body);
@@ -154,7 +176,8 @@ module.exports = {
     },
 
     getPasswordMod: function (req, res) {
-        // console.log('getPasswordMod')
+        console.log('getPasswordMod - ')
+        console.log(req.body)
         Moderator.find({ "password": req.params.password }).then(moderator => {
             // console.log('getPasswordMod iii - ', moderator[0]),
             res.status(200).send(moderator)
@@ -278,6 +301,26 @@ module.exports = {
             }).catch(e => res.status(400).send(e))
     },
 
+    updateStudentIdPjt: function (req, res) {
+        console.log('in updateS')
+        console.log(req.body)
+        const updates = Object.keys(req.body)
+        const allowedUpdates = ['id_pjt'];
+        const isValidOperation = updates.length === 1 && updates[0] === 'id_pjt';
+        if (!isValidOperation) {
+            return res.status(400).send({ error: 'Invalid updates!' })
+        }
+        Student.findOneAndUpdate({ "sdt_ID": req.params.id }, { "id_pjt": req.body.id_pjt }, { new: true, runValidators: true })
+            .then(student => {
+                if (!student) {
+                    return res.status(404).send('There is no student')
+                }
+                else {
+                    res.send(student)
+                }
+            }).catch(e => res.status(400).send(e))
+    },
+
     AddProjectToModerator: function (req, res) {
         console.log('AddProjectToModerator')
         // console.log(req.body)
@@ -291,8 +334,6 @@ module.exports = {
                     return res.status(404).send()
                 }
                 else {
-                    // console.log('moderator')
-                    // console.log(moderator)
                     res.send(moderator)
                 }
             }).catch(e => res.status(400).send(e))
@@ -319,5 +360,42 @@ module.exports = {
                     res.send(project)
                 }
             }).catch(e => res.status(400).send(e))
+    },
+
+    downloadFiles: async function (req, res) {//להבין איך אי מצליחה להשיג את ה- ID של הקובץ
+        const fileId = req.params.fileId;
+        try {
+            if (fileId === '0000') {
+                const file = await ProposalReport.findOne({ propos_rpt_id: fileId });
+                const fileName = file.propos_rpt_name;
+                // console.log('fileName - ', fileName)
+                const filePath = path.join(__dirname, '..', '..', 'uploads', fileName); // Define the file path
+                console.log('fileName - ',fileName)
+                console.log('filePath - ',filePath)
+                // res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
+                res.sendFile(filePath)
+            }
+            else if (fileId === '0001') {
+                const file = await AlfaReport.findOne({ alfa_rpt_id: fileId });
+                const fileName = file.alfa_rpt_name;
+                const filePath = path.join(__dirname, '..', '..', 'uploads', fileName); // Define the file path
+                res.sendFile(filePath)
+            }
+            else if (fileId === '0010') {
+                const file = await BetaReport.findOne({ beta_rpt_id: fileId });
+                const fileName = file.beta_rpt_name;
+                const filePath = path.join(__dirname, '..', '..', 'uploads', fileName); // Define the file path
+                res.sendFile(filePath)
+            }
+            else {
+                const file = await FinalReport.findOne({ final_rpt_id: fileId });
+                const fileName = file.final_rpt_name;
+                const filePath = path.join(__dirname, '..', '..', 'uploads', fileName); // Define the file path
+                res.sendFile(filePath)
+            }
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Server error' });
+        }
     }
 };
