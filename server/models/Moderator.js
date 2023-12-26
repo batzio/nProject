@@ -37,23 +37,76 @@ var ModeratorSchema = new mongoose.Schema({
         trim: true
     },
 
-    pjt1_grd: {
-        type: Number,
-        required: true,
-        trim: true
-    },
+    grades1: [{
+        alfa_rpt_grd1: {
+            type: Number,
+            required: true,
+            trim: true
+        },
+        final_rpt_grd1: {
+            type: Number,
+            required: true,
+            trim: true
+        },
+        final_grd_pjt1: {
+            type: Number,
+            required: true,
+            trim: true,
+        },
+    }],
 
-    pjt2_grd: {
-        type: Number,
-        required: true,
-        trim: true
-    },
+    grades2: [{
+        alfa_rpt_grd2: {
+            type: Number,
+            required: true,
+            trim: true
+        },
+        final_rpt_grd2: {
+            type: Number,
+            required: true,
+            trim: true
+        },
+        final_grd_pjt2: {
+            type: Number,
+            required: true,
+            trim: true,
+        },
+    }],
 
-    pjt3_grd: {
-        type: Number,
-        required: true,
-        trim: true
-    },
+    grades3: [{
+        alfa_rpt_grd3: {
+            type: Number,
+            required: true,
+            trim: true
+        },
+        final_rpt_grd3: {
+            type: Number,
+            required: true,
+            trim: true
+        },
+        final_grd_pjt3: {
+            type: Number,
+            required: true,
+            trim: true,
+        },
+    }],
+    // pjt1_grd: {
+    //     type: Number,
+    //     required: true,
+    //     trim: true
+    // },
+
+    // pjt2_grd: {
+    //     type: Number,
+    //     required: true,
+    //     trim: true
+    // },
+
+    // pjt3_grd: {
+    //     type: Number,
+    //     required: true,
+    //     trim: true
+    // },
 
     projects_arr: [{
         type: mongoose.Schema.Types.ObjectId,
