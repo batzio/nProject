@@ -42,29 +42,47 @@ var StudentSchema = new mongoose.Schema({
         trim: true
     },
 
-    alfa_grd: {
-        type: Number,
-        required: true,
-        trim: true,
-    },
+    // alfa_rpt_grd: {
+    //     type: Number,
+    //     required: true,
+    //     trim: true,
+    // },
 
-    beta_grd: {
-        type: Number,
-        required: true,
-        trim: true,
-    },
+    // beta_rpt_grd: {
+    //     type: Number,
+    //     required: true,
+    //     trim: true,
+    // },
 
-    finall_rpt_grd: {
-        type: Number,
-        required: true,
-        trim: true,
-    },
+    // final_rpt_grd: {
+    //     type: Number,
+    //     required: true,
+    //     trim: true,
+    // },
 
-    finall_grd: {
-        type: Number,
-        required: true,
-        trim: true,
-    }
+    // final_grd_pjt: {
+    //     type: Number,
+    //     required: true,
+    //     trim: true,
+    // },
+
+    grades: [{
+        alfa_rpt_grd: {
+            type: Number,
+            required: true,
+            trim: true
+        },
+        final_rpt_grd: {
+            type: Number,
+            required: true,
+            trim: true
+        },
+        final_grd_pjt: {
+            type: Number,
+            required: true,
+            trim: true,
+        },
+    }],
 
 
 }, { timestamps: true });
