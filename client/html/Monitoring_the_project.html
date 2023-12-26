@@ -5,11 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-    <script src="/js/Monitoring_the_project.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
-    <script src="/js/taskbar.js"></script>
+    <!-- <script src="/js/Monitoring_the_project.js"></script> -->
+    <script src="/js/template.js"></script>
+
+    <link rel="stylesheet" href="/css/stl.css">
+
+    <!-- <link rel="stylesheet" type="text/css" href="/css/style.css" /> -->
+    <!-- <script src="/js/taskbar.js"></script> -->
     <title>Monitoring</title>
 </head>
 
@@ -30,45 +35,27 @@
             <tbody>
                 <tr>
                     <th>דוח הצעה</th>
-                    
-
-                    <!-- <td>01/01/2021</td>-->
-                    <!-- <td id="proposal">  -->
-                        
-                        <!-- <form id="form_report">
-                            <input id="input_report">
-                        </form> -->
-                    <!-- </td> -->
+                    <td>
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <input type="file" id="propFileInput" name="proposal_rpt" accept=".pdf" />
+                            <button type="button"  onclick="proposal_upload(this.id)">העלאה</button>
+                        </form>
+                    </td>
                 </tr>
                 <tr>
                     <th id="alpha">דוח אלפה</th>
-                    <!-- <td>01/01/2021</td> -->
-                    <td id="alpha" >
-                        <!-- <form id="form_report">
-                            <input id="input_report">
-                        </form> -->
-                    </td>
+                    <td id="alpha"></td>
                 </tr>
                 <tr>
                     <th id="submitting">לו"ז לסימסטר ב'</th>
                 </tr>
                 <tr>
                     <th id="beta">דוח בטה</th>
-                    <!-- <td>01/01/2021</td> -->
-                    <td id="beta">
-                        <!-- <form id="form_report">
-                            <input id="input_report">
-                        </form> -->
-                    </td>
+                    <td id="beta"></td>
                 </tr>
                 <tr>
                     <th id="final_rep">דוח סופי</th>
-                    <!-- <td>01/01/2021</td> -->
-                    <td id="final_rep">
-                        <!-- <form id="form_report">
-                            <input id="input_report">
-                        </form> -->
-                    </td>
+                    <td id="final_rep"></td>
                 </tr>
                 <tr>
                     <th id="presentation">הצגת הפרויקט</th>
@@ -81,4 +68,5 @@
     </div>
     <button type="button" id="btnHome" onclick="home()"><span class="fa fa-arrow-right">בית</span></button>
 </body>
+
 </html>
