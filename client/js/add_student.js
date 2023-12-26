@@ -15,11 +15,18 @@ function add_studen() {
             "sdt_lastName": $("#lastName_sdt_id").val(),
             "sdt_ID": $("#id_sdt").val(),
             "sdt_email": $("#email_sdt_id").val(),
-            // "alfa_rpt_exm": data.filePath,
-            "alfa_grd": 0,
-            "beta_grd": 0,
-            "finall_rpt_grd": 0,
-            "finall_grd": 0
+            "id_pjt": "",
+            "grades": [
+                {
+                    "alfa_rpt_grd": 0,
+                    "final_rpt_grd": 0,
+                    "final_grd_pjt": 0
+                },
+            ]
+            // "alfa_rpt_grd": 0,
+            // // "beta_grd": 0,
+            // "final_rpt_grd": 0,
+            // "final_grd_pjt": 0
         }),
         processData: false,
         encode: true,
