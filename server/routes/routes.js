@@ -39,13 +39,20 @@ const upload = multer({
     dest: 'uploads/' });
 
 
-// Define a route to handle file uploads
+// Define a route to handle file uploads 
 // router.post('/uploadProRep', projects_routes.createUploadProRep);
 
-router.post('/uploadProposalRep', upload.single('proposal_rpt'), projects_routes.createUploadPropRep);
-router.post('/uploadAlfaRep', upload.single('alfa_rpt'), projects_routes.createUploadAlfaRep);
-router.post('/uploadBetaRep', upload.single('beta_rpt'), projects_routes.createUploadBetaRep);
-router.post('/uploadFinalRep', upload.single('final_rpt'), projects_routes.createUploadFinalRep);
+// router.post('/uploadRepFiles/:fileId/:rptName', upload.single('proposal_rpt'), projects_routes.createUploadRep);
+// router.post('/uploadRepFiles/:fileId/:rptName', upload.single('alfa_rpt'), projects_routes.createUploadRep);
+// router.post('/uploadRepFiles/:fileId/:rptName', upload.single('beta_rpt'), projects_routes.createUploadRep);
+// router.post('/uploadRepFiles/:fileId/:rptName', upload.single('final_rpt'), projects_routes.createUploadRep);
+
+
+
+router.post('/uploadProposalRep/:fileId', upload.single('proposal_rpt'), projects_routes.createUploadPropRep);
+router.post('/uploadAlfaRep/:fileId', upload.single('alfa_rpt'), projects_routes.createUploadAlfaRep);
+router.post('/uploadBetaRep/:fileId', upload.single('beta_rpt'), projects_routes.createUploadBetaRep);
+router.post('/uploadFinalRep/:fileId', upload.single('final_rpt'), projects_routes.createUploadFinalRep);
 
 router.post('/addproject', projects_routes.createProject);
 router.post('/addmoderator', projects_routes.createModerator);
@@ -71,5 +78,11 @@ router.put('/updatProject/:id', projects_routes.updateProject);
 router.put('/updateStudent/:id', projects_routes.updateStudent);
 router.put('/updateModerator/:id', projects_routes.updateModerator);
 router.put('/updateIdModToProjet/:id', projects_routes.updateIdModToProjet);
+router.put('/updateStudentIdPjt/:id', projects_routes.updateStudentIdPjt);
+
+
+
+
+router.get('/download/:fileId', projects_routes.downloadFiles);
 
 module.exports = router;
