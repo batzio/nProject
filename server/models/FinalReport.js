@@ -12,7 +12,11 @@ var FinalReportSchema = new mongoose.Schema({
 
     final_rpt_id:{
         type: String
-    }
+    },
+
+    // final_rpt_DOS: {     //Date Of Submission
+    //     type: String
+    // }
 
 }, { timestamps: true });
 FinalReportSchema.plugin(id_validator);

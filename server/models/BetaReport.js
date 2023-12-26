@@ -12,7 +12,11 @@ var BetaReportSchema = new mongoose.Schema({
 
     beta_rpt_id:{
         type: String
-    }
+    },
+
+    // beta_rpt_DOS: {     //Date Of Submission
+    //     type: String
+    // }
 
 }, { timestamps: true });
 BetaReportSchema.plugin(id_validator);

@@ -12,7 +12,11 @@ var AlfaReportSchema = new mongoose.Schema({
 
     alfa_rpt_id: {
         type: String
-    }
+    },
+
+    // alfa_rpt_DOS: {     //Date Of Submission
+    //     type: String
+    // }
 
 }, { timestamps: true });
 AlfaReportSchema.plugin(id_validator);
