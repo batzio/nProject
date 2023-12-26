@@ -1,47 +1,47 @@
 $(document).ready(function () {
     var password = localStorage.getItem('password');
     console.log('tsdguysjjhfdb')
-    uploadFile();
+    // uploadFile();
   });
 
   function home(){
     window.location.href = "/home";
   }
 
-  function uploadFile() {
-    var table = document.getElementById("tbl_monitoring");
-    var col = table.rows[1].cells[1];
-    console.log("hi" + col);
+  // function uploadFile() {
+  //   var table = document.getElementById("tbl_monitoring");
+  //   var col = table.rows[1].cells[1];
+  //   console.log("hi" + col);
   
-    var fileInput = document.createElement("input");
-    fileInput.type = "file";
+  //   var fileInput = document.createElement("input");
+  //   fileInput.type = "file";
   
-    // Create a closure to capture the file information
-    fileInput.onchange = function() {
-      var reader = new FileReader();
-      var fileToRead = this.files[0];
-      reader.readAsText(fileToRead);
+  //   // Create a closure to capture the file information
+  //   fileInput.onchange = function() {
+  //     var reader = new FileReader();
+  //     var fileToRead = this.files[0];
+  //     reader.readAsText(fileToRead);
   
-      reader.onload = function(e) {
-        for (var i = 1; i <= 6; i++) {
-          var row = table.rows[i];
-          var cell = row.insertCell(1);
-          cell.innerHTML = e.target.result;
-        }
-      };
-    };
+  //     reader.onload = function(e) {
+  //       for (var i = 1; i <= 6; i++) {
+  //         var row = table.rows[i];
+  //         var cell = row.insertCell(1);
+  //         cell.innerHTML = e.target.result;
+  //       }
+  //     };
+  //   };
   
-    // Append the input to the cell
-    var cell = document.createElement("td");
-    cell.appendChild(fileInput);
+  //   // Append the input to the cell
+  //   var cell = document.createElement("td");
+  //   cell.appendChild(fileInput);
   
-    // Insert the cell in rows 2 to 7 at column 2
-    for (var i = 1; i <= 6; i++) {
-      var row = table.rows[i];
-      row.insertCell(1);
-      row.cells[1].appendChild(cell.cloneNode(true));
-    }
-  }
+  //   // Insert the cell in rows 2 to 7 at column 2
+  //   for (var i = 1; i <= 6; i++) {
+  //     var row = table.rows[i];
+  //     row.insertCell(1);
+  //     row.cells[1].appendChild(cell.cloneNode(true));
+  //   }
+  // }
   
   //   var table = document.getElementById("tbl_monitoring");
   // var col = document.getElementById("upload_file");

@@ -130,6 +130,8 @@ function getProjectsDetails(id, index) {
         url: '/project/' + id,
         success: function (result) {
             var value = result[0];
+            // console.log('value - ', value)
+            // alert('value')
             var project = document.createElement("option")
             project.setAttribute('value', index)
             project.setAttribute("id", value._id)

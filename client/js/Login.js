@@ -3,7 +3,7 @@ function sub() {
   var password = document.getElementById("id_password").value;
 
   if (password == '0000') {
-    alert('in 0000')
+    // alert('in 0000')
     resetPassword(); // Wait for resetPassword to complete before proceeding.
   }
 
@@ -14,19 +14,20 @@ function sub() {
       url: '/getStudentPwd/' + password,
       contentType: 'application/json',
       success: function (result) {
-        alert('in else check')
+        // alert('in else check')
         console.log('result[0] - '+result[0])
         if (JSON.stringify(result[0]) == undefined) {
-        alert('in else check')
+        // alert('in else check')
           login_mod(username, password);
         }
         else if (result[0].username == username && result[0].password == password) {
-          // console.log(result[0].username);
+          // console.log(result[0]);
           // console.log(result[0].password);
-          // alert("success to bring student")
+          alert("success to bring student")
           localStorage.setItem("data", "student")
           var name = result[0].sdt_firstName + " " + result[0].sdt_lastName;
-          localStorage.setItem("name", name)
+          localStorage.setItem("name", name);
+          localStorage.setItem("stdID", result[0].sdt_ID);
           location.href = "/assigAndsubDats"
         }
         else {
@@ -47,8 +48,12 @@ function login_mod(username, password) {
     type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
     url: '/getModeratorPwd/' + password,
     success: function (result) {
+      console.log(result)
+      alert('result[0]')
+      alert('before is_coor - in success')
       if (result[0].username == username && result[0].password == password) {
         var name = result[0].mod_firstName + " " + result[0].mod_lastName;
+        alert('before is_coor')
         is_coor(result[0].mod_ID, name, result[0]._id);
       }
       else {
@@ -64,14 +69,14 @@ function login_mod(username, password) {
 
 function is_coor(id, name, modID) {
   // console.log('id - ' + id)
-  // alert('in is_coor')
+  alert('in is_coor')
   $.ajax({
     type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
     url: '/getCoodinator',///' + id,
     contentType: 'application/json',
     success: function (result) {
       // console.log('result[0] - ',result[0])
-      alert('result[0] - in is_coor')
+      // alert('result[0] - in is_coor')
       if (result[0].coo_ID == id) {
         localStorage.setItem("data", "coordinator");
       }
