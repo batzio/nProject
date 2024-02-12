@@ -28,7 +28,9 @@ function sub() {
           var name = result[0].sdt_firstName + " " + result[0].sdt_lastName;
           localStorage.setItem("name", name);
           localStorage.setItem("stdID", result[0].sdt_ID);
-          location.href = "/assigAndsubDats"
+          // console.log(result[0].sdt_ID)
+          window.location.href = "/assigAndsubDats";
+          alert(name)
         }
         else {
           alert('שם משתמש ו/או הסיסמה שגויים')
