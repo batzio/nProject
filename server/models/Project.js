@@ -77,7 +77,83 @@ var ProjectSchema = new mongoose.Schema({
         type: String
         // required: true,
         // trim: true
-    }
+    },
+
+    grades1: [{
+        id_pjt_judge1: {
+            type: String,
+            // required: true,
+            // trim: true
+        },
+        alfa_rpt_grd1: {
+            type: Number,
+            // required: true,
+            // trim: true
+        },
+        final_rpt_grd1: {
+            type: Number,
+            // required: true,
+            // trim: true
+        },
+        final_grd_pjt1: {
+            type: Number,
+            // required: true,
+            // trim: true,
+        },
+    }],
+
+    grades2: [{
+        id_pjt_judge2: {
+            type: String,
+            // required: true,
+            // trim: true
+        },
+        alfa_rpt_grd2: {
+            type: Number,
+            // required: true,
+            // trim: true
+        },
+        final_rpt_grd2: {
+            type: Number,
+            // required: true,
+            // trim: true
+        },
+        final_grd_pjt2: {
+            type: Number,
+            // required: true,
+            // trim: true,
+        },
+    }],
+
+    grades3: [{
+        id_pjt_judge3: {
+            type: String,
+            // required: true,
+            // trim: true
+        },
+        alfa_rpt_grd3: {
+            type: Number,
+            // required: true,
+            // trim: true
+        },
+        final_rpt_grd3: {
+            type: Number,
+            // required: true,
+            // trim: true
+        },
+        final_grd_pjt3: {
+            type: Number,
+            // required: true,
+            // trim: true,
+        },
+    }],
+
+//להוסיף תז של סטודנט/ים - תלוי אם יחיד או זוג
+
+    Judges_arr: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'moderator'
+    }],
 
 
 }, { timestamps: true });

@@ -1,4 +1,4 @@
-$(document).ready(function () {
+jQuery(function ($) {
     var password = localStorage.getItem('password');
     console.log('tsdguysjjhfdb')
     // uploadFile();

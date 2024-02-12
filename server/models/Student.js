@@ -66,6 +66,30 @@ var StudentSchema = new mongoose.Schema({
     //     trim: true,
     // },
 
+    //רשימה של שמות הדוחות של אותו סטודנט
+    // reports_arr: [{
+    //     prop_rpt_path: {
+    //         type: String,
+    //         required: true,
+    //         trim: true
+    //     },
+    //     alfa_rpt_path: {
+    //         type: String,
+    //         required: true,
+    //         trim: true
+    //     },
+    //     beta_rpt_path: {
+    //         type: String,
+    //         required: true,
+    //         trim: true
+    //     },
+    //     final_rpt_path: {
+    //         type: String,
+    //         required: true,
+    //         trim: true
+    //     }
+    // }],
+
     grades: [{
         alfa_rpt_grd: {
             type: Number,

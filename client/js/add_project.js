@@ -173,8 +173,8 @@ function add_project(outputStatus, outputSingleOrCouple) {
             "add_time": $('#add_time_id').val(),
             "single_or_couple": outputSingleOrCouple,
             "external_factor": $('#external_factor_id').val(),
-            "external_party_email": $('#external_party_email_id').val(),
-            "mod_id": ""
+            "external_party_email": $('#external_party_email_id').val()
+            // "mod_id": ""
         }),
         processData: false,
         encode: true,
@@ -219,9 +219,9 @@ function add_mod_to_pro(id_pjt) {
             "mod_id": modID
         }),
         success: function (result) {
-            alert('before result')
-            console.log('result - ', result)
-            alert('result')
+            // alert('before result')
+            // console.log('result - ', result)
+            // alert('result')
             window.location.href = '/assigAndsubDats';
         },
         error: function (jqXhr, textStatus, errorThrown) {

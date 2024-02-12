@@ -22,7 +22,7 @@ function getUsername() {
     }
 
     else {
-        // alert('in else')
+        alert('in else')
         $.ajax({
             type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
             url: '/getstudents',
@@ -30,12 +30,13 @@ function getUsername() {
                 $.each(result, function (index, value) {
                     if (value.sdt_ID == id) {
                         flag = true;
+                        alert(flag)
                         update_student_pwd(id, newPwd)
                         // return;
                     }
                 });
                 if (!flag) {
-                    // alert('in flag false')
+                    alert('in flag false')
                     $.ajax({
                         type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
                         url: '/getmoderators',
@@ -65,6 +66,7 @@ function getUsername() {
 
 
 function update_student_pwd(id, newPwd) {
+    alert('update_student_pwd')
     localStorage.setItem('status', 'student')
     $.ajax({
         type: 'PUT', // define the type of HTTP verb we want to use (GET for our form)
@@ -74,6 +76,7 @@ function update_student_pwd(id, newPwd) {
             "password": newPwd
         }),
         success: function () {
+            alert('update_student_pwd - in success')
             // resolve();
             window.location.href = '/login';
         },

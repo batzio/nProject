@@ -30,66 +30,81 @@ var ModeratorSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    
+
     mod_email: {
         type: String,
         required: true,
         trim: true
     },
 
-    grades1: [{
-        alfa_rpt_grd1: {
-            type: Number,
-            required: true,
-            trim: true
-        },
-        final_rpt_grd1: {
-            type: Number,
-            required: true,
-            trim: true
-        },
-        final_grd_pjt1: {
-            type: Number,
-            required: true,
-            trim: true,
-        },
-    }],
+    // grades1: [{
+    //     id_pjt1: {
+    //         type: String,
+    //         required: true,
+    //         trim: true
+    //     },
+    //     alfa_rpt_grd1: {
+    //         type: Number,
+    //         required: true,
+    //         trim: true
+    //     },
+    //     final_rpt_grd1: {
+    //         type: Number,
+    //         required: true,
+    //         trim: true
+    //     },
+    //     final_grd_pjt1: {
+    //         type: Number,
+    //         required: true,
+    //         trim: true,
+    //     },
+    // }],
 
-    grades2: [{
-        alfa_rpt_grd2: {
-            type: Number,
-            required: true,
-            trim: true
-        },
-        final_rpt_grd2: {
-            type: Number,
-            required: true,
-            trim: true
-        },
-        final_grd_pjt2: {
-            type: Number,
-            required: true,
-            trim: true,
-        },
-    }],
+    // grades2: [{
+    //     id_pjt2: {
+    //         type: String,
+    //         required: true,
+    //         trim: true
+    //     },
+    //     alfa_rpt_grd2: {
+    //         type: Number,
+    //         required: true,
+    //         trim: true
+    //     },
+    //     final_rpt_grd2: {
+    //         type: Number,
+    //         required: true,
+    //         trim: true
+    //     },
+    //     final_grd_pjt2: {
+    //         type: Number,
+    //         required: true,
+    //         trim: true,
+    //     },
+    // }],
 
-    grades3: [{
-        alfa_rpt_grd3: {
-            type: Number,
-            required: true,
-            trim: true
-        },
-        final_rpt_grd3: {
-            type: Number,
-            required: true,
-            trim: true
-        },
-        final_grd_pjt3: {
-            type: Number,
-            required: true,
-            trim: true,
-        },
-    }],
+    // grades3: [{
+    //     id_pjt3: {
+    //         type: String,
+    //         required: true,
+    //         trim: true
+    //     },
+    //     alfa_rpt_grd3: {
+    //         type: Number,
+    //         required: true,
+    //         trim: true
+    //     },
+    //     final_rpt_grd3: {
+    //         type: Number,
+    //         required: true,
+    //         trim: true
+    //     },
+    //     final_grd_pjt3: {
+    //         type: Number,
+    //         required: true,
+    //         trim: true,
+    //     },
+    // }],
     // pjt1_grd: {
     //     type: Number,
     //     required: true,
@@ -108,10 +123,18 @@ var ModeratorSchema = new mongoose.Schema({
     //     trim: true
     // },
 
+    //List of projects the moderator in
     projects_arr: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'project'
+    }],
+    
+    judge_project_arr: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'project'
     }]
+
+    
 
 }, { timestamps: true }
 );
