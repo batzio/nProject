@@ -1,4 +1,5 @@
 const { json } = require('express');
+const fs = require('fs');
 const Project = require('../models/Project.js');
 const ProposalReport = require('../models/ProposalReport.js');
 const AlfaReport = require('../models/AlfaReport.js');
@@ -53,49 +54,137 @@ module.exports = {
     //     res.status(200).send(newFile);
     // },
 
-
-
     createUploadPropRep: async function (req, res) {
-        console.log('createUploadPropRep')
-        console.log(req.params)
+        const fileName = req.params.fileName;
+        const filePath = path.join('uploads', fileName);
+
         const newFile = new ProposalReport({
-            propos_rpt_name: req.file.filename,
-            propos_rpt_path: req.file.path,
+            propos_rpt_name: fileName,
+            propos_rpt_path: filePath,
             propos_rpt_id: req.params.fileId
         });
-        await newFile.save();
-        res.status(200).send(newFile);
+        // const oldFileName = req.file.filename;
+        // await uploadHandle(newFile, oldFileName, fileName, res);
+
+        try {
+            await newFile.save();
+            res.status(200).send(newFile);
+            const oldFilePath = path.join('uploads', req.file.filename); // Use req.file.filename to get the file path
+            const newFilePath = path.join('uploads', fileName);
+            fs.rename(oldFilePath, newFilePath, function (err) {
+                if (err) {
+                    console.error("Error renaming file:", err);
+                } else {
+                    console.log("File renamed successfully.");
+                }
+            });
+        } catch (error) {
+            console.error("Error saving file to MongoDB:", error);
+            res.status(500).send("Internal Server Error");
+        }
     },
 
     createUploadAlfaRep: async function (req, res) {
+        const fileName = req.params.fileName;
+        const filePath = path.join('uploads', fileName);
+
         const newFile = new AlfaReport({
-            alfa_rpt_name: req.file.filename,
-            alfa_rpt_path: req.file.path,
+            alfa_rpt_name: fileName,
+            alfa_rpt_path: filePath,
             alfa_rpt_id: req.params.fileId
         });
-        await newFile.save();
-        res.status(200).send(newFile);
+        try {
+            await newFile.save();
+            res.status(200).send(newFile);
+            const oldFilePath = path.join('uploads', req.file.filename); // Use req.file.filename to get the file path
+            const newFilePath = path.join('uploads', fileName);
+            fs.rename(oldFilePath, newFilePath, function (err) {
+                if (err) {
+                    console.error("Error renaming file:", err);
+                } else {
+                    console.log("File renamed successfully.");
+                }
+            });
+        } catch (error) {
+            console.error("Error saving file to MongoDB:", error);
+            res.status(500).send("Internal Server Error");
+        }
     },
 
     createUploadBetaRep: async function (req, res) {
+        const fileName = req.params.fileName;
+        const filePath = path.join('uploads', fileName);
+
         const newFile = new BetaReport({
-            beta_rpt_name: req.file.filename,
-            beta_rpt_path: req.file.path,
+            beta_rpt_name: fileName,
+            beta_rpt_path: filePath,
             beta_rpt_id: req.params.fileId
         });
-        await newFile.save();
-        res.status(200).send(newFile);
+        try {
+            await newFile.save();
+            res.status(200).send(newFile);
+            const oldFilePath = path.join('uploads', req.file.filename); // Use req.file.filename to get the file path
+            const newFilePath = path.join('uploads', fileName);
+            fs.rename(oldFilePath, newFilePath, function (err) {
+                if (err) {
+                    console.error("Error renaming file:", err);
+                } else {
+                    console.log("File renamed successfully.");
+                }
+            });
+        } catch (error) {
+            console.error("Error saving file to MongoDB:", error);
+            res.status(500).send("Internal Server Error");
+        }
     },
 
     createUploadFinalRep: async function (req, res) {
+        const fileName = req.params.fileName;
+        const filePath = path.join('uploads', fileName);
+
         const newFile = new FinalReport({
-            final_rpt_name: req.file.filename,
-            final_rpt_path: req.file.path,
+            final_rpt_name: fileName,
+            final_rpt_path: filePath,
             final_rpt_id: req.params.fileId
         });
-        await newFile.save();
-        res.status(200).send(newFile);
+        try {
+            await newFile.save();
+            res.status(200).send(newFile);
+            const oldFilePath = path.join('uploads', req.file.filename); // Use req.file.filename to get the file path
+            const newFilePath = path.join('uploads', fileName);
+            fs.rename(oldFilePath, newFilePath, function (err) {
+                if (err) {
+                    console.error("Error renaming file:", err);
+                } else {
+                    console.log("File renamed successfully.");
+                }
+            });
+        } catch (error) {
+            console.error("Error saving file to MongoDB:", error);
+            res.status(500).send("Internal Server Error");
+        }
     },
+
+    // async uploadHandle (newFile, oldFileName, fileName, res) {
+    //     try {
+    //         await newFile.save();
+    //         res.status(200).send(newFile);
+    //         const oldFilePath = path.join('uploads', oldFileName); // Use req.file.filename to get the file path
+    //         const newFilePath = path.join('uploads', fileName);
+    //         fs.rename(oldFilePath, newFilePath, function (err) {
+    //             if (err) {
+    //                 console.error("Error renaming file:", err);
+    //             } else {
+    //                 console.log("File renamed successfully.");
+    //             }
+    //         });
+    //     } catch (error) {
+    //         console.error("Error saving file to MongoDB:", error);
+    //         res.status(500).send("Internal Server Error");
+    //     }
+    // },
+
+
 
     createStudent: function (req, res) {
         console.log('in add student - server')
@@ -169,7 +258,9 @@ module.exports = {
 
     getPasswordSdt: function (req, res) {
         // console.log('getPasswordSdt')
+        // console.log(req.body)
         Student.find({ "password": req.params.password }).then(student => {
+            // console.log(student),
             res.status(200).send(student)
         }
         ).catch(e => res.status(500).send())
@@ -263,6 +354,7 @@ module.exports = {
     },
 
     updateStudent: function (req, res) {
+        console.log('updateStudent')
         const updates = Object.keys(req.body)
         const allowedUpdates = ['password'];
         const isValidOperation = updates.length === 1 && updates[0] === 'password';
@@ -340,6 +432,64 @@ module.exports = {
         }
     },
 
+    AddProjectToJudge: function (req, res) {
+        // console.log('AddProjectToModerator')
+        // console.log(req.body)
+        // console.log(req.params.modID)
+        if (!req.body) res.status(400).send("There is no body");
+        // else if (!req.params["_id"] || !req.body.modID) res.status(400).send("Missing parameters");
+        else {
+            //find the specific moderator and update it
+            Moderator.findOneAndUpdate({ "_id": req.params.id_judge }, { $push: { judge_project_arr: req.body.projectID } }, { new: true, runValidators: true }).then(moderator => {
+                if (!moderator) {
+                    return res.status(404).send()
+                }
+                else {
+                    res.send(moderator)
+                }
+            }).catch(e => res.status(400).send(e))
+        }
+    },
+
+    // This function add id's judges to project
+    AddJudgesToProject: function (req, res) {
+        console.log('AddJudgesToProject')
+        console.log(req.params)
+        // console.log(req.body)
+        // console.log(req.params.modID)
+        if (!req.body) res.status(400).send("There is no body");
+        // else if (!req.params["_id"] || !req.body.modID) res.status(400).send("Missing parameters");
+        else {
+            //find the specific moderator and update it
+            Project.findOneAndUpdate({ "_id": req.params.id_pjt }, { $push: { Judges_arr: req.body.JudgeID, } }, { new: true, runValidators: true }).then(project => {
+                if (!project) {
+                    return res.status(404).send()
+                }
+                else {
+                    res.send(project)
+                }
+            }).catch(e => res.status(400).send(e))
+        }
+    },
+
+    // AddPathRptToStudent: function (req, res) {
+    //     // console.log('AddJudgesToProject')
+    //     console.log(req.params)
+    //     console.log(req.body)
+    //     if (!req.body) res.status(400).send("There is no body");
+    //     else {
+    //         //find the specific moderator and update it
+    //         Student.findOneAndUpdate({ "sdt_ID": req.params.id }, { $push: { reports_arr: req.body.rptPath } }, { new: true, runValidators: true }).then(student => {
+    //             if (!student) {
+    //                 return res.status(404).send()
+    //             }
+    //             else {
+    //                 res.send(student)
+    //             }
+    //         }).catch(e => res.status(400).send(e.message || e))
+    //     }
+    // },
+
     updateIdModToProjet: function (req, res) {
         console.log('updateIdModToProjet')
         // console.log(req.body)
@@ -362,40 +512,137 @@ module.exports = {
             }).catch(e => res.status(400).send(e))
     },
 
-    downloadFiles: async function (req, res) {//להבין איך אי מצליחה להשיג את ה- ID של הקובץ
+    // downloadFile: function (req, res) {
+    //     res.download('./uploads/alfa_rpt-30.1.2024 10.22.6.336.png')
+    // },
+
+    downloadFile: function (req, res) {
+        console.log(req.params)
+        const rptStr = req.params.rpt;
         const fileId = req.params.fileId;
-        try {
-            if (fileId === '0000') {
-                const file = await ProposalReport.findOne({ propos_rpt_id: fileId });
-                const fileName = file.propos_rpt_name;
-                // console.log('fileName - ', fileName)
-                const filePath = path.join(__dirname, '..', '..', 'uploads', fileName); // Define the file path
-                console.log('fileName - ',fileName)
-                console.log('filePath - ',filePath)
-                // res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
-                res.sendFile(filePath)
-            }
-            else if (fileId === '0001') {
-                const file = await AlfaReport.findOne({ alfa_rpt_id: fileId });
-                const fileName = file.alfa_rpt_name;
-                const filePath = path.join(__dirname, '..', '..', 'uploads', fileName); // Define the file path
-                res.sendFile(filePath)
-            }
-            else if (fileId === '0010') {
-                const file = await BetaReport.findOne({ beta_rpt_id: fileId });
-                const fileName = file.beta_rpt_name;
-                const filePath = path.join(__dirname, '..', '..', 'uploads', fileName); // Define the file path
-                res.sendFile(filePath)
+        // // Ensure that filePath is provided
+        // if (!filePath) {
+        //     return res.status(400).send("File path is missing");
+        // }
+
+        res.download('./uploads/' + rptStr + '-' + fileId + '.pdf');
+    },
+
+
+    // downloadFiles: async function (req, res) {
+    //     const fileId = req.params.fileId;
+    //     try {
+    //         var file, fileName, filePath;
+
+    //         if (fileId === '0000') {
+    //             file = await ProposalReport.findOne({ propos_rpt_id: fileId });
+    //             fileName = file.propos_rpt_name;
+    //         } else if (fileId === '0001') {
+    //             file = await AlfaReport.findOne({ alfa_rpt_id: fileId });
+    //             fileName = file.alfa_rpt_name;
+    //         } else if (fileId === '0010') {
+    //             file = await BetaReport.findOne({ beta_rpt_id: fileId });
+    //             fileName = file.beta_rpt_name;
+    //         } else {
+    //             file = await FinalReport.findOne({ final_rpt_id: fileId });
+    //             fileName = file.final_rpt_name;
+    //         }
+
+    //         filePath = path.join(__dirname, '..', '..', 'uploads', fileName);
+
+    //         // Check if the file exists
+    //         if (!fs.existsSync(filePath)) {
+    //             console.log('File does not exist');
+    //             return res.status(404).json({ error: 'File not found' });
+    //         }
+    //         else {
+    //             // Log the file details for debugging
+    //             console.log('fileId - ', fileId);
+    //             console.log('fileName - ', fileName);
+    //             console.log('filePath - ', filePath);
+
+    //             // Send the file
+    //             res.sendFile(filePath);
+    //             // res.status(200).json({ filePath });
+    //         }
+    //     } catch (error) {
+    //         console.error(error);
+    //         res.status(500).json({ error: 'Server error' });
+    //     }
+    // },
+
+    deleteProject: function (req, res) {
+        // console.log('deleteConference - ' + req.params.id)
+        Project.deleteOne({ _id: req.params.id }, function (err) {
+            if (!err) {
+                res.status(200).send();
             }
             else {
-                const file = await FinalReport.findOne({ final_rpt_id: fileId });
-                const fileName = file.final_rpt_name;
-                const filePath = path.join(__dirname, '..', '..', 'uploads', fileName); // Define the file path
-                res.sendFile(filePath)
+                res.status(500).send()
             }
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: 'Server error' });
-        }
+        });
     }
+    /*
+    app.get('/downloadFile/:vehicleId/:fileIndex', async (req, res) => {
+  const vehicleId = req.params.vehicleId;
+  const fileIndex = req.params.fileIndex;
+
+  try {
+    const vehicle = await Vehicle.findById(vehicleId);
+
+    if (!vehicle || !vehicle.files[fileIndex]) {
+      return res.status(404).json({ error: 'File not found' });
+    }
+
+    const fileName = vehicle.files[fileIndex];
+    const filePath = path.join(__dirname, 'uploads', fileName); // Define the file path
+
+    if (fs.existsSync(filePath)) {
+      res.sendFile(filePath);
+    } else {
+      res.status(404).json({ error: 'File not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+    */
+
+    // downloadFiles: async function (req, res) {//להבין איך אי מצליחה להשיג את ה- ID של הקובץ
+    //     const fileId = req.params.fileId;
+    //     try {
+    //         if (fileId === '0000') {
+    //             const file = await ProposalReport.findOne({ propos_rpt_id: fileId });
+    //             const fileName = file.propos_rpt_name;
+    //             console.log('fileId - ', fileId)
+    //             const filePath = path.join(__dirname, '..', '..', 'uploads', fileName); // Define the file path
+    //             console.log('fileName - ',fileName)
+    //             console.log('filePath - ',filePath)
+    //             // res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
+    //             res.sendFile(filePath)
+    //         }
+    //         else if (fileId === '0001') {
+    //             const file = await AlfaReport.findOne({ alfa_rpt_id: fileId });
+    //             const fileName = file.alfa_rpt_name;
+    //             const filePath = path.join(__dirname, '..', '..', 'uploads', fileName); // Define the file path
+    //             res.sendFile(filePath)
+    //         }
+    //         else if (fileId === '0010') {
+    //             const file = await BetaReport.findOne({ beta_rpt_id: fileId });
+    //             const fileName = file.beta_rpt_name;
+    //             const filePath = path.join(__dirname, '..', '..', 'uploads', fileName); // Define the file path
+    //             res.sendFile(filePath)
+    //         }
+    //         else {
+    //             const file = await FinalReport.findOne({ final_rpt_id: fileId });
+    //             const fileName = file.final_rpt_name;
+    //             const filePath = path.join(__dirname, '..', '..', 'uploads', fileName); // Define the file path
+    //             res.sendFile(filePath)
+    //         }
+    //     } catch (error) {
+    //         console.error(error);
+    //         res.status(500).json({ error: 'Server error' });
+    //     }
+    // }
 };

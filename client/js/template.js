@@ -46,33 +46,50 @@ const id_sdt = localStorage.getItem('stdID')
 
 
 
-function proposal_upload(id){
-    // var b = localStorage.setItem('idFile', '0000');
-    // alert('id')
-    // console.log(id)
-    // alert('id')
-
-    if(id == ""){
-        id = id_sdt
-        // console.log(id)
-        // alert('id is empty')
+function proposal_upload(id) {
+    // var flag = false;
+    if (id == "") {
+        id = id_sdt;
+        // flag = true;
     }
     const formData = new FormData();  // Create a new FormData object
     // Assuming 'fileInput' is the id of file input element
     const file = document.getElementById('propFileInput').files[0];
+
+    const fileName = 'proposal_rpt-' + id + '.pdf';
+
     // Append the file to the formData
-    formData.append('proposal_rpt', file);
+    formData.append('proposal_rpt', file);//, fileName);
     // var id = document.get
 
     $.ajax({
-        url: '/uploadProposalRep/' + id,
+        url: '/uploadProposalRep/' + id + '/' + fileName,
         type: 'POST',
         data: formData,
         contentType: false,
         processData: false,
         success: function (data, textStatus, jQxhr) {
-            // alert('in success in upload_files')
-            location.reload();
+            alert('הקובץ עלה בהצלחה')
+            // if (flag == true) {
+            //     $.ajax({
+            //         type: 'POST', // define the type of HTTP verb we want to use (GET for our form)
+            //         url: '/addIdRptInStudent/' + id,
+            //         contentType: 'application/json',
+            //         data: JSON.stringify({
+            //             "rptPath": fileName
+            //         }),
+            //         success: function (result) {
+            //             // alert('before result')
+            //             console.log('result - ', result)
+            //             alert('result')
+            //             // window.location.href = '/assigAndsubDats';
+            //         },
+            //         error: function (jqXhr, textStatus, errorThrown) {
+            //             console.log(errorThrown);
+            //         }
+            //     });
+            // }
+            // location.reload();
         }
     });
 }
@@ -82,8 +99,11 @@ function alfa_upload(id) {
     const formData = new FormData();  // Create a new FormData object
     // Assuming 'fileInput' is the id of file input element
     const file = document.getElementById('alfaFileInput').files[0];
+
+    const fileName = 'alfa_rpt-' + id + '.pdf';
+
     // Append the file to the formData
-    formData.append('alfa_rpt', file);
+    formData.append('alfa_rpt', file, fileName);
 
     $.ajax({
         url: '/uploadAlfaRep/' + id,
@@ -98,13 +118,19 @@ function alfa_upload(id) {
     });
 }
 
-function beta_upload(id){
+function beta_upload(id) {
     // localStorage.setItem('idFile', '0010');
     const formData = new FormData();  // Create a new FormData object
     // Assuming 'fileInput' is the id of file input element
     const file = document.getElementById('betaFileInput').files[0];
+
+    //  להוסיף את השורה שמשנה את השם של הקובץ ולשנות תשם לסוג הקובץ + המזהה שלו
+
+    // Set the desired filename (you can modify this part)
+    const fileName = 'beta_rpt-' + id + '.pdf';
+
     // Append the file to the formData
-    formData.append('beta_rpt', file);
+    formData.append('beta_rpt', file, fileName);
     $.ajax({
         url: '/uploadBetaRep/' + id,
         type: 'POST',
@@ -118,13 +144,16 @@ function beta_upload(id){
     });
 }
 
-function final_upload(id){
+function final_upload(id) {
     // localStorage.setItem('idFile', '0011');
     const formData = new FormData();  // Create a new FormData object
     // Assuming 'fileInput' is the id of file input element
     const file = document.getElementById('finalFileInput').files[0];
+
+    const fileName = 'final_rpt-' + id + '.pdf';
+
     // Append the file to the formData
-    formData.append('final_rpt', file);
+    formData.append('final_rpt', file, fileName);
 
     $.ajax({
         url: '/uploadFinalRep/' + id,
@@ -139,19 +168,98 @@ function final_upload(id){
     });
 }
 
+function downloadFile(fileId, rpt) {
+//     if (fileId != '0000' || fileId != '0001' || fileId != '0010' || fileId != '0011') {
+//         $.ajax({
+//             type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
+//             url: '/student/' + fileId,
+//             success: function (result) {
+//                 $.each(result, function (index, data) {
+//                     // console.log('username - ' + username)
+//                     // alert('j')
+//                     if (data.sdt_ID == fileId) {//((value.username == username) && ) {
+//                         var arr = data.reports_arr;
+//                         for (let i = 0; i < arr.length; i++) {
+//                             const isSubstringFound = arr[0].indexOf(rpt) !== -1;
+//                             if (isSubstringFound) {
+//                                 alert('wait!'); ``
+//                             }
+//                             /*
+//                             // Sample long text
+// const longText = "This is a long text, and we want to find a specific substring.";
 
-function download_file(fileId) {
-    // var fileId = localStorage.getItem('idFile');
-    console.log('fileId - ', fileId)
-    alert('fileId')
+// // Substring to find
+// const substringToFind = "specific substring";
+
+// // Check if the substring exists in the long text
+// const isSubstringFound = longText.indexOf(substringToFind) !== -1;
+
+// if (isSubstringFound) {
+//     console.log("Substring found!");
+// } else {
+//     console.log("Substring not found.");
+// }
+
+//                             */
+//                         }
+//                         // check_id_moderator(username, id)
+//                         // update_moderator_pwd(id, newPwd);
+//                         // return;
+//                     }
+//                 });
+//             },
+//             error: function (jqXhr, textStatus, errorThrown) {
+//                 console.log(errorThrown);
+//             }
+//         });
+//     }
+    var form = document.getElementById('downloadForm');
+    form.action = '/download-file/' + fileId + '/' + rpt;
+    form.submit();
+}
+
+
+/*function download_file(fileId) {
     $.ajax({
       url: '/download/' + fileId, // Route on your server to handle download
       method: 'GET',
-      success: function () {
-        console.log('File downloaded successfully!');
+      success: function (data) {
+        console.log(data)
+        alert('data')
+        // Data should contain the file URL from the server
+        if (data) {
+          var link = document.createElement('a');
+          link.href = data;//.fileURL;
+          link.style.display = 'none';
+          link.setAttribute('download', ''); // Specify the file should be downloaded
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          console.log('File downloaded successfully!');
+        } else {
+          console.log('Error: File URL not received from the server.');
+        }
+      },
+      error: function () {
+        console.log('Error: Failed to download the file.');
       }
     });
-  }
+  }*/
+
+
+
+// function download_file(fileId) {
+//     // var fileId = localStorage.getItem('idFile');
+//     console.log('fileId - ', fileId)
+//     alert('fileId')
+//     $.ajax({
+//       url: '/download/' + fileId, // Route on your server to handle download
+//       method: 'GET',
+//       success: function (data) {
+//         console.log('File downloaded successfully!');
+//       }
+//     });
+//   }
 
 //   function beforeppp() {
 //     // var id = localStorage.getItem('id')
