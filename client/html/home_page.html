@@ -25,6 +25,8 @@
             <h1 id="title"></h1>
             <!-- <br> -->
             <!-- PROJECTS -->
+            <!-- <div id="main_div_id" > -->
+            <!-- style="display:none;"> -->
             <div id="id-list-group" class="form-group">
                 <label id="lbl_projects" for="project">רשימת הפרוייקטים:</label>
                 <select name="projects_name" id="projects_name"></select>
@@ -43,15 +45,20 @@
             <!-- STATUS -->
             <div id="status-group" class="form-group">
                 <label for="status">סטטוס</label>
-              <!--   <select name="options" id="options">
+                <!--   <select name="options" id="options">
                     <option value="open">פתוח</option>
                     <option value="close">סגור</option>
                   </select> -->
-                <input type="text" class="form-control" name="status_id" id="status_id" placeholder="סטטוס הפרוייקט" disabled>
-            <!-- errors will go here -->
+                <input type="text" class="form-control" name="status_id" id="status_id" placeholder="סטטוס הפרוייקט"
+                    disabled>
+                <!-- errors will go here -->
             </div>
-            <button id="editProjbtn" >עריכה</button>
+            <!-- </div> -->
+            <button id="editProjbtn">עריכה</button>
             <button id="sendingARequest" onclick="getIdModFromPro()">שליחת בקשה</button>
+            <button id="deleteProjectBtn" style="display:none;">מחיקת פרויקט</button>
+            <button id="monitoringTblBtn" style="display:none;">טבלת מעקב</button>
+
             <!-- <button type="submit" class="btn btn-success" onclick="goToTracking()">למעקב אחר הפרוייקט<span
                     class="fa fa-arrow-right"></span></button> -->
         </form>

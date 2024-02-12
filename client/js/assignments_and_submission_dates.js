@@ -2,23 +2,28 @@ jQuery(function ($) {
     var data = localStorage.getItem("data");
     localStorage.setItem("data", data);
 
-    var addProjBtn = document.getElementById("addProjectBtn")
+    var addProjBtn = document.getElementById("addProjectBtn");
+    var monitoringTblBtn = document.getElementById('monitoringTblBtn');
     var addStudentBtn = document.getElementById("addStudentBtn")
     var addModeratorBtn = document.getElementById("addModeratorBtn")
     var updateDatesBtn = document.getElementById("updateDatesBtn");
+    var allProjectsListBtnBtn = document.getElementById("allProjectsListBtn");
 
     console.log("data", data)
     if (data === "student") {
+        monitoringTblBtn.style.visibility = "visible";
         addProjBtn.style.display = "none";
         addStudentBtn.style.display = "none";
         addModeratorBtn.style.display = 'none';
         updateDatesBtn.style.display = "none";
+        allProjectsListBtnBtn.style.display = "none";
     }
 
     else if (data === "moderator") {
         addStudentBtn.style.display = "none";
         addModeratorBtn.style.display = 'none';
         updateDatesBtn.style.display = "none";
+        allProjectsListBtnBtn.style.display = "none";
     }
 
     localStorage.setItem("data", data);
@@ -99,10 +104,12 @@ function monitoringTbl() {
 }
 
 function projectsList() {
+    // alert('in projectsList')
     var modID = localStorage.getItem("modID");
     localStorage.setItem("modID", modID);
     var name = localStorage.getItem("name")
     localStorage.setItem("name", name);
+    localStorage.setItem("All", "not all");
     window.location.href = "/home";
 }
 
@@ -120,4 +127,13 @@ function addModerator() {
 
 function updateDates() {
     window.location.href = "/updateDates";
+}
+
+function allProjectsList() {
+    // var modID = localStorage.getItem("modID");
+    // alert('in allprojectsList')
+    localStorage.setItem("All", "all");
+    var name = localStorage.getItem("name")
+    localStorage.setItem("name", name);
+    window.location.href = "/home";
 }

@@ -34,15 +34,22 @@
               <input type="file" id="propFileInput" name="proposal_rpt" accept=".pdf" />
               <button type="button" id="0000" onclick="proposal_upload(this.id)">העלאה</button>
             </form>
-            <button type="button" id="0000" onclick="download_file(this.id)">הורדה</button>
+
+            <form id="downloadForm">
+              <button type="button" id="0000" onclick="downloadFile(this.id ,'proposal_rpt')">הורדה</button>
+            </form>
+            <!-- <button type="button" id="0000" onclick="download_file(this.id)">הורדה</button> -->
           </td>
 
           <td>
-          <form id="uploadForm" enctype="multipart/form-data">
-            <input type="file" id="alfaFileInput" name="alfa_rpt" accept=".pdf" />
-            <button type="button" id="0001" onclick="alfa_upload(this.id)">העלאה</button>
-          </form>
-          <button type="button" onclick="download_file(this.id)">הורדה</button>
+            <form id="uploadForm" enctype="multipart/form-data">
+              <input type="file" id="alfaFileInput" name="alfa_rpt" accept=".pdf" />
+              <button type="button" id="0001" onclick="alfa_upload(this.id)">העלאה</button>
+            </form>
+            <form id="downloadForm">
+              <button type="button" id="0001" onclick="downloadFile(this.id, 'alfa_rpt')">הורדה</button>
+            </form>
+            <!-- <button type="button" onclick="download_file(this.id)">הורדה</button> -->
           </td>
 
           <td>
@@ -50,7 +57,10 @@
               <input type="file" id="betaFileInput" name="beta_rpt" accept=".pdf" />
               <button type="button" id="0010" onclick="beta_upload(this.id)">העלאה</button>
             </form>
-            <button type="button" id="0010" onclick="download_file(this.id)">הורדה</button>
+            <form id="downloadForm">
+              <button type="button" id="0010" onclick="downloadFile(this.id, 'beta_rpt')">הורדה</button>
+            </form>
+            <!-- <button type="button" id="0010" onclick="download_file(this.id)">הורדה</button> -->
           </td>
 
           <td>
@@ -58,9 +68,12 @@
               <input type="file" id="finalFileInput" name="final_rpt" accept=".pdf" />
               <button type="button" id="0011" onclick="final_upload(this.id)">העלאה</button>
             </form>
-            <button type="button" id="0011" onclick="download_file(this.id)">הורדה</button>
+            <form id="downloadForm">
+              <button type="button" id="0011" onclick="downloadFile(this.id, 'final_rpt')">הורדה</button>
+            </form>
+            <!-- <button type="button" id="0011" onclick="download_file(this.id)">הורדה</button> -->
           </td>
-                 <!-- CSB -->
+          <!-- CSB -->
           <td>
             <!-- <form id="uploadForm" enctype="multipart/form-data">
               <input type="file" id="alfaFileInput" name="alfa_rpt" accept=".pdf" />

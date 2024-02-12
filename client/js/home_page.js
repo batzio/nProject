@@ -11,9 +11,19 @@ jQuery(function ($) {
     var data = localStorage.getItem("data");
     var btnEditProj = document.getElementById("editProjbtn");
     var btnSendingARequest = document.getElementById("sendingARequest");
+    var btnDeleteProject = document.getElementById("deleteProjectBtn");
+    var monitoringTblBtn = document.getElementById('monitoringTblBtn');
 
+    var all = localStorage.getItem("All")
+    // console.log('all - ', all)
+    // alert('all')
     // If the user id student he will see all the projects
-    if (data === "student") {
+    if (data === "student" || all === "all") {
+        // document.getElementById('main_div_id').style.display = "block";
+        if (data === "coordinator") {
+            btnSendingARequest.style.visibility = "hidden";
+            btnDeleteProject.style.display = "block";
+        }
         btnEditProj.style.visibility = "hidden";
         projects_name.appendChild(project)
         getAllProjectsDetails();
@@ -21,8 +31,9 @@ jQuery(function ($) {
     else {
         // document.getElementById("status_id").style.display = "none";
         // If the user is moderator he will see onle his projects
-        if (data === "moderator" || data === "coordinator") {
+        if (data === "moderator" || (data === "coordinator" && all === "not all")) {
             btnSendingARequest.style.visibility = "hidden";
+            monitoringTblBtn.style.display = "block";
             var id = localStorage.getItem("modID");
             $.ajax({
                 type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
@@ -68,7 +79,9 @@ jQuery(function ($) {
                         if (result[0].status == 'close') {
                             btnSendingARequest.style.visibility = "hidden";
                         }
-
+                        else if (result[0].status == 'open' && data === "student") {
+                            btnSendingARequest.style.visibility = "visible";
+                        }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         console.log(errorThrown);
@@ -80,6 +93,14 @@ jQuery(function ($) {
                     document.getElementById('editProjbtn').onclick = function () {
                         // const id_pjt = option.id;
                         editProject(option.id);
+                    };
+
+                    document.getElementById("deleteProjectBtn").onclick = function () {
+                        deleteProject(option.id);
+                    };
+
+                    monitoringTblBtn.onclick = function(){
+                        monitoringTbl(option.id);
                     };
                 }
                 localStorage.setItem('id_pjt', option.id)
@@ -194,11 +215,27 @@ function getAllProjectsDetails() {
     });
 }
 
-function sendRequest(id_mod, name) {
-    // getIdModFromPro();
-    //פונ' זו נקראת רק כאשר סטודנט נכנס למערכת. יש להביא איכשהו את המייל של המנחה של אותו פרוייקט לכאן
+/*
+This function is before sending the request.
+The function accesses the server and receives the desired project.
+Then sends the request function the ID of the moderator and the name of the project in Hebrew.
+*/
+function getIdModFromPro() {
+    var id_pjt = localStorage.getItem('id_pjt');
 
-    // var id_mod = localStorage.getItem("modID");
+    $.ajax({
+        type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
+        url: '/project/' + id_pjt,
+        success: function (result) {
+            sendRequest(result[0].mod_id, result[0].name_hebrew);
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+}
+
+function sendRequest(id_mod, name) {
     $.ajax({
         type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
         url: '/getemail/' + id_mod,
@@ -222,19 +259,31 @@ function sendRequest(id_mod, name) {
     });
 }
 
-function getIdModFromPro() {
-    var id_pjt = localStorage.getItem('id_pjt');
+function deleteProject(id) {
+    console.log('id - ', id);
+    alert('id')
+    $.ajax({
+        url: "/deletePjt/" + id,
+        type: 'DELETE',
+        success: function (data) {
+            location.reload();
+        },
+        error: function (err) {
+            console.log("err", err);
+        }
+    });
+}
 
+function monitoringTbl(id) {
     $.ajax({
         type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
-        url: '/project/' + id_pjt,
+        url: '/project/' + id,
         success: function (result) {
-            // console.log(result[0])
-
             sendRequest(result[0].mod_id, result[0].name_hebrew);
         },
         error: function (jqXhr, textStatus, errorThrown) {
             console.log(errorThrown);
         }
     });
+    window.location.href = "/Monitoring";
 }

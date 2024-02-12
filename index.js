@@ -5,7 +5,7 @@ const routers = require('./server/routes/routes.js')
 const path = require('path');
 
 const app = express()
-const port = process.env.PORT || 3005
+const port = process.env.PORT || 3000
 
 
 app.use('/login', express.static(path.join(__dirname, 'client/html/Login.html')));
@@ -30,7 +30,11 @@ app.use('/addmoderator', express.static(path.join(__dirname, 'client/html/add_mo
 
 app.use('/uploads', express.static('uploads'));
 
+app.use(express.static('uploads')); /////
+
 app.use('/addcoordinator', express.static(path.join(__dirname, 'client/html/add_coordinator.html')));
+
+app.use('/judge', express.static(path.join(__dirname, 'client/html/judge.html')));
 
 app.use('/css', express.static(path.join(__dirname, 'client/css')));
 
