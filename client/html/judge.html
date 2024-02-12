@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="/js/Judge.js"></script> <!-- load our javascript file -->
+    <title>Judge</title>
+</head>
+<body>
+    <form id="id_project" name="id_login">
+
+        <h1 id="title"></h1>
+        <div id="id-list-group" class="form-group">
+            <label id="lbl_projects" for="project">רשימת הפרוייקטים:</label>
+            <select name="projects_name" id="projects_name"></select>
+        </div>
+
+
+        <div id="id-list-group" class="form-group">
+            <label id="judge1" for="name">שופט 1</label>
+            <select name="id_judge1" id="id_judge1"></select>
+        </div>
+
+        <div id="id-list-group" class="form-group">
+            <label id="judge2" for="name">שופט 2</label>
+            <select name="id_judge2" id="id_judge2"></select>
+        </div>
+
+        <div id="id-list-group" class="form-group">
+            <label id="judge3" for="name">שופט 3</label>
+            <select name="id_judge3" id="id_judge3"></select>
+        </div>
+
+        <button type="submit" onclick="beforeAddPjToJudge()" class="btn btn-success">אישור<span class="fa fa-arrow-right"></span></button>
+
+        <!-- STATUS -->
+        <!-- <div id="status-group" class="form-group">
+            <label for="status">סטטוס</label> -->
+            <!--   <select name="options" id="options">
+                <option value="open">פתוח</option>
+                <option value="close">סגור</option>
+              </select> -->
+            <!-- <input type="text" class="form-control" name="status_id" id="status_id" placeholder="סטטוס הפרוייקט"
+                disabled> -->
+            <!-- errors will go here -->
+        <!-- </div> -->
+    </form>
+</body>
+</html>
