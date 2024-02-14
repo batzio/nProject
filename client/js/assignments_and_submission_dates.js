@@ -3,7 +3,7 @@ jQuery(function ($) {
     localStorage.setItem("data", data);
 
     var addProjBtn = document.getElementById("addProjectBtn");
-    var monitoringTblBtn = document.getElementById('monitoringTblBtn');
+    // var monitoringTblBtn = document.getElementById('monitoringTblBtn');
     var addStudentBtn = document.getElementById("addStudentBtn")
     var addModeratorBtn = document.getElementById("addModeratorBtn")
     var updateDatesBtn = document.getElementById("updateDatesBtn");
@@ -11,7 +11,7 @@ jQuery(function ($) {
 
     console.log("data", data)
     if (data === "student") {
-        monitoringTblBtn.style.visibility = "visible";
+        // monitoringTblBtn.style.visibility = "visible";
         addProjBtn.style.display = "none";
         addStudentBtn.style.display = "none";
         addModeratorBtn.style.display = 'none';
@@ -27,65 +27,7 @@ jQuery(function ($) {
     }
 
     localStorage.setItem("data", data);
-
-    var date = localStorage.getItem("date");
-    console.log('date - ', date);
-    // alert('date');
-
-    if (date === "proposal_date") {
-        var proposal_date = localStorage.getItem("proposal_date");
-        console.log('proposal_date - ', proposal_date);
-        // alert('proposal_date');
-        if (proposal_date != "") {
-            document.getElementById('proposal_id').value = proposal_date;
-            document.getElementById("proposal_id").innerHTML = proposal_date;
-        }
-
-    }
-
-    else if (date === "alfa_date") {
-        var alfa_date = localStorage.getItem("alfa_date");
-        console.log('alfa_date - ', alfa_date);
-        // alert('alfa_date');
-        if (alfa_date != "") {
-            document.getElementById('alfa_id').value = alfa_date;
-            document.getElementById("alfa_id").innerHTML = alfa_date;
-        }
-
-    }
-
-    else if (date === "beta_date") {
-        var beta_date = localStorage.getItem("beta_date");
-        console.log('beta_date - ', beta_date);
-        // alert('beta_date');
-        if (beta_date != "") {
-            document.getElementById('beta_id').value = beta_date;
-            document.getElementById("beta_id").innerHTML = beta_date;
-        }
-
-    }
-
-    else if (date === "final_date") {
-        var final_date = localStorage.getItem("final_date");
-        console.log('final_date - ', final_date);
-        // alert('final_date');
-        if (final_date != "") {
-            document.getElementById('final_id').value = final_date;
-            document.getElementById("final_id").innerHTML = final_date;
-        }
-
-    }
-
-    else if (date === "presentation_date") {
-        var presentation_date = localStorage.getItem("presentation_date");
-        console.log('presentation_date - ', presentation_date);
-        // alert('presentation_date');
-        if (presentation_date != "") {
-            document.getElementById('presentation_id').value = presentation_date;
-            document.getElementById("presentation_id").innerHTML = presentation_date;
-        }
-
-    }
+    getDates();
 });
 
 function addProject() {
@@ -98,9 +40,25 @@ function addProject() {
 }
 
 function monitoringTbl() {
-    var sdt = localStorage.getItem("stdID")
-    localStorage.setItem('stdID', sdt)
+    var data = localStorage.getItem("data");
+    var id;
+    if (data === "student") {
+        id = localStorage.getItem("stdID");
+        localStorage.setItem('stdID', id);
+    }
+    else {
+        id = localStorage.getItem("modID");
+        localStorage.setItem('modID', id);
+    }
+
+
+    // var sdt = localStorage.getItem("stdID")
+    // localStorage.setItem('stdID', sdt);
+    console.log(' id - ', id);
+    alert('id');
+    // if (data === "student") {
     window.location.href = "/Monitoring";
+    // }
 }
 
 function projectsList() {
@@ -136,4 +94,41 @@ function allProjectsList() {
     var name = localStorage.getItem("name")
     localStorage.setItem("name", name);
     window.location.href = "/home";
+}
+
+
+//This function shows the submission dates of the reports and the project
+function getDates() {
+    var prop = document.getElementById("proposal_id");
+    var alfa = document.getElementById("alpha_id");
+    var beta = document.getElementById("beta_id");
+    var final = document.getElementById("final_id");
+    var present = document.getElementById("presentation_id");
+
+    $.ajax({
+        type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
+        url: '/getdates',
+        success: function (result) {
+            $.each(result, function (index, value) {
+                if ("propRpt" in value) {
+                    prop.innerHTML = value.propRpt;
+                }
+                else if ("alfaRpt" in value) {
+                    alfa.innerHTML = value.alfaRpt;
+                }
+                else if ("betaRpt" in value) {
+                    beta.innerHTML = value.betaRpt;
+                }
+                else if ("finalRpt" in value) {
+                    final.innerHTML = value.finalRpt;
+                }
+                else if ("presentation" in value) {
+                    present.innerHTML = value.presentation;
+                }
+            });
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    })
 }
