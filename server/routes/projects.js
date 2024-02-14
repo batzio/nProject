@@ -8,6 +8,7 @@ const FinalReport = require('../models/FinalReport.js');
 const Moderator = require('../models/Moderator.js')
 const Student = require('../models/Student.js')
 const Coordinator = require('../models/Coordinator.js');
+const DateOfSubmission = require('../models/DateOfSubmission.js');
 const path = require('path');
 
 function isValidDate(date) {
@@ -42,18 +43,6 @@ module.exports = {
         }
     },
 
-    // createUploadRep: async function (req, res) {
-    //     console.log('createUploadRep')
-    //     consolr.log(req.params)
-    //     const newFile = new ProposalReport({
-    //         propos_rpt_name: req.file.filename,
-    //         propos_rpt_path: req.file.path,
-    //         propos_rpt_id: '0000'
-    //     });
-    //     await newFile.save();
-    //     res.status(200).send(newFile);
-    // },
-
     createUploadPropRep: async function (req, res) {
         const fileName = req.params.fileName;
         const filePath = path.join('uploads', fileName);
@@ -83,6 +72,21 @@ module.exports = {
             res.status(500).send("Internal Server Error");
         }
     },
+
+    /*
+    createUploadAlfaRep: async function (req, res) {
+        const fileName = req.params.fileName;
+        const filePath = path.join('uploads', fileName);
+
+        const newFile = new AlfaReport({
+            alfa_rpt_name: fileName,
+            alfa_rpt_path: filePath,
+            alfa_rpt_id: req.params.fileId
+        });
+        await newFile.save();
+            res.status(200).send(newFile);
+    },
+    */
 
     createUploadAlfaRep: async function (req, res) {
         const fileName = req.params.fileName;
@@ -219,6 +223,16 @@ module.exports = {
         }
     },
 
+    // DateOfSub: function (req, res) {
+    //     if (!req.body) res.status(400).send("There is no body")
+    //     else {
+    //         const dateOfSub = new DateOfSubmission(req.body);
+    //         dateOfSub.save().then(dateOfSub =>
+    //             res.status(200).send(dateOfSub)
+    //         ).catch(e => res.status(400).send(e))
+    //     }
+    // },
+
     getProjects: async function (req, res) {
         await Project.find().then(project =>
             res.send(project)
@@ -315,7 +329,7 @@ module.exports = {
 
     getModeratorProjects: function (req, res) {
         // console.log(req.params.id)
-        Moderator.find({ "_id": req.params.id }).then(moderator => {
+        Moderator.find({ "mod_ID": req.params.id }).then(moderator => {
             // console.log(moderator[0])
             res.status(200).send(moderator[0].projects_arr)
         }
@@ -328,6 +342,13 @@ module.exports = {
             // console.log(moderator[0].mod_email)
             res.status(200).send(moderator[0].mod_email)
         }
+        ).catch(e => res.status(500).send())
+    },
+
+    getDates: function (req, res) {
+        // console.log('getDates')
+        DateOfSubmission.find().then(dateOfSub =>
+            res.send(dateOfSub)
         ).catch(e => res.status(500).send())
     },
 
@@ -391,6 +412,37 @@ module.exports = {
                     res.send(moderator)
                 }
             }).catch(e => res.status(400).send(e))
+    },
+
+    DateOfSub: function (req, res) {
+
+        // const updates = Object.keys(req.body)
+        // const allowedUpdates = ['password'];
+        // const isValidOperation = updates.length === 1 && updates[0] === 'password';
+        // if (!isValidOperation) {
+        //     return res.status(400).send({ error: 'Invalid updates!' })
+        // }
+        // Moderator.findOneAndUpdate({ "password": req.body.password }, { new: true, runValidators: true })
+        //     .then(moderator => {
+        //         if (!moderator) {
+        //             return res.status(404).send('There is no project')
+        //         }
+        //         else {
+        //             res.send(moderator)
+        //         }
+        //     }).catch(e => res.status(400).send(e))
+
+
+
+
+
+        if (!req.body) res.status(400).send("There is no body")
+        else {
+            const dateOfSub = new DateOfSubmission(req.body);
+            dateOfSub.save().then(dateOfSub =>
+                res.status(200).send(dateOfSub)
+            ).catch(e => res.status(400).send(e))
+        }
     },
 
     updateStudentIdPjt: function (req, res) {
