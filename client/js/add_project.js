@@ -8,7 +8,6 @@ jQuery(function ($) {
 
     getFullDate();
 
-
     if (isEdit == 'true') {
         $('#title').html("עידכון פרויקט:")
         receiving_the_information();
@@ -27,9 +26,10 @@ jQuery(function ($) {
     }
 });
 
+//Saving special values
 function per_add_proj() {
-    console.log('in per_add_proj edit - isEdit - ', isEdit);
-    alert('in per_add_proj')
+    // console.log('in per_add_proj edit - isEdit - ', isEdit);
+    // alert('in per_add_proj')
     var statusSelect = document.querySelector('#status_id');
     var outputStatus = statusSelect.value;
     document.getElementById("input_status_id").setAttribute('value', outputStatus)
@@ -38,9 +38,9 @@ function per_add_proj() {
     var outputSingleOrCouple = singleOrCoupleSelect.value;
     document.getElementById("input_single_or_couple_id").setAttribute('value', outputSingleOrCouple)
 
-    console.log('outputStatus - ', outputStatus)
-    console.log('outputSingleOrCouple - ', outputSingleOrCouple)
-    alert('outputStatus, outputSingleOrCouple')
+    // console.log('outputStatus - ', outputStatus)
+    // console.log('outputSingleOrCouple - ', outputSingleOrCouple)
+    // alert('outputStatus, outputSingleOrCouple')
 
 
     var email = document.getElementById('external_party_email_id').value;
@@ -55,7 +55,7 @@ function per_add_proj() {
     }
 }
 
-
+//Give the date of adding /updateing project
 function getFullDate() {
     const date = new Date();
     var month = date.getMonth() + 1;
@@ -77,6 +77,8 @@ function getFullDate() {
 
 
 }
+
+
 
 function receiving_the_information() {
     var english_name = localStorage.getItem('english_name_proj')
@@ -110,7 +112,7 @@ function receiving_the_information() {
     document.getElementById("external_party_email_id").setAttribute('value', external_party_email)
 }
 
-
+//Check validate of email
 const validateEmail = (email) => {
     // alert('in validateEmail')
     return String(email)
@@ -174,11 +176,13 @@ function add_project(outputStatus, outputSingleOrCouple) {
             "single_or_couple": outputSingleOrCouple,
             "external_factor": $('#external_factor_id').val(),
             "external_party_email": $('#external_party_email_id').val()
+            // "Grades_arr": null
             // "mod_id": ""
         }),
         processData: false,
         encode: true,
         success: function (data, textStatus, jQxhr) {
+            // console.log(data)
             add_pro_to_mod(data._id);
         },
         error: function (jqXhr, textStatus, errorThrown) {
@@ -187,6 +191,7 @@ function add_project(outputStatus, outputSingleOrCouple) {
     })
 }
 
+//Add project id to the moderator
 function add_pro_to_mod(id_pjt) {
     alert('in add_pro_to_mod')
     $.ajax({
@@ -207,10 +212,11 @@ function add_pro_to_mod(id_pjt) {
     })
 }
 
+//Add moderator id to the project
 function add_mod_to_pro(id_pjt) {
     // console.log('add_mod_to_pro - ', id_pjt)
     // console.log(modID)
-    // alert('add_mod_to_pro')
+    alert('add_mod_to_pro')
     $.ajax({
         type: 'PUT', // define the type of HTTP verb we want to use (GET for our form)
         url: '/updateIdModToProjet/' + id_pjt,
@@ -222,7 +228,15 @@ function add_mod_to_pro(id_pjt) {
             // alert('before result')
             // console.log('result - ', result)
             // alert('result')
-            window.location.href = '/assigAndsubDats';
+            //יצירנ שלוש פעמים אבור כל שופט בפרויקט
+            createGraedeDoc(id_pjt);
+            createGraedeDoc(id_pjt);
+            createGraedeDoc(id_pjt);
+
+            createSubDoc(id_pjt);
+            createSubDoc(id_pjt);
+            createSubDoc(id_pjt);
+            // window.location.href = '/assigAndsubDats';
         },
         error: function (jqXhr, textStatus, errorThrown) {
             console.log(errorThrown);
@@ -230,6 +244,7 @@ function add_mod_to_pro(id_pjt) {
     });
 }
 
+//Add project id to the student/s that work on it
 function add_project_id_to_students(id_pjt, single_or_couple) {
     // let text;
     let id_sdt = prompt("הכנס תז של הסטודנט שעושה פרוייקט זה", "");
@@ -245,14 +260,14 @@ function add_project_id_to_students(id_pjt, single_or_couple) {
         if (id_second_sdt == null || id_second_sdt == "") {
             alert("חובה להכניס תז של הסטודנט");
         } else {
-        update_student_id_pjt(id_second_sdt, id_pjt);
+            update_student_id_pjt(id_second_sdt, id_pjt);
         }
         // document.getElementById("demo").innerHTML = text1;
     }
     alert('הסתיים בהצלחה')
 }
 
-function update_student_id_pjt(id_sdt, id_pjt){
+function update_student_id_pjt(id_sdt, id_pjt) {
     $.ajax({
         type: 'PUT', // define the type of HTTP verb we want to use (GET for our form)
         url: '/updateStudentIdPjt/' + id_sdt,
@@ -268,4 +283,95 @@ function update_student_id_pjt(id_sdt, id_pjt){
         }
     });
 }
-         
+
+//Create Grades document and save the id of pjt
+function createGraedeDoc(id_pjt) {
+    // alert("createGraedeDoc")
+    $.ajax({
+        type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+        url: '/createGrdDoc', // the url where we want to POST
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "id_project": id_pjt,
+        }),
+        processData: false,
+        encode: true,
+        success: function (result) {
+            // console.log(result)
+            save_grade_id_doc(id_pjt, result);
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    })
+}
+
+//שומר
+function save_grade_id_doc(id_pjt, id_grade_doc) {
+    // alert("save_grade_id_doc")
+    $.ajax({
+        type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+        url: '/saveGrdInPjt/' + id_pjt, // the url where we want to POST
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "GradeID": id_grade_doc,
+        }),
+        processData: false,
+        encode: true,
+        success: function (result) {
+            console.log("save_grade_id_doc")
+            console.log(result)
+            // add_mod_to_pro(id_pjt);
+            // window.location.href = '/assigAndsubDats';
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    })
+}
+
+//Create Subs document and save the id of pjt
+function createSubDoc(id_pjt) {
+    // alert("createSubDoc")
+    $.ajax({
+        type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+        url: '/createSubDoc', // the url where we want to POST
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "id_project": id_pjt,
+        }),
+        processData: false,
+        encode: true,
+        success: function (result) {
+            // console.log(result)
+            save_sub_id_doc(id_pjt, result);
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    })
+}
+
+//שומר
+function save_sub_id_doc(id_pjt, id_sub_doc) {
+    // alert("save_sub_id_doc")
+    $.ajax({
+        type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+        url: '/saveSubInPjt/' + id_pjt, // the url where we want to POST
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "SubRptID": id_sub_doc,
+        }),
+        processData: false,
+        encode: true,
+        success: function (result) {
+            console.log("save_sub_id_doc")
+            console.log(result)
+            // add_mod_to_pro(id_pjt);
+            // window.location.href = '/assigAndsubDats';
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    })
+}

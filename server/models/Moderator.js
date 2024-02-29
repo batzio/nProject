@@ -37,6 +37,15 @@ var ModeratorSchema = new mongoose.Schema({
         trim: true
     },
 
+    // id_grade: {
+    //     type: String
+    // },
+
+    // id_sub: {
+    //     type: String
+    // },
+
+
     // grades1: [{
     //     id_pjt1: {
     //         type: String,
@@ -128,13 +137,28 @@ var ModeratorSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'project'
     }],
-    
+
+    //List of projects judged by the moderator
     judge_project_arr: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'project'
-    }]
+    }],
 
-    
+    //A list of grade documents that are linked to the project that the supervisor is judging
+    Grades_arr: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'grades'
+    }],
+
+    //A list of approval documents that are linked to the project that the supervisor is judging
+    SubRpt:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'submissionReport'
+    }]
+    // Grades_arr: [{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'grades'
+    // }],
 
 }, { timestamps: true }
 );
