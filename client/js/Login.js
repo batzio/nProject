@@ -15,19 +15,20 @@ function sub() {
       contentType: 'application/json',
       success: function (result) {
         // alert('in else check')
-        console.log('result[0] - '+result[0])
+        console.log('result[0] - ' + result[0])
         if (JSON.stringify(result[0]) == undefined) {
-        // alert('in else check')
+          // alert('in else check')
           login_mod(username, password);
         }
         else if (result[0].username == username && result[0].password == password) {
           // console.log(result[0]);
           // console.log(result[0].password);
-          alert("success to bring student")
+          // alert("success to bring student")
           localStorage.setItem("data", "student")
           var name = result[0].sdt_firstName + " " + result[0].sdt_lastName;
           localStorage.setItem("name", name);
           localStorage.setItem("stdID", result[0].sdt_ID);
+          localStorage.setItem("modID", "")
           // console.log(result[0].sdt_ID)
           window.location.href = "/assigAndsubDats";
           alert(name)
@@ -50,13 +51,14 @@ function login_mod(username, password) {
     type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
     url: '/getModeratorPwd/' + password,
     success: function (result) {
-      console.log(result)
+      // console.log(result[0])
       alert('result[0]')
-      alert('before is_coor - in success')
+      // alert('before is_coor - in success')
       if (result[0].username == username && result[0].password == password) {
         var name = result[0].mod_firstName + " " + result[0].mod_lastName;
+        console.log('name - ' + name)
         alert('before is_coor')
-        is_coor(result[0].mod_ID, name, result[0]._id);
+        is_coor(result[0].mod_ID, name);
       }
       else {
         alert('שם משתמש ו/או הסיסמה שגויים')
@@ -69,7 +71,7 @@ function login_mod(username, password) {
 }
 
 
-function is_coor(id, name, modID) {
+function is_coor(id, name) {
   // console.log('id - ' + id)
   alert('in is_coor')
   $.ajax({
@@ -78,18 +80,19 @@ function is_coor(id, name, modID) {
     contentType: 'application/json',
     success: function (result) {
       // console.log('result[0] - ',result[0])
-      // alert('result[0] - in is_coor')
-      if (result[0].coo_ID == id) {
-        localStorage.setItem("data", "coordinator");
-      }
-      else {
+      alert('result[0] - in is_coor')
+      if (result[0].coo_ID == undefined || result[0].coo_ID != id ) {
         localStorage.setItem("data", "moderator");
       }
+      else {
+        localStorage.setItem("data", "coordinator");
+      }
       localStorage.setItem("name", name)
-      localStorage.setItem("modID", modID)
+      localStorage.setItem("modID", id)
+      localStorage.setItem("stdID", "");
       window.location.href = "/assigAndsubDats";
       // console.log('is_coor - ' + JSON.stringify(result[0]) )
-      // alert('in success of is_coor')
+      alert('in success of is_coor')
       // return true;
     },
     error: function (jqXhr, textStatus, errorThrown) {

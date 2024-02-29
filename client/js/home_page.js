@@ -12,7 +12,7 @@ jQuery(function ($) {
     var btnEditProj = document.getElementById("editProjbtn");
     var btnSendingARequest = document.getElementById("sendingARequest");
     var btnDeleteProject = document.getElementById("deleteProjectBtn");
-    var monitoringTblBtn = document.getElementById('monitoringTblBtn');
+    // var monitoringTblBtn = document.getElementById('monitoringTblBtn');
 
     var all = localStorage.getItem("All")
     // console.log('all - ', all)
@@ -33,12 +33,13 @@ jQuery(function ($) {
         // If the user is moderator he will see onle his projects
         if (data === "moderator" || (data === "coordinator" && all === "not all")) {
             btnSendingARequest.style.visibility = "hidden";
-            monitoringTblBtn.style.display = "block";
+            // monitoringTblBtn.style.display = "block";
             var id = localStorage.getItem("modID");
             $.ajax({
                 type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
-                url: '/moderatorProjects/' + id,
+                url: '/getModeratorProjects/' + id,
                 success: function (result) {
+                    alert("moderatorProjects")
                     index = 0;
                     $.each(result, function (index, value) {
                         getProjectsDetails(result[index], index);
@@ -99,9 +100,9 @@ jQuery(function ($) {
                         deleteProject(option.id);
                     };
 
-                    monitoringTblBtn.onclick = function(){
-                        monitoringTbl(option.id);
-                    };
+                    // monitoringTblBtn.onclick = function(){
+                    //     monitoringTbl(option.id);
+                    // };
                 }
                 localStorage.setItem('id_pjt', option.id)
                 break;

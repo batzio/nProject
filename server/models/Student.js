@@ -93,18 +93,18 @@ var StudentSchema = new mongoose.Schema({
     grades: [{
         alfa_rpt_grd: {
             type: Number,
-            required: true,
-            trim: true
+            // required: true,
+            // trim: true
         },
         final_rpt_grd: {
             type: Number,
-            required: true,
-            trim: true
+            // required: true,
+            // trim: true
         },
         final_grd_pjt: {
             type: Number,
-            required: true,
-            trim: true,
+            // required: true,
+            // trim: true,
         },
     }],
 

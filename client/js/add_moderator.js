@@ -10,27 +10,27 @@ function add_mod() {
             "mod_lastName": $("#lastName_mod_id").val(),
             "mod_ID": $("#id_mod").val(),
             "mod_email": $("#email_mod_id").val(),
-            "grades1": [
-                {
-                    "alfa_rpt_grd1": 0,
-                    "final_rpt_grd1": 0,
-                    "final_grd_pjt1": 0
-                },
-            ],
-            "grades2": [
-                {
-                    "alfa_rpt_grd2": 0,
-                    "final_rpt_grd2": 0,
-                    "final_grd_pjt2": 0
-                },
-            ],
-            "grades3": [
-                {
-                    "alfa_rpt_grd3": 0,
-                    "final_rpt_grd3": 0,
-                    "final_grd_pjt3": 0
-                },
-            ]
+            // "grades1": [
+            //     {
+            //         "alfa_rpt_grd1": 0,
+            //         "final_rpt_grd1": 0,
+            //         "final_grd_pjt1": 0
+            //     },
+            // ],
+            // "grades2": [
+            //     {
+            //         "alfa_rpt_grd2": 0,
+            //         "final_rpt_grd2": 0,
+            //         "final_grd_pjt2": 0
+            //     },
+            // ],
+            // "grades3": [
+            //     {
+            //         "alfa_rpt_grd3": 0,
+            //         "final_rpt_grd3": 0,
+            //         "final_grd_pjt3": 0
+            //     },
+            // ]
             // "mod_isCoordinator": isCoordinator,
             // "pjt1_grd": 0,
             // "pjt2_grd": 0,

@@ -109,20 +109,21 @@ function getDates() {
         type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
         url: '/getdates',
         success: function (result) {
+            console.log(result)
             $.each(result, function (index, value) {
                 if ("propRpt" in value) {
                     prop.innerHTML = value.propRpt;
                 }
-                else if ("alfaRpt" in value) {
+                if ("alfaRpt" in value) {
                     alfa.innerHTML = value.alfaRpt;
                 }
-                else if ("betaRpt" in value) {
+                if ("betaRpt" in value) {
                     beta.innerHTML = value.betaRpt;
                 }
-                else if ("finalRpt" in value) {
+                if ("finalRpt" in value) {
                     final.innerHTML = value.finalRpt;
                 }
-                else if ("presentation" in value) {
+                if ("presentation" in value) {
                     present.innerHTML = value.presentation;
                 }
             });
