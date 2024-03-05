@@ -40,59 +40,78 @@ function sentDate() {
 
 
 function getDates() {
-    var prop = document.getElementById("proposal_id");
-    var alfa = document.getElementById("alpha_id");
-    var beta = document.getElementById("beta_id");
-    var final = document.getElementById("final_id");
-    var present = document.getElementById("presentation_id");
+    var prop = document.getElementById("proposal_id_date");
+    var alfa = document.getElementById("alpha_id_date");
+    var beta = document.getElementById("beta_id_date");
+    var final = document.getElementById("final_id_date");
+    var present = document.getElementById("presentation_id_date");
+    // console.log('prop - ',prop)
 
     $.ajax({
         type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
         url: '/getdates',
         success: function (result) {
-            var current = new Date().getTime();
+            var current = new Date()//.getTime();
+            let dd = String(current.getDate()).padStart(2, '0');
+            let mm = String(current.getMonth() + 1).padStart(2, '0'); // January is 0!
+            let yyyy = current.getFullYear();
+            current = yyyy + '-' + mm + '-' + dd;
+
+            // console.log('current - ',current)
+            // console.log('current - ',current)
+            
             $.each(result, function (index, value) {
                 if ("propRpt" in value) {
+                    // alert('current')
                     if (current <= value.propRpt) {
+                        // prop = value.propRpt;
+                        // console.log('value - ',value.propRpt)
                         prop.innerHTML = value.propRpt;
                     }
-                    else {
-                        document.getElementById("propFileInput").disabled = true;
-                        document.getElementById("proposal").disabled = true;
+                    else {//if(current > value.propRpt) {
+                        // console.log('in else')
+                        // alert('in else')document.getElementById("myBtn").disabled = true;
+                        document.getElementsByName("propFileDis")[0].disabled = true;
+                        // document.getElementsByName("propFileDis").disabled = true;
+                        // document.getElementById("propFileInput").disabled = true;
+                        // document.getElementById("proposal").disabled = true;
                         prop.innerHTML = "תאריך הגשה עבר";
                     }
                 }
-                else if ("alfaRpt" in value) {
+                if ("alfaRpt" in value) {
                     if (current <= value.alfaRpt) {
                         alfa.innerHTML = value.alfaRpt;
                     }
                     else {
-                        document.getElementById("alfaFileInput").disabled = true;
-                        document.getElementById("alfa").disabled = true;
+                        // document.getElementById("alfaFileInput").disabled = true;
+                        // document.getElementById("alfa").disabled = true;
+                        document.getElementsByName("alfaFileDis")[0].disabled = true;
                         alfa.innerHTML = "תאריך הגשה עבר";
                     }
                 }
-                else if ("betaRpt" in value) {
+                if ("betaRpt" in value) {
                     if (current <= value.betaRpt) {
                         beta.innerHTML = value.betaRpt;
                     }
                     else {
-                        document.getElementById("betaFileInput").disabled = true;
-                        document.getElementById("beta").disabled = true;
+                        // document.getElementById("betaFileInput").disabled = true;
+                        // document.getElementById("beta").disabled = true;
+                        document.getElementsByName("betaFileDis")[0].disabled = true;
                         beta.innerHTML = "תאריך הגשה עבר";
                     }
                 }
-                else if ("finalRpt" in value) {
+                if ("finalRpt" in value) {
                     if (current <= value.finalRpt) {
                         final.innerHTML = value.finalRpt;
                     }
                     else {
-                        document.getElementById("finalFileInput").disabled = true;
-                        document.getElementById("final").disabled = true;
+                        // document.getElementById("finalFileInput").disabled = true;
+                        // document.getElementById("final").disabled = true;
+                        document.getElementsByName("finalFileDis")[0].disabled = true;
                         final.innerHTML = "תאריך הגשה עבר";
                     }
                 }
-                else if ("presentation" in value) {
+                if ("presentation" in value) {
                     present.innerHTML = value.presentation;
                 }
             });

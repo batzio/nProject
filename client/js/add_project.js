@@ -319,8 +319,8 @@ function save_grade_id_doc(id_pjt, id_grade_doc) {
         processData: false,
         encode: true,
         success: function (result) {
-            console.log("save_grade_id_doc")
-            console.log(result)
+            // console.log("save_grade_id_doc")
+            // console.log(result)
             // add_mod_to_pro(id_pjt);
             // window.location.href = '/assigAndsubDats';
         },
@@ -365,8 +365,8 @@ function save_sub_id_doc(id_pjt, id_sub_doc) {
         processData: false,
         encode: true,
         success: function (result) {
-            console.log("save_sub_id_doc")
-            console.log(result)
+            // console.log("save_sub_id_doc")
+            // console.log(result)
             // add_mod_to_pro(id_pjt);
             // window.location.href = '/assigAndsubDats';
         },

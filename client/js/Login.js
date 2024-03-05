@@ -15,7 +15,7 @@ function sub() {
       contentType: 'application/json',
       success: function (result) {
         // alert('in else check')
-        console.log('result[0] - ' + result[0])
+        console.log('result[0] - ' + result)
         if (JSON.stringify(result[0]) == undefined) {
           // alert('in else check')
           login_mod(username, password);
@@ -51,7 +51,7 @@ function login_mod(username, password) {
     type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
     url: '/getModeratorPwd/' + password,
     success: function (result) {
-      // console.log(result[0])
+      console.log(result[0])
       alert('result[0]')
       // alert('before is_coor - in success')
       if (result[0].username == username && result[0].password == password) {
