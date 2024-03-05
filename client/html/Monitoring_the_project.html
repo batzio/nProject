@@ -38,7 +38,7 @@
                     <th id="title">כותרת</th>
                     <th id="upload_file">העלאת קובץ</th>
                     <th id="dateOfSub">תאריך הגשה</th>
-                    <th id="submission_report">אישור הגשת הדוח</th>
+                    <th id="submission_report" style="visibility: hidden;">אישור הגשת הדוח</th>
                     <th id="status_rep">סטטוס</th>
                     <th id="giving_a_grade" style="display: none;"></th>
                     <th id="weighted_score">ציון משוקלל</th>
@@ -56,13 +56,14 @@
                             <button type="button" onclick="downloadFile(this.id ,'proposal_rpt')">הורדה</button>
                         </form>
                     </td>
-                    <td id="proposal_id"></td>
+                    <td id="proposal_id_date"></td>
                     <td>
-                        <button type="button" id="proposal" onclick="subRpt(this.id)"
+                        <button type="button" name="propFileDis" id="proposal" onclick="subRpt(this.id)"
                             style="visibility: hidden;">אישור</button>
+                        <label id="lblSubProp"></label>
                     </td>
                     <td></td>
-                    <td></td>
+                    <td name="nonGrade"></td>
                 </tr>
                 <tr>
                     <th id="alpha">דוח אלפה</th>
@@ -75,15 +76,17 @@
                             <button type="button" onclick="downloadFile(this.id, 'alfa_rpt')">הורדה</button>
                         </form>
                     </td>
-                    <td id="alpha_id"></td>
+                    <td id="alpha_id_date"></td>
                     <td>
-                        <button type="button" id="alfa" onclick="subRpt(this.id)"
+                        <button type="button" name="alfaFileDis" id="alfa" onclick="subRpt(this.id)"
                             style="visibility: hidden;">אישור</button>
+                            <label id="lblSubAlfa"></label>
                     </td>
                     <td></td>
                     <td>
                         <button type="button" id="alfa" onclick="grade(this.id)"
                             style="visibility: hidden;">ציון</button>
+                        <label id="lblGrdAlfa"></label>
                     </td>
                 </tr>
                 <tr>
@@ -92,7 +95,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
+                    <td name="nonGrade"></td>
                 </tr>
                 <tr>
                     <th id="beta">דוח בטה</th>
@@ -105,13 +108,14 @@
                             <button type="button" onclick="downloadFile(this.id, 'beta_rpt')">הורדה</button>
                         </form>
                     </td>
-                    <td id="beta_id"></td>
+                    <td id="beta_id_date"></td>
                     <td>
-                        <button type="button" id="beta" onclick="subRpt(this.id)"
+                        <button type="button" name="betaFileDis" id="beta" onclick="subRpt(this.id)"
                             style="visibility: hidden;">אישור</button>
+                            <label id="lblSubBeta"></label>
                     </td>
                     <td></td>
-                    <td></td>
+                    <td name="nonGrade"></td>
                 </tr>
                 <tr>
                     <th id="final_rep">דוח סופי</th>
@@ -124,34 +128,37 @@
                             <button type="button" onclick="downloadFile(this.id, 'final_rpt')">הורדה</button>
                         </form>
                     </td>
-                    <td id="final_id"></td>
+                    <td id="final_id_date"></td>
                     <td>
-                        <button type="button" id="final" onclick="subRpt(this.id)"
+                        <button type="button" id="final" name="finalFileDis" onclick="subRpt(this.id)"
                             style="visibility: hidden;">אישור</button>
+                            <label id="lblSubFinal"></label>
                     </td>
                     <td></td>
                     <td>
                         <button type="button" id="final" onclick="grade(this.id)"
                             style="visibility: hidden;">ציון</button>
+                        <label id="lblGrdFinal"></label>
                     </td>
                 </tr>
                 <tr>
                     <th id="presentation">הצגת הפרויקט</th>
                     <td></td>
-                    <td id="presentation_id"></td>
+                    <td id="presentation_id_date"></td>
                     <td></td>
                     <td></td>
-                    <td></td>
+                    <td name="nonGrade"></td>
                 </tr>
                 <tr>
                     <th id="final_sco">ציון סופי</th>
+                    <!-- <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
+                    <td></td> -->
                     <td>
                         <button type="button" id="final_pjt" onclick="grade(this.id)"
                             style="visibility: hidden;">ציון</button>
+                        <label id="lblGrdFinalPjt"></label>
                     </td>
                 </tr>
             </tbody>
