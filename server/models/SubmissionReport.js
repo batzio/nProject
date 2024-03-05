@@ -4,8 +4,9 @@ var SubmissionReportSchema = new mongoose.Schema({
 
     id_project: {
         type: String,
-        // required: true,
-        // trim: true
+    },
+    id_judge: {
+        type: String
     },
     prop_rpt_sub:{
         type: String,
@@ -13,16 +14,12 @@ var SubmissionReportSchema = new mongoose.Schema({
 
     alfa_rpt_sub: {
         type: String,
-        // required: true,
-        // trim: true
     },
     beta_rpt_sub:{
         type: String
     },
-    final_rpt_grd: {
+    final_rpt_Sub: {
         type: String,
-        // required: true,
-        // trim: true
     },
 
 }, { timestamps: true });

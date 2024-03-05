@@ -7,9 +7,9 @@ var GradesSchema = new mongoose.Schema({
         // required: true,
         // trim: true
     },
-    // id_judge: {
-    //     type: String
-    // },
+    id_judge: {
+        type: String
+    },
     alfa_rpt_grd: {
         type: Number,
         // required: true,
