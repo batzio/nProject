@@ -5,7 +5,13 @@ const data = localStorage.getItem("data");
 
 jQuery(function ($) {
     console.log('data - ', data)
-    // Your code here
+    // showDetails();
+    //הצגת דוחות שללא ציון
+    var elements = document.getElementsByName("nonGrade");
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].innerHTML = "ללא ציון";
+    }
+
     if (data === "moderator" || data === "coordinator") {
         document.getElementById("upload_file").innerHTML = "הורדת מסמך";
         document.getElementById("weighted_score").innerHTML = "נתינת ציון";
@@ -17,8 +23,19 @@ jQuery(function ($) {
         });
         $("[id='uploadForm']").hide();
     }
+    if (data === "student") {
+        console.log('in student')
+        getAvgGrds();
+    }
     // btnToPjt();
 });
+
+// function showDetails() {
+//     // var elements = document.getElementsByName("nonGrade");
+//     // for (var i = 0; i < elements.length; i++) {
+//     //     elements[i].innerHTML = "ללא ציון";
+//     // }
+// }
 
 // //מקשרת פרויקט וכפתור
 // function btnToPjt() {
@@ -77,25 +94,6 @@ function proposal_upload(id) {
         processData: false,
         success: function (data, textStatus, jQxhr) {
             alert('הקובץ עלה בהצלחה')
-            // if (flag == true) {
-            //     $.ajax({
-            //         type: 'POST', // define the type of HTTP verb we want to use (GET for our form)
-            //         url: '/addIdRptInStudent/' + id,
-            //         contentType: 'application/json',
-            //         data: JSON.stringify({
-            //             "rptPath": fileName
-            //         }),
-            //         success: function (result) {
-            //             // alert('before result')
-            //             console.log('result - ', result)
-            //             alert('result')
-            //             // window.location.href = '/assigAndsubDats';
-            //         },
-            //         error: function (jqXhr, textStatus, errorThrown) {
-            //             console.log(errorThrown);
-            //         }
-            //     });
-            // }
             location.reload();
         }
     });
@@ -310,6 +308,7 @@ function loadPjt(idBtn) {
                 success: function (result) {
                     var name = result[0].name_hebrew;
                     document.getElementById("namePjt").innerHTML = "שם הפרויקט: " + name;
+                    showDetails(result[0].Grades_arr, result[0].SubRpt);
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     console.log(errorThrown);
@@ -323,17 +322,71 @@ function loadPjt(idBtn) {
     });
 }
 
+function showDetails(gradesArr, subArr) {
+    console.log(gradesArr.length)
+    for (var i = 0; i < gradesArr.length; i++) {
+        $.ajax({
+            type: 'GET',
+            url: '/getGrdDoc/' + gradesArr[i],
+            success: function (result) {
+                // console.log('result[0] - ', result[0]);
+                $.each(result, function (index, value) {
+                    if ("alfa_rpt_grd" in value) {
+                        document.getElementById('lblGrdAlfa').innerHTML = value.alfa_rpt_grd;
+                    }
+                    if ("final_rpt_grd" in value) {
+                        document.getElementById('lblGrdFinal').innerHTML = value.final_rpt_grd;
+                    }
+                    if ("final_grd_pjt" in value) {
+                        document.getElementById('lblGrdFinalPjt').innerHTML = value.final_grd_pjt;
+                    }
+                });
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    for (var i = 0; i < subArr.length; i++) {
+        $.ajax({
+            type: 'GET',
+            url: '/getSubDoc/' + subArr[i],
+            success: function (result) {
+                // console.log('result[0] - ', result[0]);
+                $.each(result, function (index, value) {
+                    if ("prop_rpt_sub" in value) {
+                        document.getElementById('lblSubProp').innerHTML = "הדוח אושר";
+                    }
+                    if ("alfa_rpt_sub" in value) {
+                        document.getElementById('lblSubAlfa').innerHTML = "הדוח אושר";
+                    }
+                    if ("beta_rpt_sub" in value) {
+                        document.getElementById('lblSubBeta').innerHTML = "הדוח אושר";
+                    }
+                    if ("final_rpt_Sub" in value) {
+                        document.getElementById('lblSubFinal').innerHTML = "הדוח אושר";
+                    }
+                });
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+}
+
 //אישור דוח
 function subRpt(idBtn) {
     var id_pjt = localStorage.getItem('id_pjt')
 
     $.ajax({
-        type: 'GET', 
+        type: 'GET',
         url: '/getSubRptIdDoc/' + id_mod,
         success: function (result) {
             var subsFromMod = result;
             $.ajax({
-                type: 'GET', 
+                type: 'GET',
                 url: '/getSubRptId/' + id_pjt,
                 success: function (result) {
                     var subsFromPjt = result;
@@ -423,13 +476,66 @@ function saveGrd(id, idBtn, grade) {
             "idBtn": idBtn
         }),
         success: function (result) {
-            alert("הציון נשמר בהצלחה");
+            // alert("הציון נשמר בהצלחה");
+            if (idBtn === "alfa") {
+                document.getElementById("lblGrdAlfa").innerHTML = grade;
+            }
         },
         error: function (jqXhr, textStatus, errorThrown) {
             console.log(errorThrown);
         }
     });
 }
+
+/////שמירת ציונים לתלמיד
+function getAvgGrds() {
+    console.log('getAvgGrds')
+    $.ajax({
+        type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
+        url: '/student/' + id_sdt,
+        success: function (result) {
+            var idPjt = result[0].id_pjt;
+            console.log('idPjt - ', idPjt)
+            // var avgGrade;
+            $.ajax({
+                type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
+                url: '/project/' + idPjt,
+                success: function (result) {
+                    var gradesIdArr = result[0].Grades_arr;
+                    console.log('gradesIdArr - ', gradesIdArr)
+                    for (var i; i < gradesIdArr.length; i++) {
+                        console.log('gradesIdArr[i] - ', gradesIdArr[i])
+                        getGradesForSdt(gradesIdArr[i]);
+                    }
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+}
+
+function getGradesForSdt(gradeId) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: 'GET',
+            url: '/getGrdDoc/' + gradeId,
+            success: function (result) {
+                console.log('result - getGradesForSdt - ', result)
+                resolve(result.score); // Resolve with the score from the server
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                reject(errorThrown); // Reject with the error message
+            }
+        });
+    });
+}
+
+
 
 
 
