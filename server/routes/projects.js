@@ -193,8 +193,8 @@ module.exports = {
 
 
     createStudent: function (req, res) {
-        console.log('in add student - server')
-        console.log(req.body)
+        // console.log('in add student - server')
+        // console.log(req.body)
         if (!req.body) res.status(400).send("There is no body")
         else {
             const student = new Student(req.body);
@@ -206,7 +206,7 @@ module.exports = {
     },
 
     createModerator: function (req, res) {
-        console.log(req.body)
+        // console.log(req.body)
         if (!req.body) res.status(400).send("There is no body")
         else {
             const moderator = new Moderator(req.body);
@@ -304,8 +304,8 @@ module.exports = {
     },
 
     getPasswordSdt: function (req, res) {
-        // console.log('getPasswordSdt')
-        // console.log(req.body)
+        console.log('getPasswordSdt')
+        console.log(req.params)
         Student.find({ "password": req.params.password }).then(student => {
             // console.log(student),
             res.status(200).send(student)
@@ -314,8 +314,8 @@ module.exports = {
     },
 
     getPasswordMod: function (req, res) {
-        console.log('getPasswordMod - ')
-        console.log(req.body)
+        // console.log('getPasswordMod - ')
+        // console.log(req.body)
         Moderator.find({ "password": req.params.password }).then(moderator => {
             // console.log('getPasswordMod iii - ', moderator[0]),
             res.status(200).send(moderator)
@@ -400,19 +400,15 @@ module.exports = {
 
     //מחזיר את רשימת האיידי של הציונים של אותו פרויקט
     getGradeId: function (req, res) {
-        // console.log(req.params.id)
         Project.find({ "_id": req.params.id_pjt }).then(project => {
-            // console.log(moderator[0].mod_email)
             res.status(200).send(project[0].Grades_arr)
         }
         ).catch(e => res.status(500).send())
     },
-    //////////////
+
     //מחזיר את רשימת האיידי של האישורים של הפרויקטים שהמנחה שופט
     getSubRptIdDoc: function (req, res) {
-        // console.log(req.params.id)
         Moderator.find({ "mod_ID": req.params.id_mod }).then(moderator => {
-            // console.log(moderator[0].mod_email)
             res.status(200).send(moderator[0].SubRpt)
         }
         ).catch(e => res.status(500).send())
@@ -420,16 +416,13 @@ module.exports = {
 
     //מחזיר את רשימת האיידי של האישורים של אותו פרויקט
     getSubRptId: function (req, res) {
-        // console.log(req.params.id)
         Project.find({ "_id": req.params.id_pjt }).then(project => {
-            // console.log(moderator[0].mod_email)
             res.status(200).send(project[0].SubRpt)
         }
         ).catch(e => res.status(500).send())
     },
-    ///////////////////////
+    
     getDates: function (req, res) {
-        // console.log('getDates')
         DateOfSubmission.find().then(dateOfSub =>
             res.send(dateOfSub)
         ).catch(e => res.status(500).send())
@@ -437,7 +430,6 @@ module.exports = {
 
     //הצמדת פרויקט לכפתור
     getModeratorProjectsJudge: function (req, res) {
-        // console.log(req.params)
         const idBtn = req.params.idBtn;
         Moderator.find({ "mod_ID": req.params.id }).then(moderator => {
             if (idBtn === "firstPjt") {
@@ -459,9 +451,23 @@ module.exports = {
         ).catch(e => res.status(500).send())
     },
 
+    getGrdsDoc: function (req, res) {
+        Grade.find({ "_id": req.params.gradeId }).then(grade => {
+            res.status(200).send(grade)
+        }
+        ).catch(e => res.status(500).send())
+    },
+
+    getSubsDoc: function (req, res) {
+        SubRpt.find({ "_id": req.params.subId }).then(subRpt => {
+            res.status(200).send(subRpt)
+        }
+        ).catch(e => res.status(500).send())
+    },
+
     updateProject: function (req, res) {
         // console.log(JSON.stringify(req.body.name))
-        console.log('updateProject')
+        // console.log('updateProject')
         // console.log(req.body)
         // console.log(req.params)
         const updates = Object.keys(req.body)
@@ -482,7 +488,7 @@ module.exports = {
     },
 
     updateStudent: function (req, res) {
-        console.log('updateStudent')
+        // console.log('updateStudent')
         const updates = Object.keys(req.body)
         const allowedUpdates = ['password'];
         const isValidOperation = updates.length === 1 && updates[0] === 'password';
@@ -503,7 +509,7 @@ module.exports = {
     },
 
     updateModerator: function (req, res) {
-        console.log('in updateS')
+        // console.log('in updateS')
         const updates = Object.keys(req.body)
         const allowedUpdates = ['password'];
         const isValidOperation = updates.length === 1 && updates[0] === 'password';
@@ -559,8 +565,8 @@ module.exports = {
     // },
 
     updateStudentIdPjt: function (req, res) {
-        console.log('in updateS')
-        console.log(req.body)
+        // console.log('in updateS')
+        // console.log(req.body)
         const updates = Object.keys(req.body)
         const allowedUpdates = ['id_pjt'];
         const isValidOperation = updates.length === 1 && updates[0] === 'id_pjt';
@@ -626,7 +632,6 @@ module.exports = {
     },
 
     SaveSubs: function (req, res) {
-
         if (req.body.idBtn === "proposal") {
             SubRpt.findOneAndUpdate({ "_id": req.params.id }, { "prop_rpt_sub": "ok" }, { new: true, runValidators: true })
                 .then(subRpt => {
@@ -664,34 +669,72 @@ module.exports = {
         }
 
         else if (req.body.idBtn === "final") {
-            Grade.findOneAndUpdate({ "_id": req.params.id }, { "final_rpt_grd": req.body.grd }, { new: true, runValidators: true })
-                .then(grade => {
-                    if (!grade) {
-                        return res.status(404).send('There is no student')
+            SubRpt.findOneAndUpdate({ "_id": req.params.id }, { "final_rpt_sub": "ok" }, { new: true, runValidators: true })
+                .then(subRpt => {
+                    if (!subRpt) {
+                        return res.status(404).send('There is no submission')
                     }
                     else {
-                        res.send(grade)
+                        res.send(subRpt)
                     }
                 }).catch(e => res.status(400).send(e))
         }
 
-        else {
-            Grade.findOneAndUpdate({ "_id": req.params.id }, { "final_grd_pjt": req.body.grd }, { new: true, runValidators: true })
-                .then(grade => {
-                    if (!grade) {
-                        return res.status(404).send('There is no student')
-                    }
-                    else {
-                        res.send(grade)
-                    }
-                }).catch(e => res.status(400).send(e))
+        // else {
+        //     Grade.findOneAndUpdate({ "_id": req.params.id }, { "final_grd_pjt": req.body.grd }, { new: true, runValidators: true })
+        //         .then(grade => {
+        //             if (!grade) {
+        //                 return res.status(404).send('There is no student')
+        //             }
+        //             else {
+        //                 res.send(grade)
+        //             }
+        //         }).catch(e => res.status(400).send(e))
+        // }
+    },
+
+    UpdateGradeDocId: function (req, res) {
+        const updates = Object.keys(req.body)
+        const allowedUpdates = ['id_judge']
+        const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+        if (!isValidOperation) {
+            return res.status(400).send({ error: 'Invalid updates!' })
         }
+        Grade.findOneAndUpdate({ "_id": req.params.id_grd }, { "id_judge": req.body.id_judge }, { new: true, runValidators: true }).then(grade => {
+            if (!grade) {
+                return res.status(404).send('There is no project')
+            }
+            else {
+                res.send(grade)
+            }
+        }).catch(e => res.status(400).send(e))
+    },
+
+    UpdateSubDocId: function (req, res) {
+        // console.log("UpdateSubDocId")
+        // console.log(req.body)
+        const updates = Object.keys(req.body)
+        const allowedUpdates = ['id_judge']
+        const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+        if (!isValidOperation) {
+            return res.status(400).send({ error: 'Invalid updates!' })
+        }
+        SubRpt.findOneAndUpdate({ "_id": req.params.id_sub }, { "id_judge": req.body.id_judge }, { new: true, runValidators: true }).then(subRpt => {
+            if (!subRpt) {
+                return res.status(404).send('There is no project')
+            }
+            else {
+                res.send(subRpt)
+            }
+        }).catch(e => res.status(400).send(e))
     },
 
     AddProjectToModerator: function (req, res) {
-        console.log('AddProjectToModerator')
+        // console.log('AddProjectToModerator')
         // console.log(req.body)
-        console.log(req.params.modID)
+        // console.log(req.params.modID)
         if (!req.body) res.status(400).send("There is no body");
         // else if (!req.params["_id"] || !req.body.modID) res.status(400).send("Missing parameters");
         else {
@@ -708,7 +751,7 @@ module.exports = {
     },
 
     SaveGrdInPjt: function (req, res) {
-        console.log('SaveGrdInPjt')
+        // console.log('SaveGrdInPjt')
         if (!req.body) res.status(400).send("There is no body");
         else {
             //find the specific project and update it
@@ -724,7 +767,7 @@ module.exports = {
     },
 
     SaveSubInPjt: function (req, res) {
-        console.log('SaveSubInPjt')
+        // console.log('SaveSubInPjt')
         if (!req.body) res.status(400).send("There is no body");
         else {
             //find the specific project and update it
@@ -760,8 +803,8 @@ module.exports = {
 
     // This function add id's judges to project
     AddJudgesToProject: function (req, res) {
-        console.log('AddJudgesToProject')
-        console.log(req.params)
+        // console.log('AddJudgesToProject')
+        // console.log(req.params)
         // console.log(req.body)
         // console.log(req.params.modID)
         if (!req.body) res.status(400).send("There is no body");
@@ -795,6 +838,8 @@ module.exports = {
     },
 
     addJudgeSub: function (req, res) {
+        // console.log('addJudgeSub')
+        // console.log(req.body)
         if (!req.body) res.status(400).send("There is no body");
         else {
             //find the specific moderator and update it
@@ -849,7 +894,7 @@ module.exports = {
     // },
 
     updateIdModToProjet: function (req, res) {
-        console.log('updateIdModToProjet')
+        // console.log('updateIdModToProjet')
         // console.log(req.body)
         const updates = Object.keys(req.body)
         const allowedUpdates = ['mod_id'];
@@ -875,7 +920,7 @@ module.exports = {
     // },
 
     downloadFile: function (req, res) {
-        console.log(req.params)
+        // console.log(req.params)
         const rptStr = req.params.rpt;
         const fileId = req.params.fileId;
         // // Ensure that filePath is provided

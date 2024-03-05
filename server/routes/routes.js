@@ -91,6 +91,8 @@ router.get('/getGradeIdDoc/:id_mod', projects_routes.getGradeIdDoc);
 router.get('/getGradeId/:id_pjt', projects_routes.getGradeId);
 router.get('/getsubRptIdDoc/:id_mod', projects_routes.getSubRptIdDoc);
 router.get('/getsubRptId/:id_pjt', projects_routes.getSubRptId);
+router.get('/getGrdDoc/:gradeId', projects_routes.getGrdsDoc);
+router.get('/getSubDoc/:subId', projects_routes.getSubsDoc);
 
 router.put('/updatProject/:id', projects_routes.updateProject);
 router.put('/updateStudent/:id', projects_routes.updateStudent);
@@ -99,6 +101,8 @@ router.put('/updateIdModToProjet/:id', projects_routes.updateIdModToProjet);
 router.put('/updateStudentIdPjt/:id', projects_routes.updateStudentIdPjt);
 router.put('/saveGrade/:id', projects_routes.SaveGrades);
 router.put('/saveSub/:id', projects_routes.SaveSubs);
+router.put('/updateGrdDocId/:id_grd', projects_routes.UpdateGradeDocId);
+router.put('/updateSubDocId/:id_sub', projects_routes.UpdateSubDocId)
 
 router.delete('/deletePjt/:id', projects_routes.deleteProject);
 
