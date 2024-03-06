@@ -3,49 +3,51 @@
 
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <!-- //<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"> -->
     <!-- load bootstrap via CDN -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
     "></script> <!-- load jquery via CDN -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/login.css">
     <script src="/js/Login.js"></script> <!-- load our javascript file -->
     <script src="/js/showPassword.js"></script>
 </head>
 
 <body>
-    <div class="col-sm-6 col-sm-offset-3">
+  <div id="logo-container">
+    <img src="https://yedion.jce.ac.il/info/images/CollegeLogo.png" alt="Logo">
+  </div>
+  <div class="container">
+    <div class="screen">
+      <div class="screen__content">
+        <form class="login">
+          <div class="login__field">
+            <i class="login__icon fas fa-user"></i>
+            <input type="text" class="login__input" placeholder="שם משתמש">
+          </div>
+          <div class="login__field">
+            <i class="login__icon fas fa-lock"></i>
+            <input type="password" class="login__input" name="id_password" id="id_password" placeholder="סיסמה"  required>
+           <input type="checkbox" onclick="showPassword('login')" id="chbx_shw_pwd_id"></br>
+           <span class="psw"><a href="#" class="reset" style="color: red;" onclick="resetPassword()">שכחת סיסמה?</a></span>
 
-        <h1 id="conference_title">ברוכים הבאים</h1>
 
-        <!-- OUR FORM -->
-        <form id="id_login" name="id_login">
-
-            <!-- NAME -->
-            <div id="name-group" class="form-group">
-                <label id="username" for="name">שם משתמש</label>
-                <input type="text" class="form-control" name="id_username" id="id_username" placeholder="הקלד שם משתמש"
-                    required>
-                <!-- errors will go here -->
-            </div>
-
-            <!-- PASSWORD -->
-            <div id="id-group" class="form-group">
-                <label for="password">סיסמה</label>
-                <input type="password" class="form-control" name="id_password" id="id_password" placeholder="הכנס סיסמה"
-                    required>
-                לבדיקת סיסמה <input type="checkbox" onclick="showPassword('login')" id="chbx_shw_pwd_id"></br>
-                <span class="psw"><a href="#" style="color: red;" onclick="resetPassword()">שכחת סיסמה?</a></span>
-
-                <!-- לעבור לעמוד שנותן לאפס סיסמא -->
-                <!-- errors will go here -->
-            </div>
-
-            <button type="submit" class="btn btn-success" onclick="sub()" id="okBtn">אישור<span
-                    class="fa fa-arrow-right"></span></button>
-            <br>
-            <br>
+          </div>
+          <button class="button login__submit">
+            <span class="button__text">כניסה</span>
+            <i class="button__icon fas fa-chevron-right"></i>
+          </button>				
         </form>
+        
+      </div>
+      <div class="screen__background">
+        <span class="screen__background__shape screen__background__shape4"></span>
+        <span class="screen__background__shape screen__background__shape3"></span>		
+        <span class="screen__background__shape screen__background__shape2"></span>
+        <span class="screen__background__shape screen__background__shape1"></span>
+      </div>		
+    </div>
+  </div>
 </body>
 
 </html>
