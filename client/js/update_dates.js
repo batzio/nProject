@@ -68,13 +68,10 @@ function getDates() {
                         // console.log('value - ',value.propRpt)
                         prop.innerHTML = value.propRpt;
                     }
-                    else {//if(current > value.propRpt) {
-                        // console.log('in else')
-                        // alert('in else')document.getElementById("myBtn").disabled = true;
+                    else {
                         document.getElementsByName("propFileDis")[0].disabled = true;
-                        // document.getElementsByName("propFileDis").disabled = true;
-                        // document.getElementById("propFileInput").disabled = true;
-                        // document.getElementById("proposal").disabled = true;
+                        document.getElementById("propFileInput").disabled = true;
+                        document.getElementById("proposal").disabled = true;
                         prop.innerHTML = "תאריך הגשה עבר";
                     }
                 }
@@ -83,8 +80,8 @@ function getDates() {
                         alfa.innerHTML = value.alfaRpt;
                     }
                     else {
-                        // document.getElementById("alfaFileInput").disabled = true;
-                        // document.getElementById("alfa").disabled = true;
+                        document.getElementById("alfaFileInput").disabled = true;
+                        document.getElementById("alfa").disabled = true;
                         document.getElementsByName("alfaFileDis")[0].disabled = true;
                         alfa.innerHTML = "תאריך הגשה עבר";
                     }
@@ -94,8 +91,8 @@ function getDates() {
                         beta.innerHTML = value.betaRpt;
                     }
                     else {
-                        // document.getElementById("betaFileInput").disabled = true;
-                        // document.getElementById("beta").disabled = true;
+                        document.getElementById("betaFileInput").disabled = true;
+                        document.getElementById("beta").disabled = true;
                         document.getElementsByName("betaFileDis")[0].disabled = true;
                         beta.innerHTML = "תאריך הגשה עבר";
                     }
@@ -105,8 +102,8 @@ function getDates() {
                         final.innerHTML = value.finalRpt;
                     }
                     else {
-                        // document.getElementById("finalFileInput").disabled = true;
-                        // document.getElementById("final").disabled = true;
+                        document.getElementById("finalFileInput").disabled = true;
+                        document.getElementById("final").disabled = true;
                         document.getElementsByName("finalFileDis")[0].disabled = true;
                         final.innerHTML = "תאריך הגשה עבר";
                     }

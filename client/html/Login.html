@@ -8,7 +8,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
     "></script> <!-- load jquery via CDN -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
+    <!-- <link rel="stylesheet" href="/css/style.css"> -->
+    <!-- <link rel="stylesheet" href="/css/login.css"> -->
     <script src="/js/Login.js"></script> <!-- load our javascript file -->
     <script src="/js/showPassword.js"></script>
 </head>
@@ -34,7 +35,7 @@
                 <label for="password">סיסמה</label>
                 <input type="password" class="form-control" name="id_password" id="id_password" placeholder="הכנס סיסמה"
                     required>
-                לבדיקת סיסמה <input type="checkbox" onclick="showPassword('login')" id="chbx_shw_pwd_id"></br>
+                <input type="checkbox" onclick="showPassword('login')" id="chbx_shw_pwd_id"></br>
                 <span class="psw"><a href="#" style="color: red;" onclick="resetPassword()">שכחת סיסמה?</a></span>
 
                 <!-- לעבור לעמוד שנותן לאפס סיסמא -->
@@ -43,9 +44,11 @@
 
             <button type="submit" class="btn btn-success" onclick="sub()" id="okBtn">אישור<span
                     class="fa fa-arrow-right"></span></button>
+
             <br>
             <br>
         </form>
+    </div>
 </body>
 
 </html>

@@ -79,6 +79,12 @@ var ProjectSchema = new mongoose.Schema({
         // trim: true
     },
 
+    sub_rpt_id: {
+        type: String
+        // required: true,
+        // trim: true
+    },
+
     // grades1: [{
     //     id_judge1: {
     //         type: String,
@@ -160,10 +166,10 @@ var ProjectSchema = new mongoose.Schema({
         ref: 'moderator'
     }],
 
-    SubRpt:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'submissionReport'
-    }]
+    // SubRpt:[{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'submissionReport'
+    // }]
 
 
 }, { timestamps: true });
