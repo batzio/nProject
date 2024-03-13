@@ -7,51 +7,95 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-    <link rel="stylesheet" href="/css/stl.css">
+    <link rel="stylesheet" href="/css/assignments.css">
     <script  src="/js/assignments_and_submission_dates.js"></script>
 </head>
 <body>
-    <div>
-        <table id="tbl_monitoring">
-            <thead>
-                <tr>
-                    <th id="title">כותרת</th>
-                    <th id="dateOfSub">תאריך הגשה</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th id="proposal">דוח הצעה</th>
-                    <td id="proposal_id" ></tr>
-                <tr>
-                    <th id="alpha">דוח אלפה</th>
-                    <td id="alpha_id" ></td>
-                </tr>
-                <tr>
-                    <th id="beta">דוח בטה</th>
-                    <td id="beta_id"></td>
-                </tr>
-                <tr>
-                    <th id="final_rep">דוח סופי</th>
-                    <td id="final_id"></td>
-                </tr>
-                <tr>
-                    <th id="presentation">הצגת הפרויקט</th>
-                    <td id="presentation_id"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div>
+    <nav role="navigation">
+        <div id="menuToggle">
+         
+          <input type="checkbox" />
+          <span></span>
+          <span></span>
+          <span></span>
+          
+          <ul id="menu">
+          <li>
+            <a href="#" id="monitoringTblBtn" onclick="monitoringTbl()">טבלת מעקב</a></li>
+            <a href="#" id="addProjectBtn" onclick="addProject()"><li>הוספת פרויקט</li></a>
+            <a href="#" id="projectsListBtn" onclick="projectsList()"><li>רשימת פרויקטים</li></a>
+            <a href="#" id="downloadReportsBtn" onclick="downloadReports()"><li>הורדת דוחות</li></a>
+            <a href="#" id="addStudentBtn" onclick="addStudent()"><li>הוספת סטודנט</li></a>
+            <a href="#" id="addModeratorBtn" onclick="addModerator()"><li>הוספת מנחה</li></a>
+            <a href="#" id="updateDatesBtn" onclick="updateDates()"><li>עדכון תאריכים</li></a>
+            <a href="#" id="allProjectsListBtn" onclick="allProjectsList()"><li>לכל הפרויקטים</li></a>
+
+       
+          </ul>
+          
+        </div>
+      </nav>
+      
+    
+        <div id="logo-container">
+            <img src="https://yedion.jce.ac.il/info/images/CollegeLogo.png" alt="Logo">
+            
+          </div>
+        <div class="policy-container">
+            <div class="policy-table">
+              <div class="headings" >
+                <span class="heading">אבני דרך</span>
+                <span class="heading">תאריך הגשה</span>
+                
+    
+                <!-- <span class="heading">Actions</span> -->
+              </div>
+          
+              <div class="policy">
+                
+                <span>דוח הצעה</span>
+                <span id="proposal_id" ></span>
+    
+              </div>
+          
+              <div class="policy">
+                
+                <span>דוח אלפא</span>
+                <span id="alpha_id"></span>
+    
+              </div>
+              <div class="policy">
+                
+                <span>דוח בטה</span>
+             
+                <span id="beta_id" ></span>
+    
+              </div> <div class="policy">
+                
+                <span>דוח סופי</span>
+            
+                <span id="final_id"></span>
+    
+              </div> <div class="policy">
+               
+                <span>הצגת הפרויקט</span>
+             
+                <span id="presentation_id"></span>
+    
+              </div>
+            </div>
+          </div>
+    </body>
+    </html>
+    
+                  
+<!--                
         <button id="addProjectBtn" onclick="addProject()">הוספת פרויקט</button>
-        <!-- <button id="monitoringTblBtn" onclick="monitoringTbl()" style="visibility: hidden;">טבלת מעקב</button> -->
-        <button id="monitoringTblBtn" onclick="monitoringTbl()">טבלאות מעקב</button>
+        <button id="monitoringTblBtn" onclick="monitoringTbl()">טבלת מעקב</button>
         <button id="projectsListBtn" onclick="projectsList()">רשימת פרויקטים</button>
         <button id="downloadReportsBtn" onclick="downloadReports()">הורדת דוחות</button>
         <button id="addStudentBtn" onclick="addStudent()">הוספת סטודנט</button>
         <button id="addModeratorBtn" onclick="addModerator()">הוספת מנחה</button>
         <button id="updateDatesBtn" onclick="updateDates()">עדכון תאריכים</button>
         <button id="allProjectsListBtn" onclick="allProjectsList()">רשימת כל הפרויקטים</button>
-    </div>
-</body>
-</html>
+    </div> -->
