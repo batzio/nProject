@@ -213,7 +213,7 @@ function beforeAddPjToJudge() {
             // console.log('result[0] ' )
             // console.log( result[0])
             var grades = result[0].Grades_arr;
-            var subs = result[0].SubRpt;
+            // var subs = result[0].SubRpt;
 
             // console.log( "grades")
             // console.log( grades[0])
@@ -236,9 +236,9 @@ function beforeAddPjToJudge() {
             // console.log(subs[1])
             // console.log(subs[2])
             // alert('subs')
-            add_judge_sub(id_judge1, subs[0]);
-            add_judge_sub(id_judge2, subs[1]);
-            add_judge_sub(id_judge3, subs[2]);
+            // add_judge_sub(id_judge1, subs[0]);
+            // add_judge_sub(id_judge2, subs[1]);
+            // add_judge_sub(id_judge3, subs[2]);
 
             //הוספת האיידי של השופטים לפרויקט
             add_judge_to_pjt(id_pjt, id_judge1);
@@ -311,30 +311,30 @@ function add_judge_grd(id_judge, grade) {
     });
 }
 
-//פונקציה המוסיפה לשופט את המסמכים הקשורים לפרויקט שהוא שופט
-function add_judge_sub(id_judge, sub) {
-    // console.log("sub add_judge_sub - ", sub);
-    $.ajax({
-        type: 'POST', // define the type of HTTP verb we want to use (GET for our form)
-        url: '/addJudgeSub/' + id_judge,
-        contentType: 'application/json',
-        data: JSON.stringify({
-            "id_sub": sub
-        }),
-        success: function (result) {
+// //פונקציה המוסיפה לשופט את המסמכים הקשורים לפרויקט שהוא שופט
+// function add_judge_sub(id_judge, sub) {
+//     // console.log("sub add_judge_sub - ", sub);
+//     $.ajax({
+//         type: 'POST', // define the type of HTTP verb we want to use (GET for our form)
+//         url: '/addJudgeSub/' + id_judge,
+//         contentType: 'application/json',
+//         data: JSON.stringify({
+//             "id_sub": sub
+//         }),
+//         success: function (result) {
 
-            // console.log("sub - ", result);
-            // alert('in add_judge_sub')
+//             // console.log("sub - ", result);
+//             // alert('in add_judge_sub')
 
 
-            add_sub_judge(id_judge, sub);
-            // window.location.href = '/assigAndsubDats';
-        },
-        error: function (jqXhr, textStatus, errorThrown) {
-            console.log(errorThrown);
-        }
-    });
-}
+//             add_sub_judge(id_judge, sub);
+//             // window.location.href = '/assigAndsubDats';
+//         },
+//         error: function (jqXhr, textStatus, errorThrown) {
+//             console.log(errorThrown);
+//         }
+//     });
+// }
 
 //Adding the judge's id to the project
 function add_judge_to_pjt(id_pjt, id_judge) {
@@ -382,27 +382,27 @@ function add_grd_judge(id_judge, id_grade) {
     })
 }
 
-//הוספת האיידי של השופט לטופס של אישורי הדוחות בפרויקט שהוא שופט
-function add_sub_judge(id_judge, id_sub) {
-    // alert('in add_sub_judge')
-    $.ajax({
-        type: 'PUT', // define the type of HTTP verb we want to use (PUT for our form)
-        url: '/updateSubDocId/' + id_sub, // the url where we want to PUT
-        contentType: 'application/json',
-        data: JSON.stringify({
-            "id_judge": id_judge
-        }),
-        processData: false,
-        encode: true,
-        success: function (data, textStatus, jQxhr) {
-            // console.log('data - ', data);
-            // alert('data');
-        },
-        error: function (jqXhr, textStatus, errorThrown) {
-            console.log(errorThrown);
-        }
-    })
-}
+// //הוספת האיידי של השופט לטופס של אישורי הדוחות בפרויקט שהוא שופט
+// function add_sub_judge(id_judge, id_sub) {
+//     // alert('in add_sub_judge')
+//     $.ajax({
+//         type: 'PUT', // define the type of HTTP verb we want to use (PUT for our form)
+//         url: '/updateSubDocId/' + id_sub, // the url where we want to PUT
+//         contentType: 'application/json',
+//         data: JSON.stringify({
+//             "id_judge": id_judge
+//         }),
+//         processData: false,
+//         encode: true,
+//         success: function (data, textStatus, jQxhr) {
+//             // console.log('data - ', data);
+//             // alert('data');
+//         },
+//         error: function (jqXhr, textStatus, errorThrown) {
+//             console.log(errorThrown);
+//         }
+//     })
+// }
 // //Create Grades document and save the id of pjt
 // function createGraedeDoc(id_pjt) {
 //     $.ajax({

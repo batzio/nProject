@@ -38,7 +38,7 @@
                     <th id="title">כותרת</th>
                     <th id="upload_file">העלאת קובץ</th>
                     <th id="dateOfSub">תאריך הגשה</th>
-                    <th id="submission_report" style="visibility: hidden;">אישור הגשת הדוח</th>
+                    <th id="submission_report" class="subRptTbl" style="visibility: hidden;">אישור הגשת הדוח</th>
                     <th id="status_rep">סטטוס</th>
                     <th id="giving_a_grade" style="display: none;"></th>
                     <th id="weighted_score">ציון משוקלל</th>
@@ -57,18 +57,20 @@
                         </form>
                     </td>
                     <td id="proposal_id_date"></td>
-                    <td>
+                    <td class="subRptTbl">
                         <button type="button" name="propFileDis" id="proposal" onclick="subRpt(this.id)"
                             style="visibility: hidden;">אישור</button>
                         <label id="lblSubProp"></label>
                     </td>
-                    <td></td>
+                    <td>
+                        <label id="lblStatusProp"></label>
+                    </td>
                     <td name="nonGrade"></td>
                 </tr>
                 <tr>
                     <th id="alpha">דוח אלפה</th>
                     <td id="alpha">
-                        <form id="uploadForm" enctype="multipart/form-data">
+                        <form id="uploadForm"  enctype="multipart/form-data">
                             <input type="file" id="alfaFileInput" name="alfa_rpt" accept=".pdf" />
                             <button type="button" id="alfa" onclick="alfa_upload(this.id)">העלאה</button>
                         </form>
@@ -77,12 +79,14 @@
                         </form>
                     </td>
                     <td id="alpha_id_date"></td>
-                    <td>
+                    <td class="subRptTbl">
                         <button type="button" name="alfaFileDis" id="alfa" onclick="subRpt(this.id)"
                             style="visibility: hidden;">אישור</button>
                             <label id="lblSubAlfa"></label>
                     </td>
-                    <td></td>
+                    <td>
+                        <label id="lblStatusAlfa"></label>
+                    </td>
                     <td>
                         <button type="button" id="alfa" onclick="grade(this.id)"
                             style="visibility: hidden;">ציון</button>
@@ -93,7 +97,7 @@
                     <th id="submitting">לו"ז לסימסטר ב'</th>
                     <td></td>
                     <td></td>
-                    <td></td>
+                    <td class="subRptTbl"></td>
                     <td></td>
                     <td name="nonGrade"></td>
                 </tr>
@@ -109,12 +113,14 @@
                         </form>
                     </td>
                     <td id="beta_id_date"></td>
-                    <td>
+                    <td class="subRptTbl">
                         <button type="button" name="betaFileDis" id="beta" onclick="subRpt(this.id)"
                             style="visibility: hidden;">אישור</button>
                             <label id="lblSubBeta"></label>
                     </td>
-                    <td></td>
+                    <td>
+                        <label id="lblStatusBeta"></label>
+                    </td>
                     <td name="nonGrade"></td>
                 </tr>
                 <tr>
@@ -129,12 +135,14 @@
                         </form>
                     </td>
                     <td id="final_id_date"></td>
-                    <td>
+                    <td class="subRptTbl">
                         <button type="button" id="final" name="finalFileDis" onclick="subRpt(this.id)"
                             style="visibility: hidden;">אישור</button>
                             <label id="lblSubFinal"></label>
                     </td>
-                    <td></td>
+                    <td>
+                        <label id="lblStatusFinal"></label>
+                    </td>
                     <td>
                         <button type="button" id="final" onclick="grade(this.id)"
                             style="visibility: hidden;">ציון</button>
@@ -145,7 +153,7 @@
                     <th id="presentation">הצגת הפרויקט</th>
                     <td></td>
                     <td id="presentation_id_date"></td>
-                    <td></td>
+                    <td class="subRptTbl"></td>
                     <td></td>
                     <td name="nonGrade"></td>
                 </tr>

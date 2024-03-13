@@ -8,7 +8,7 @@ function sub() {
   }
 
   else {
-    alert('in else')
+    // alert('in else')
     $.ajax({
       type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
       url: '/getStudentPwd/' + password,
@@ -31,7 +31,7 @@ function sub() {
           localStorage.setItem("modID", "")
           // console.log(result[0].sdt_ID)
           window.location.href = "/assigAndsubDats";
-          alert(name)
+          // alert(name)
         }
         else {
           alert('שם משתמש ו/או הסיסמה שגויים')
@@ -46,18 +46,18 @@ function sub() {
 
 function login_mod(username, password) {
   // console.log('username - ' + username + ' password - ' + password)
-  alert('in log_mod')
+  // alert('in log_mod')
   $.ajax({
     type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
     url: '/getModeratorPwd/' + password,
     success: function (result) {
       console.log(result[0])
-      alert('result[0]')
+      // alert('result[0]')
       // alert('before is_coor - in success')
       if (result[0].username == username && result[0].password == password) {
         var name = result[0].mod_firstName + " " + result[0].mod_lastName;
         console.log('name - ' + name)
-        alert('before is_coor')
+        // alert('before is_coor')
         is_coor(result[0].mod_ID, name);
       }
       else {
@@ -73,14 +73,14 @@ function login_mod(username, password) {
 
 function is_coor(id, name) {
   // console.log('id - ' + id)
-  alert('in is_coor')
+  // alert('in is_coor')
   $.ajax({
     type: 'GET', // define the type of HTTP verb we want to use (GET for our form)
     url: '/getCoodinator',///' + id,
     contentType: 'application/json',
     success: function (result) {
       // console.log('result[0] - ',result[0])
-      alert('result[0] - in is_coor')
+      // alert('result[0] - in is_coor')
       if (result[0].coo_ID == undefined || result[0].coo_ID != id ) {
         localStorage.setItem("data", "moderator");
       }
@@ -92,7 +92,7 @@ function is_coor(id, name) {
       localStorage.setItem("stdID", "");
       window.location.href = "/assigAndsubDats";
       // console.log('is_coor - ' + JSON.stringify(result[0]) )
-      alert('in success of is_coor')
+      // alert('in success of is_coor')
       // return true;
     },
     error: function (jqXhr, textStatus, errorThrown) {
@@ -103,11 +103,11 @@ function is_coor(id, name) {
 
 
 function resetPassword() {
-  alert('in reset')
+  // alert('in reset')
   var username = document.getElementById("id_username").value;
   localStorage.setItem('username', username);
   location.href = '/changepassword';
-  alert('in reset after all')
+  // alert('in reset after all')
 }
 
 function showPassword(str) {

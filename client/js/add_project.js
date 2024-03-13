@@ -216,7 +216,7 @@ function add_pro_to_mod(id_pjt) {
 function add_mod_to_pro(id_pjt) {
     // console.log('add_mod_to_pro - ', id_pjt)
     // console.log(modID)
-    alert('add_mod_to_pro')
+    // alert('add_mod_to_pro')
     $.ajax({
         type: 'PUT', // define the type of HTTP verb we want to use (GET for our form)
         url: '/updateIdModToProjet/' + id_pjt,
@@ -234,8 +234,8 @@ function add_mod_to_pro(id_pjt) {
             createGraedeDoc(id_pjt);
 
             createSubDoc(id_pjt);
-            createSubDoc(id_pjt);
-            createSubDoc(id_pjt);
+            // createSubDoc(id_pjt);
+            // createSubDoc(id_pjt);
             // window.location.href = '/assigAndsubDats';
         },
         error: function (jqXhr, textStatus, errorThrown) {
@@ -352,26 +352,41 @@ function createSubDoc(id_pjt) {
     })
 }
 
-//שומר
+//שומר את האיידי של המסמך בפרויקט
 function save_sub_id_doc(id_pjt, id_sub_doc) {
     // alert("save_sub_id_doc")
     $.ajax({
-        type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
-        url: '/saveSubInPjt/' + id_pjt, // the url where we want to POST
+        type: 'PUT', // define the type of HTTP verb we want to use (GET for our form)
+        url: '/saveSubInPjt/' + id_pjt,
         contentType: 'application/json',
         data: JSON.stringify({
-            "SubRptID": id_sub_doc,
+            "SubRptID": id_sub_doc
         }),
-        processData: false,
-        encode: true,
         success: function (result) {
-            // console.log("save_sub_id_doc")
-            // console.log(result)
-            // add_mod_to_pro(id_pjt);
-            // window.location.href = '/assigAndsubDats';
+            console.log("האיידי נשמר")
+            // window.location.href = '/home';
         },
         error: function (jqXhr, textStatus, errorThrown) {
             console.log(errorThrown);
         }
-    })
+    });
+    // $.ajax({
+    //     type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+    //     url: '/saveSubInPjt/' + id_pjt, // the url where we want to POST
+    //     contentType: 'application/json',
+    //     data: JSON.stringify({
+    //         "SubRptID": id_sub_doc,
+    //     }),
+    //     processData: false,
+    //     encode: true,
+    //     success: function (result) {
+    //         // console.log("save_sub_id_doc")
+    //         // console.log(result)
+    //         // add_mod_to_pro(id_pjt);
+    //         // window.location.href = '/assigAndsubDats';
+    //     },
+    //     error: function (jqXhr, textStatus, errorThrown) {
+    //         console.log(errorThrown);
+    //     }
+    // })
 }

@@ -145,16 +145,16 @@ var ModeratorSchema = new mongoose.Schema({
     }],
 
     //A list of grade documents that are linked to the project that the supervisor is judging
-    Grades_arr: [{
+    Grades_arr_judge: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'grades'
     }],
 
-    //A list of approval documents that are linked to the project that the supervisor is judging
-    SubRpt:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'submissionReport'
-    }]
+    // //A list of approval documents that are linked to the project that the supervisor is judging
+    // SubRpt:[{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'submissionReport'
+    // }]
     // Grades_arr: [{
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref: 'grades'

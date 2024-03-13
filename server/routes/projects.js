@@ -768,18 +768,35 @@ module.exports = {
 
     SaveSubInPjt: function (req, res) {
         // console.log('SaveSubInPjt')
-        if (!req.body) res.status(400).send("There is no body");
-        else {
-            //find the specific project and update it
-            Project.findOneAndUpdate({ "_id": req.params.id_pjt }, { $push: { SubRpt: req.body.SubRptID } }, { new: true, runValidators: true }).then(project => {
+        // const updates = Object.keys(req.body)
+        // const allowedUpdates = ['password'];
+        // const isValidOperation = updates.length === 1 && updates[0] === 'password';
+        // if (!isValidOperation) {
+        //     return res.status(400).send({ error: 'Invalid updates!' })
+        // }
+        Project.findOneAndUpdate({ "_id": req.params.id_pjt }, { "sub_rpt_id": req.body.SubRptID }, { new: true, runValidators: true })
+            .then(project => {
                 if (!project) {
-                    return res.status(404).send()
+                    return res.status(404).send('There is no project')
                 }
                 else {
                     res.send(project)
                 }
             }).catch(e => res.status(400).send(e))
-        }
+
+
+        // if (!req.body) res.status(400).send("There is no body");
+        // else {
+        //     //find the specific project and update it
+        //     Project.findOneAndUpdate({ "_id": req.params.id_pjt }, { $push: { SubRpt: req.body.SubRptID } }, { new: true, runValidators: true }).then(project => {
+        //         if (!project) {
+        //             return res.status(404).send()
+        //         }
+        //         else {
+        //             res.send(project)
+        //         }
+        //     }).catch(e => res.status(400).send(e))
+        // }
     },
 
     AddProjectToJudge: function (req, res) {

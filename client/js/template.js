@@ -1,7 +1,7 @@
 const id_sdt = localStorage.getItem('stdID');
 const id_mod = localStorage.getItem('modID');
 const data = localStorage.getItem("data");
-
+const secData = localStorage.getItem("secData");
 
 jQuery(function ($) {
     console.log('data - ', data)
@@ -15,18 +15,63 @@ jQuery(function ($) {
     if (data === "moderator" || data === "coordinator") {
         document.getElementById("upload_file").innerHTML = "הורדת מסמך";
         document.getElementById("weighted_score").innerHTML = "נתינת ציון";
-        var hiddenElements = $("[style='visibility: hidden;']");
 
-        // Show all hidden elements
-        hiddenElements.each(function () {
-            $(this).css("visibility", "visible"); // Change display style to make them visible
-        });
-        $("[id='uploadForm']").hide();
+        if (secData === "notJudge") {
+            var elements = document.querySelectorAll('.subRptTbl');
+
+            // Loop through each element and hide it
+            elements.forEach(function (element) {
+                console.log('hidden')
+                element.classList.add('hidden');
+            });
+
+            var elements = document.querySelectorAll('[id="uploadForm"]');
+            elements.forEach(function (element) {
+                element.style.display = "none";
+            });
+
+            var elements = document.querySelectorAll('[id="downloadForm"]');
+            elements.forEach(function (element) {
+                element.style.visibility = "visible";
+            });
+        }
+
+        else {
+            var hiddenElements = $("[style='visibility: hidden;']");
+            // Show all hidden elements
+            hiddenElements.each(function () {
+                $(this).css("visibility", "visible"); // Change display style to make them visible
+            });
+            $("[id='uploadForm']").hide();
+        }
     }
     if (data === "student") {
         console.log('in student')
         getAvgGrds();
     }
+
+    // if (secData === "notJudge") {
+    //     var elements = document.querySelectorAll('.subRptTbl');
+
+    //     // Loop through each element and hide it
+    //     elements.forEach(function (element) {
+    //         console.log('hidden')
+    //         element.classList.add('hidden');
+    //     });
+
+    //     // // Select all table rows within elements with the class 'subRptTbl'
+    //     // var rows = document.querySelectorAll('.subRptTbl tr');
+
+    //     // // Loop through each row and hide it
+    //     // rows.forEach(function (row, index) {
+    //     //     row.style.display = 'none'; // Hide the row itself
+
+    //     //     // If the row has an odd index (striped row), remove the striping effect
+    //     //     if (index % 2 === 1) {
+    //     //         row.style.background = 'none'; // Remove background color
+    //     //     }
+    //     // });
+    // }
     // btnToPjt();
 });
 
@@ -298,8 +343,8 @@ function loadPjt(idBtn) {
         url: '/getModeratorProjectsJudge/' + id_mod + "/" + idBtn,
         success: function (result) {
             //מקבלים בתשובה את האיידי של הפרויקט
-            console.log(result)
-            alert("moderatorProjects")
+            // console.log(result)
+            // alert("moderatorProjects")
             localStorage.setItem('id_pjt', result);
 
             $.ajax({
@@ -308,7 +353,7 @@ function loadPjt(idBtn) {
                 success: function (result) {
                     var name = result[0].name_hebrew;
                     document.getElementById("namePjt").innerHTML = "שם הפרויקט: " + name;
-                    showDetails(result[0].Grades_arr, result[0].SubRpt);
+                    showDetails(result[0].Grades_arr, result[0].sub_rpt_id);
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     console.log(errorThrown);
@@ -322,7 +367,7 @@ function loadPjt(idBtn) {
     });
 }
 
-function showDetails(gradesArr, subArr) {
+function showDetails(gradesArr, subRptId) {
     console.log(gradesArr.length)
     for (var i = 0; i < gradesArr.length; i++) {
         $.ajax({
@@ -348,58 +393,24 @@ function showDetails(gradesArr, subArr) {
         });
     }
 
-    for (var i = 0; i < subArr.length; i++) {
-        $.ajax({
-            type: 'GET',
-            url: '/getSubDoc/' + subArr[i],
-            success: function (result) {
-                // console.log('result[0] - ', result[0]);
-                $.each(result, function (index, value) {
-                    if ("prop_rpt_sub" in value) {
-                        document.getElementById('lblSubProp').innerHTML = "הדוח אושר";
-                    }
-                    if ("alfa_rpt_sub" in value) {
-                        document.getElementById('lblSubAlfa').innerHTML = "הדוח אושר";
-                    }
-                    if ("beta_rpt_sub" in value) {
-                        document.getElementById('lblSubBeta').innerHTML = "הדוח אושר";
-                    }
-                    if ("final_rpt_Sub" in value) {
-                        document.getElementById('lblSubFinal').innerHTML = "הדוח אושר";
-                    }
-                });
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-    }
-}
-
-//אישור דוח
-function subRpt(idBtn) {
-    var id_pjt = localStorage.getItem('id_pjt')
-
+    // for (var i = 0; i < subArr.length; i++) {
     $.ajax({
         type: 'GET',
-        url: '/getSubRptIdDoc/' + id_mod,
+        url: '/getSubDoc/' + subRptId,
         success: function (result) {
-            var subsFromMod = result;
-            $.ajax({
-                type: 'GET',
-                url: '/getSubRptId/' + id_pjt,
-                success: function (result) {
-                    var subsFromPjt = result;
-
-                    subsFromMod.forEach(element => {
-                        const index = subsFromPjt.indexOf(element);
-                        if (index !== -1) {
-                            saveSub(subsFromPjt[index], idBtn);
-                        }
-                    });
-                },
-                error: function (jqXhr, textStatus, errorThrown) {
-                    console.log(errorThrown);
+            // console.log('result[0] - ', result[0]);
+            $.each(result, function (index, value) {
+                if ("prop_rpt_sub" in value) {
+                    document.getElementById('lblSubProp').innerHTML = "הדוח אושר";
+                }
+                if ("alfa_rpt_sub" in value) {
+                    document.getElementById('lblSubAlfa').innerHTML = "הדוח אושר";
+                }
+                if ("beta_rpt_sub" in value) {
+                    document.getElementById('lblSubBeta').innerHTML = "הדוח אושר";
+                }
+                if ("final_rpt_Sub" in value) {
+                    document.getElementById('lblSubFinal').innerHTML = "הדוח אושר";
                 }
             });
         },
@@ -407,24 +418,58 @@ function subRpt(idBtn) {
             console.log(errorThrown);
         }
     });
+    // }
 }
 
-function saveSub(id, idBtn) {
-    $.ajax({
-        type: 'PUT', // define the type of HTTP verb we want to use (GET for our form)
-        url: '/saveSub/' + id,
-        contentType: 'application/json',
-        data: JSON.stringify({
-            "idBtn": idBtn
-        }),
-        success: function (result) {
-            alert("האישור נשלח");
-        },
-        error: function (jqXhr, textStatus, errorThrown) {
-            console.log(errorThrown);
-        }
-    });
-}
+// //אישור דוח
+// function subRpt(idBtn) {
+//     var id_pjt = localStorage.getItem('id_pjt')
+
+//     $.ajax({
+//         type: 'GET',
+//         url: '/getSubRptIdDoc/' + id_mod,
+//         success: function (result) {
+//             var subsFromMod = result;
+//             $.ajax({
+//                 type: 'GET',
+//                 url: '/getSubRptId/' + id_pjt,
+//                 success: function (result) {
+//                     var subsFromPjt = result;
+
+//                     subsFromMod.forEach(element => {
+//                         const index = subsFromPjt.indexOf(element);
+//                         if (index !== -1) {
+//                             saveSub(subsFromPjt[index], idBtn);
+//                         }
+//                     });
+//                 },
+//                 error: function (jqXhr, textStatus, errorThrown) {
+//                     console.log(errorThrown);
+//                 }
+//             });
+//         },
+//         error: function (jqXhr, textStatus, errorThrown) {
+//             console.log(errorThrown);
+//         }
+//     });
+// }
+
+// function saveSub(id, idBtn) {
+//     $.ajax({
+//         type: 'PUT', // define the type of HTTP verb we want to use (GET for our form)
+//         url: '/saveSub/' + id,
+//         contentType: 'application/json',
+//         data: JSON.stringify({
+//             "idBtn": idBtn
+//         }),
+//         success: function (result) {
+//             alert("האישור נשלח");
+//         },
+//         error: function (jqXhr, textStatus, errorThrown) {
+//             console.log(errorThrown);
+//         }
+//     });
+// }
 
 //נתינת ציון
 function grade(idBtn) {
